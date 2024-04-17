@@ -118,3 +118,13 @@ rule "[debug.opy] Debug healing instance":
     wait(STAT_KEEP_ALIVE, Wait.RESTART_WHEN_TRUE)
     healee._last_healing_received = 0
     healee._total_healing_received = 0
+
+rule "[debug.opy] dummybot testing":
+    @Event eachPlayer
+    @Condition DEBUG_MODE
+    @Condition eventPlayer.isHoldingButton(Button.INTERACT)
+    @Condition eventPlayer.isHoldingButton(Button.CROUCH)
+
+    destroyAllDummies()
+    createDummy(Hero.ANA, getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer, eventPlayer) # feel free to change it to whatever character your testing. but always and i mean always
+                                                                                                # set it back to the same old ana and opposite team
