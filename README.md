@@ -44,6 +44,7 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Symmetra | ✔ | ✔ | ✔ | ✔ | ✅ |  |
 | Torbjorn | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | Tracer | ✔ |  |  | ✅ | ✅ |  |
+| Venture |  |  |  |  |  | ✔HP |
 | Widowmaker |  |  |  |  |  |  |
 | Winston | ✔ | ✅ | ✅ | ✅ | ✅ |  |
 | Wrecking Ball | ✅ | ✅ | ✅ | ✔ | ✔ | ✅ Piledriver |
