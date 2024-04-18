@@ -33,7 +33,7 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Moira | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | Orisa | ✅ | ✅ | ✔ | ✔ | ✔ |  |
 | Pharah | ✅ | ✔ | ✔ | ✔ | ✅ |  |
-| Ramattra |  |  |  |  |  |  |
+| Ramattra | ✔ | ✔ | ✔ |  |  | ✅ |
 | Reaper | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | Reinhardt | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | Roadhog | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Ult Charge |
