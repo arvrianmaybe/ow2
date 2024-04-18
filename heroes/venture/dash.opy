@@ -3,9 +3,8 @@
 rule "[venture/dash.opy] shorter dash":
     @Event eachPlayer
     @Hero venture
-    #sadly venture isnt out yet completly and also cause the program wont recognize venture
+    @Condition eventPlayer.isUsingAbility1() == false #so drill dash also just randomly get canceled.
     @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE) == true
     
     wait(0.25)
     eventPlayer.cancelPrimaryAction()
-    #eventPlayer.setStatusEffect(null, Status.STUNNED, 0.1) # useless
