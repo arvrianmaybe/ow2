@@ -232,8 +232,12 @@ settings {
                 "health%": percent(TRACER_HEALTH/OW2_TRACER_HEALTH), # for recall hp
                 "ultGen%": percent(OW2_TRACER_ULT_COST/TRACER_ULT_COST)
             },
-            "widowmaker": {
-                "ultGen%": percent(OW2_WIDOWMAKER_ULT_COST/WIDOWMAKER_ULT_COST)
+            "tracer": {
+                "health%": percent(TRACER_HEALTH/OW2_TRACER_HEALTH), # for recall hp
+                "ultGen%": percent(OW2_TRACER_ULT_COST/TRACER_ULT_COST)
+            },
+            "venture": {
+                "ultGen%": percent(OW2_VENTURE_ULT_COST/VENTURE_ULT_COST)
             },
             "winston": {
                 "health%": percent(WINSTON_BARRIER_HEALTH/OW2_WINSTON_BARRIER_HEALTH), # for barrier hp
