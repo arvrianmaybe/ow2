@@ -280,7 +280,7 @@ settings {
                  "symmetra",
                  "torbjorn",
                  "tracer",
-                 # "venture",
+                 "venture",
                  "widowmaker",
                  "winston",
                  "hammond",
