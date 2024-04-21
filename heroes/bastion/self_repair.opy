@@ -5,7 +5,10 @@
 playervar bastionid 
 playervar repair_heal 
 playervar self_repair 
+playervar self_repair_hud_id
 
+subroutine selfRepairGui
+subroutine hideSelfRepairGui
 
 rule "[bastion/self_repair.opy] self repair init":
     @Event eachPlayer
@@ -25,11 +28,13 @@ rule "[bastion/self_repair.opy] self repair timer":
     @Event eachPlayer
     @Hero bastion
     @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE) == true
+    @Condition eventPlayer.current_configuration != Configuration.TANK
     @Condition eventPlayer.getHealth() != eventPlayer.getMaxHealth() == true
     @Condition eventPlayer.isAlive() == true
     @Condition not isCCd(eventPlayer)
     @Condition eventPlayer.isUsingUltimate() == false
     
+    selfRepairGui()
     eventPlayer.setReloadEnabled(false)
     eventPlayer.setPrimaryFireEnabled(false)
     wait(0.16)
@@ -42,6 +47,7 @@ rule "[bastion/self_repair.opy] self repair timer":
         goto RULE_START
     eventPlayer.setReloadEnabled(true)
     eventPlayer.setPrimaryFireEnabled(true)
+    hideSelfRepairGui()
     eventPlayer.self_repair = 0
 
 
@@ -51,6 +57,7 @@ rule "[bastion/self_repair.opy] self gui":
     @Condition eventPlayer.getHealth() != eventPlayer.getMaxHealth() == true
     @Condition eventPlayer.isAlive() == true
     @Condition not isCCd(eventPlayer)
+    @Condition eventPlayer.current_configuration != Configuration.TANK
     @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE)
 
     wait(BASTION_SELF_REPAIR_CAST_TIME, Wait.ABORT_WHEN_FALSE)
@@ -68,3 +75,17 @@ rule "[bastion/self_repair.opy] stop self repair if full heal":
 
     destroyProgressBarHud(eventPlayer.bastionid)
     stopHoT(eventPlayer.repair_heal)
+
+def selfRepairGui():
+    @Name "[bastion/self_repair.opy] selfRepairGui()"
+
+    if eventPlayer.self_repair_hud_id == null:
+        createEffect(eventPlayer, Effect.SPHERE, Color.YELLOW, eventPlayer, 1.4, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+        eventPlayer.self_repair_hud_id = getLastCreatedEntity()
+
+
+def hideSelfRepairGui():
+    @Name "[bastion/self_repair.opy] hideSelfRepairGui()"
+
+    destroyEffect(eventPlayer.self_repair_hud_id)
+    eventPlayer.self_repair_hud_id = null
