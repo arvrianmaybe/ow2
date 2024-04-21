@@ -5,8 +5,9 @@
 #!include "utilities/hero_switched.opy"
 #!include "heroes/roadhog/breather.opy"
 #!include "heroes/roadhog/wholehog.opy"
-#!include "heroes/sombra/hack.opy"
+#!include "heroes/roadhog/scrap_gun.opy"
 #!include "heroes/roadhog/hook.opy"
+
 
 rule "[roadhog/init_roadhog.opy] init roadhog":
     @Event eachPlayer
