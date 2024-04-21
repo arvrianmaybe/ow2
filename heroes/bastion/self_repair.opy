@@ -30,7 +30,6 @@ rule "[bastion/self_repair.opy] self repair timer":
     @Condition not isCCd(eventPlayer)
     @Condition eventPlayer.isUsingUltimate() == false
     
-    eventPlayer.setAbility1Enabled(false)
     eventPlayer.setReloadEnabled(false)
     eventPlayer.setPrimaryFireEnabled(false)
     wait(0.16)
@@ -41,13 +40,8 @@ rule "[bastion/self_repair.opy] self repair timer":
     eventPlayer.setUltCharge(eventPlayer.getUltCharge() + 0.5)
     if eventPlayer.repair_heal > 0 and eventPlayer.isHoldingButton(Button.SECONDARY_FIRE) == true and eventPlayer.isAlive() == true and eventPlayer.hasStatusEffect(Status.STUNNED) == false and eventPlayer.hasStatusEffect(Status.KNOCKED_DOWN) == false and eventPlayer.hasStatusEffect(Status.ASLEEP) == false and eventPlayer.hasStatusEffect(Status.STUNNED) == false and eventPlayer.getHealth() != eventPlayer.getMaxHealth():
         goto RULE_START
-    eventPlayer.setAbility1Enabled(true)
     eventPlayer.setReloadEnabled(true)
-    eventPlayer.setSecondaryFireEnabled(true)
-    if eventPlayer.current_configuration == Configuration.TANK:
-        eventPlayer.setPrimaryFireEnabled(false)
-    else:
-        eventPlayer.setPrimaryFireEnabled(true)
+    eventPlayer.setPrimaryFireEnabled(true)
     eventPlayer.self_repair = 0
 
 
