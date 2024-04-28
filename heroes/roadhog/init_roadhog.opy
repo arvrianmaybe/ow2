@@ -9,6 +9,8 @@
 #!include "heroes/roadhog/hook.opy"
 
 
+# Sorry for using ow1 roadhog, is now actually normal pre-rework roadhog with some minor changes, oh and https://web.archive.org/web/20230317080207/https://overwatch.fandom.com/wiki/Roadhog#Overview for the references
+
 rule "[roadhog/init_roadhog.opy] init roadhog":
     @Event eachPlayer
     @Hero roadhog
