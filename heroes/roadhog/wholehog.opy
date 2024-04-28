@@ -31,13 +31,14 @@ rule "[roadhog/wholehog.opy]: enable abilities when not in wholehog":
     eventPlayer.stopForcingButton(Button.PRIMARY_FIRE)
 
 
-rule "[roadhog/wholehog.opy]: Wholehog force autofire":
-    @Event eachPlayer
-    @Hero roadhog
-    @Condition eventPlayer.isUsingUltimate()
-    @Condition not eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
+# rule "[roadhog/wholehog.opy]: Wholehog force autofire":
+    # @Event eachPlayer
+    # @Hero roadhog
+    # @Condition eventPlayer.isUsingUltimate()
+    # @Condition not eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
     
-    eventPlayer.startForcingButton(Button.PRIMARY_FIRE)
+    # eventPlayer.startForcingButton(Button.PRIMARY_FIRE)
+
 
 
 rule "[roadhog/wholehog.opy]: Cancel ult when stunned":
