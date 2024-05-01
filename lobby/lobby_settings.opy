@@ -70,13 +70,13 @@ settings {
             "tankPassiveHealthBonus": "alwaysEnabled",
             "enableCompetitiveRules": true
         },
-        "clash": {
-            "heroLimit": "1PerTeam",
-            "roleLimit": "off",
-            "gamemodeStartTrigger": "allSlotsFilled",
-            "tankPassiveHealthBonus": "alwaysEnabled",
-            "enableCompetitiveRules": true
-        },
+        #"clash": {
+            #"heroLimit": "1PerTeam",
+            #"roleLimit": "off",
+            #"gamemodeStartTrigger": "allSlotsFilled",
+            #"tankPassiveHealthBonus": "alwaysEnabled",
+            #"enableCompetitiveRules": true
+        #},
     },
     "heroes": {
         "allTeams": {
