@@ -1,4 +1,4 @@
-# Remastered Overwatch 2 
+# Remastered Overwatch 
 
 This repository contains OverPy source code for building [Remastered Overwatch 2](https://workshop.codes/WS8C5) Workshop gamemode.  
 
