@@ -64,7 +64,7 @@
 #!include "heroes/sigma/init_sigma.opy"
 #!include "heroes/torbjorn/init_torb.opy"
 #!include "heroes/tracer/init_tracer.opy"
-##!include "heroes/venture/init_venture.opy"
+#!include "heroes/venture/init_venture.opy"
 #!include "heroes/widowmaker/init_widowmaker.opy"
 #!include "heroes/winston/init_winston.opy"
 #!include "heroes/hammond/init_hammond.opy"
