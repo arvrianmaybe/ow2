@@ -26,7 +26,7 @@ def startExterminate():
 
     # Exterminate Player Effects
     if (eventPlayer.exterminate_player_effect[0] == null):
-        createEffect(eventPlayer, Effect.LIGHT_SHAFT, rgb(129, 214, 90), updateEveryTick(eventPlayer.getPosition()), 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS) # hex is #81d65a
+        createEffect(getAllPlayers(), Effect.LIGHT_SHAFT, rgb(129, 214, 90), updateEveryTick(eventPlayer.getPosition()), 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS) # hex is #81d65a
         eventPlayer.exterminate_player_effect[0] = getLastCreatedEntity()
     if (eventPlayer.exterminate_player_effect[1] == null):
         createEffect(getAllPlayers(), Effect.SPARKLES, Color.LIME_GREEN, eventPlayer, 1.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
