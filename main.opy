@@ -72,9 +72,8 @@
 #!include "heroes/zenyatta/init_zenyatta.opy"
 
 # Damage
-#!include "damage/melee.opy"
-#!include "damage/headshot.opy"
-
+##!include "damage/melee.opy"
+##!include "damage/headshot.opy"
 
 # Ultimate
 #!include "ultimate/ult_charge.opy"
