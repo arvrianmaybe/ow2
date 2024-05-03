@@ -15,6 +15,7 @@
 # Passives
 
 #!include "passives/tank/knockback.opy"
+#!include "passives/tank/ult_charge.opy"
 #!include "passives/damage/damage_passive.opy"
 #!include "passives/support/self_heal.opy"
 
@@ -76,5 +77,5 @@
 ##!include "damage/headshot.opy"
 
 # Ultimate
-#!include "ultimate/ult_charge.opy"
-#!include "ultimate/ultimate_cost.opy"
+##!include "ultimate/ult_charge.opy"
+##!include "ultimate/ultimate_cost.opy"
