@@ -45,7 +45,7 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Torbjorn | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | Tracer | ✔ |  |  | ✅ | ✅ |  |
 | Venture |  | ✔ |  |  |  | ✅ Explorer Resolve |
-| Widowmaker |  |  |  |  |  | ✅ HP |
+| Widowmaker |  |  |  |  |  | ✅ Damage Falloff |
 | Winston | ✔ | ✅ | ✅ | ✅ | ✅ |  |
 | Wrecking Ball | ✅ | ✅ | ✅ | ✔ | ✔ | ✅ Piledriver |
 | Zarya | ✅ | ✅ | ✅ | ✅ | ✔ |  |
