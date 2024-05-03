@@ -6,9 +6,22 @@ playervar bastionid
 playervar repair_heal 
 playervar self_repair 
 playervar self_repair_hud_id
+playervar self_repair_time_left
 
 subroutine selfRepairGui
 subroutine hideSelfRepairGui
+
+#!define isPressingSelfRepairButton(player)\
+    (player.isHoldingButton(Button.ABILITY_2) \
+  or player.isHoldingButton(Button.SECONDARY_FIRE))
+
+#!define isUsingSelfRepair(player)\
+    ((isPressingSelfRepairButton(player)) \
+ and (not player.isFiringPrimaryFire()) \
+ and (not player.isMeleeing()) \
+ and (not isCCd(player)) \
+ and (player.isAlive()) \
+ and (player.self_repair_time_left > 0))
 
 rule "[bastion/self_repair.opy] self repair init":
     @Event eachPlayer
@@ -27,44 +40,32 @@ rule "[bastion/self_repair.opy] self repair init":
 rule "[bastion/self_repair.opy] self repair timer":
     @Event eachPlayer
     @Hero bastion
-    @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE) == true
+        @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE)
     @Condition eventPlayer.current_configuration != Configuration.TANK
     @Condition eventPlayer.getHealth() != eventPlayer.getMaxHealth() == true
     @Condition eventPlayer.isAlive() == true
     @Condition not isCCd(eventPlayer)
     @Condition eventPlayer.isUsingUltimate() == false
     
-    selfRepairGui()
-    eventPlayer.setReloadEnabled(false)
-    eventPlayer.setPrimaryFireEnabled(false)
     wait(0.16)
     eventPlayer.repair_heal -= 3.75
     eventPlayer.self_repair = 1
-    eventPlayer.startHoT(eventPlayer, 0.16, 50)
-    playEffect(getAllPlayers(), DynamicEffect.GOOD_EXPLOSION, Color.YELLOW, eventPlayer, 0.1)
-    eventPlayer.setUltCharge(eventPlayer.getUltCharge() + 0.5)
+    eventPlayer.startHoT(eventPlayer, 0.16, BASTION_SELF_REPAIR_HEALING_RATE)
+    #eventPlayer.setUltCharge(eventPlayer.getUltCharge() + 0.5)
     if eventPlayer.repair_heal > 0 and eventPlayer.isHoldingButton(Button.SECONDARY_FIRE) == true and eventPlayer.isAlive() == true and eventPlayer.hasStatusEffect(Status.STUNNED) == false and eventPlayer.hasStatusEffect(Status.KNOCKED_DOWN) == false and eventPlayer.hasStatusEffect(Status.ASLEEP) == false and eventPlayer.hasStatusEffect(Status.STUNNED) == false and eventPlayer.getHealth() != eventPlayer.getMaxHealth():
         goto RULE_START
-    eventPlayer.setReloadEnabled(true)
-    eventPlayer.setPrimaryFireEnabled(true)
-    hideSelfRepairGui()
     eventPlayer.self_repair = 0
 
-
-rule "[bastion/self_repair.opy] self gui":
+rule "[bastion/self_repair.opy]: self repair start":
     @Event eachPlayer
     @Hero bastion
-    @Condition eventPlayer.getHealth() != eventPlayer.getMaxHealth() == true
-    @Condition eventPlayer.isAlive() == true
-    @Condition not isCCd(eventPlayer)
-    @Condition eventPlayer.current_configuration != Configuration.TANK
     @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE)
 
-    wait(BASTION_SELF_REPAIR_CAST_TIME, Wait.ABORT_WHEN_FALSE)
-    progressBarHud(eventPlayer, eventPlayer.repair_heal, "{2} SELF HEAL {1}%".format(null, round(eventPlayer.repair_heal * 1), abilityIconString(Hero.TORBJORN, Button.ABILITY_2)), HudPosition.TOP, 4, Color.YELLOW, Color.WHITE, ProgressHudReeval.VISIBILITY_VALUES_AND_COLOR, SpecVisibility.DEFAULT)
-    eventPlayer.bastionid = getLastCreatedText()
+    wait(BASTION_SELF_REPAIR_CAST_TIME)
+    selfRepairGui()
     waitUntil(not eventPlayer.isHoldingButton(Button.SECONDARY_FIRE), Math.INFINITY)
-    destroyProgressBarHud(eventPlayer.bastionid)
+    hideSelfRepairGui()
+
 
 rule "[bastion/self_repair.opy] stop self repair if full heal":
     @Event eachPlayer
@@ -73,15 +74,42 @@ rule "[bastion/self_repair.opy] stop self repair if full heal":
     @Condition eventPlayer.isAlive() == true
     @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE)
 
-    destroyProgressBarHud(eventPlayer.bastionid)
-    stopHoT(eventPlayer.repair_heal)
+    hideSelfRepairGui()
 
 def selfRepairGui():
     @Name "[bastion/self_repair.opy] selfRepairGui()"
 
-    if eventPlayer.self_repair_hud_id == null:
+    # Effects
+    if (eventPlayer.self_repair_hud_id[0] == null):
         createEffect(eventPlayer, Effect.SPHERE, Color.YELLOW, eventPlayer, 1.4, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-        eventPlayer.self_repair_hud_id = getLastCreatedEntity()
+        eventPlayer.self_repair_hud_id[0] = getLastCreatedEntity()
+
+    if (eventPlayer.self_repair_hud_id[1] == null):
+        createEffect(getAllPlayers(), 
+                     Effect.SPARKLES, 
+                     Color.YELLOW, 
+                     updateEveryTick(eventPlayer.getEyePosition()), 
+                     1.5, 
+                     EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+        eventPlayer.self_repair_hud_id[1] = getLastCreatedEntity()
+
+    # Hud
+
+    progressBarHud(eventPlayer, eventPlayer.repair_heal, 
+    "{2} SELF HEAL {1}%".format(null, round(eventPlayer.repair_heal * 1), 
+    abilityIconString(Hero.TORBJORN, Button.ABILITY_2)), 
+    HudPosition.TOP, 
+    4, 
+    Color.YELLOW, 
+    Color.WHITE, 
+    ProgressHudReeval.VISIBILITY_VALUES_AND_COLOR, 
+    SpecVisibility.DEFAULT)
+    eventPlayer.bastionid = getLastCreatedText()
+        
+    # Player Disable
+
+    eventPlayer.setReloadEnabled(false)
+    eventPlayer.setPrimaryFireEnabled(false)
 
 
 def hideSelfRepairGui():
@@ -89,3 +117,21 @@ def hideSelfRepairGui():
 
     destroyEffect(eventPlayer.self_repair_hud_id)
     eventPlayer.self_repair_hud_id = null
+
+    # Player Enable
+    eventPlayer.setReloadEnabled(true)
+    eventPlayer.setPrimaryFireEnabled(true)
+    
+    # Stop HOT
+    stopHoT(eventPlayer.repair_heal)
+
+    # Destroy GUI
+    destroyProgressBarHud(eventPlayer.bastionid)
+
+
+rule "[bastion/repair.opy]: Give ult charge for self repair":
+    @Event playerDealtHealing
+    @Hero bastion
+    @Condition healer == healee
+
+    eventPlayer._missing_ult_points += eventHealing
