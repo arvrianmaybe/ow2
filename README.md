@@ -31,7 +31,7 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Mccree | ✅ | ✅ | ✅ | ✅ | ✔ |  |
 | Mercy | ✅ | ✅ | ✅ | ✅ | ✔ |  |
 | Moira | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| Orisa | ✅ | ✅ | ✔ | ✔ | ✔ |  |
+| Orisa | ✅ | ✅ | ✅ | ✔ | ✔ |  |
 | Pharah | ✅ | ✔ | ✔ | ✔ | ✅ |  |
 | Ramattra | ✔ | ✔ | ✔ |  | ✅ |  |
 | Reaper | ✅ | ✅ | ✅ | ✅ | ✅ |  |
