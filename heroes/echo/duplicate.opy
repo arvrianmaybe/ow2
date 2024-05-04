@@ -38,6 +38,7 @@ rule "[echo/duplicate.opy]: Table of all heroes with custom hp":
     health_pool[heroID(Hero.SYMMETRA)] = [SYMMETRA_HEALTH,0,SYMMETRA_SHIELDS]
     health_pool[heroID(Hero.TORBJORN)] = [TORBJORN_HEALTH,TORBJORN_ARMOR,0]
     health_pool[heroID(Hero.TRACER)] = [TRACER_HEALTH,0,0]
+    health_pool[heroID(Hero.VENTURE)] = [VENTURE_HEALTH,0,0]
     health_pool[heroID(Hero.WIDOWMAKER)] = [WIDOWMAKER_HEALTH,0,0]
 
     # supports
