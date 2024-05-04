@@ -1,30 +1,32 @@
 #!mainFile "../main.opy"
 #!include "heroes/sombra/hack.opy"
 #!include "heroes/sombra/stealth.opy"
+#!include "heroes/sombra/emp.opy"
 
-rule "[sombra/init_sombra.opy] init sombra":
+rule "[sombra/init.opy]: Initialize Sombra":
     @Event eachPlayer
     @Hero sombra
-    #@Condition eventPlayer.call_init == true
-    
-    defaultHero()
+    @Condition eventPlayer.call_init
+
     newHero(SOMBRA_HEALTH, 0, 0)
-    removePassiveHealing()
     setUltCost(SOMBRA_ULT_COST)
+
+    getPlayers(eventPlayer.getTeam()).friendly_sombra_player = eventPlayer
+    getPlayers(getOppositeTeam(eventPlayer.getTeam())).enemy_sombra_player = eventPlayer
+    
     eventPlayer.disallowButton(Button.ABILITY_1)
+    eventPlayer.disallowButton(Button.ABILITY_2)
 
     eventPlayer.is_using_stealth = false
+    removeSelfHealing()
 
-rule "[hero_switch.opy]: Detect switch to sombra":
-    @Event eachPlayer
-    @Hero sombra
-    @Condition eventPlayer._hero_switched
-           
-    eventPlayer.call_init = true    
+    eventPlayer.call_init = false
+
 
 rule "[sombra/init.opy]: Clean up Sombra":
     @Event eachPlayer
     @Condition eventPlayer.getCurrentHero() == Hero.SOMBRA
-    
+
     waitUntil(eventPlayer.getCurrentHero() != Hero.SOMBRA, Math.INFINITY)
     exitStealth()
+    destroyTranslocator()
