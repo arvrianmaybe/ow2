@@ -1,3 +1,4 @@
+#!mainFile "../main.opy"
 globalvar DEBUG_MODE = createWorkshopSetting(bool, "Dev Tools", "debug mode", false)
 #!define STAT_KEEP_ALIVE (2)
 #!define STAT_SPACING (0.5)
@@ -8,9 +9,9 @@ playervar debug_pvar
 #!define _total_healing_received debug_pvar[2]
 #!define _last_healing_received debug_pvar[3]
 
-rule "[debug.opy] disable inspector":
+rule "[debug.opy] Disable Inspector for performance":
     @Event global
-    @Condition DEBUG_MODE
+    @Condition not DEBUG_MODE
 
     disableInspector()
 
@@ -18,6 +19,7 @@ rule "[debug.opy] global debug (Top Left)":
     @Event global
     @Condition DEBUG_MODE == true
 
+    wait(5)
     hudHeader(getAllPlayers(), "Global", HudPosition.LEFT, 0, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
     hudSubheader(getAllPlayers(), "Server Load: {}%".format(getServerLoad()), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
     hudSubheader(getAllPlayers(), "Server Load Average: {}%".format(getAverageServerLoad()), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
@@ -29,6 +31,7 @@ rule "[debug.opy] player debug (Top Right)":
     @Event eachPlayer
     @Condition DEBUG_MODE == true
 
+    wait(5)
     hudHeader(eventPlayer, "Event Player", HudPosition.RIGHT, 0, Color.WHITE, HudReeval.STRING)
     hudSubheader(eventPlayer, "call_init = {}".format(eventPlayer.call_init), HudPosition.RIGHT, 1, Color.WHITE, HudReeval.STRING)
     hudSubheader(eventPlayer, "isInAlternateForm() = {}".format(eventPlayer.isInAlternateForm()), HudPosition.RIGHT, 1, Color.WHITE, HudReeval.STRING)
@@ -39,11 +42,10 @@ rule "[debug.opy] player debug (Top Right)":
 rule "[debug.opy] unlimated ult":
     @Event eachPlayer
     @Condition DEBUG_MODE == true
+    @Condition eventPlayer.isHoldingButton(Button.ULTIMATE)
 
     eventPlayer.setUltCharge(100)
-    wait()
-    if RULE_CONDITION:
-        goto RULE_START
+    eventPlayer.forceButtonPress(Button.ULTIMATE)
 
 rule "[debug.opy] Show Player Damage/Healing":
     @Event eachPlayer
@@ -128,3 +130,24 @@ rule "[debug.opy] dummybot testing":
     destroyAllDummies()
     createDummy(Hero.ANA, getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer, eventPlayer) # feel free to change it to whatever character your testing. but always and i mean always
                                                                                                 # set it back to the same old ana and opposite team
+rule "[debug.opy] damage player":
+    @Event eachPlayer
+    @Condition DEBUG_MODE
+    @Condition eventPlayer.isHoldingButton(Button.INTERACT)
+    @Condition eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
+
+    damage(eventPlayer, null, 1)
+    wait()
+    if RULE_CONDITION:
+        goto RULE_START
+
+rule "[debug.opy] heal player":
+    @Event eachPlayer
+    @Condition DEBUG_MODE
+    @Condition eventPlayer.isHoldingButton(Button.INTERACT)
+    @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE)
+
+    heal(eventPlayer, null, 1)
+    wait()
+    if RULE_CONDITION:
+        goto RULE_START
