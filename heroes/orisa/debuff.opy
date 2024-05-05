@@ -89,8 +89,8 @@ def endDebuff():
     getPlayers(eventPlayer.getTeam()).is_debuff = false
 
     # Clear debuff beam effects
-    destroyEffect(eventPlayer.orisa_debuff_beam_id)
-    eventPlayer.orisa_debuff_beam_id= null
+    #destroyEffect(eventPlayer.orisa_debuff_beam_id)
+    #eventPlayer.orisa_debuff_beam_id= null
 
 
 rule "[orisa/debuff.opy]: nerf players in range":
