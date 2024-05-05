@@ -1,6 +1,6 @@
 #!mainFile "main.opy"
 
-#!obfuscate noRuleFilling noConstantObfuscation
+##!obfuscate noRuleFilling noConstantObfuscation
 
 #!suppressWarnings w_type_check w_unsuitable_event
 
