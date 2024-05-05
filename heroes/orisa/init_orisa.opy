@@ -4,6 +4,7 @@
 #!include "heroes/orisa/fortify.opy"
 #!include "heroes/orisa/exterminate.opy"
 #!include "heroes/orisa/halt.opy"
+#!include "heroes/orisa/debuff.opy"
 
 rule "[orisa/init.opy]: Detect switch to Orisa":
     @Event eachPlayer
@@ -41,5 +42,6 @@ rule "[orisa/init.opy]: Clean up Orisa":
     @Condition eventPlayer.getCurrentHero() == Hero.ORISA
 
     waitUntil(eventPlayer.getCurrentHero() != Hero.ORISA, Math.INFINITY)
+    endDebuff()
     hideOrisaAmmoHud()
     hideExterminate()
