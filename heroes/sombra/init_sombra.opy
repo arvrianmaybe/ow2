@@ -1,6 +1,7 @@
 #!mainFile "../main.opy"
 #!include "heroes/sombra/hack.opy"
 #!include "heroes/sombra/stealth.opy"
+#!include "heroes/sombra/translocator.opy"
 #!include "heroes/sombra/emp.opy"
 
 rule "[sombra/init.opy]: Initialize Sombra":
@@ -15,7 +16,7 @@ rule "[sombra/init.opy]: Initialize Sombra":
     getPlayers(getOppositeTeam(eventPlayer.getTeam())).enemy_sombra_player = eventPlayer
     
     eventPlayer.disallowButton(Button.ABILITY_1)
-    eventPlayer.disallowButton(Button.ABILITY_2)
+    #eventPlayer.disallowButton(Button.ABILITY_2)
 
     eventPlayer.is_using_stealth = false
     removeSelfHealing()
