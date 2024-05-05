@@ -302,6 +302,11 @@
 #!define ORISA_HALT_PULL_SPEED 20
 #!define ORISA_HALT_SNARE_DURATION 0.65
 #!define ORISA_HALT_SNARE_MOVE_PENALTY 67
+#!define ORISA_DEBUFF_DURATION 8
+# nano boost duration cause this is basically reverse nano boost
+#!define ORISA_DEBUFF_DAMAGE_NERF 0.5
+#!define ORISA_DEBUFF_DAMAGE_RECIVED_NERF 0.7
+#!define ORISA_DEBUFF_CAST_TIME 0.128
 
 # Pharah
 #!define PHARAH_CONCUSSIVE_BLAST_COOLDOWN 9
