@@ -22,6 +22,7 @@
 #!define ASHE_BOB_DAMAGE 16
 #!define ASHE_BOB_HEALTH 1500
 #!define ASHE_HEALTH 200
+#!define ASHE_SHOTGUN_DAMAGE 7.5
 #!define ASHE_ULT_COST 2240
 
 # Baptiste
