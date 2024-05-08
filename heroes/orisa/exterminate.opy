@@ -12,6 +12,7 @@ rule "[orisa/exterminate.opy]: Trigger exterminate ability":
     @Hero orisa
     @Condition eventPlayer.isHoldingButton(Button.ABILITY_2)
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_2) <= 0
+    @Condition eventPlayer.isUsingAbility1() == false
     
     waitUntil(not eventPlayer.isHoldingButton(Button.ABILITY_2), Math.INFINITY) # Ensure player exterminate
     startExterminate()
@@ -60,3 +61,11 @@ def hideExterminate():
     eventPlayer.setMoveSpeed(100)
 
     eventPlayer.is_using_exterminate = false # Stop Exterminate
+
+rule "[orisa/exterminate.opy]: abort exterminate if player uses fortify":
+    @Event eachPlayer
+    @Hero orisa
+    @Condition eventPlayer.is_using_exterminate
+    @Condition eventPlayer.isUsingAbility1()
+
+    hideExterminate()
