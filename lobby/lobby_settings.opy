@@ -1,5 +1,5 @@
 #!mainFile "main.opy"
-#!include "lobby/game_mode.opy"
+#!include "env/ow_env.opy"
 #!include "constant/reimagined_constant.opy"
 #!include "utilities/macro.opy"
 #!include "constant/normal_constant.opy"
@@ -86,6 +86,8 @@ settings {
             "ultGen%": percent(ANA_ULT_COST/OW2_ANA_ULT_COST)
             },
             "ashe": {
+                "ability1EnemyKb%": 0,
+                "ability1SelfKb%": 0,
                 "health%": percent(ASHE_BOB_HEALTH/OW2_ASHE_BOB_HEALTH), # for BOB hp
                 "ultGen%": percent(OW2_ASHE_ULT_COST/ASHE_ULT_COST)
             },
