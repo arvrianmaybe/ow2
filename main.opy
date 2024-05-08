@@ -1,12 +1,11 @@
-#!mainFile "main.opy"
+#!include "env/ow_env.opy"
 
 ##!obfuscate noRuleFilling noConstantObfuscation
 
 #!suppressWarnings w_type_check w_unsuitable_event
 
 # Game Lobby
-#!include "lobby/lobby_settings.opy"
-#!include "lobby/game_mode.opy"
+#!include "lobby/ow_lobby.opy"
 
 # Constants
 #!include "constant/reimagined_constant.opy"
