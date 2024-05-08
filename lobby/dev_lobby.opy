@@ -38,6 +38,8 @@ settings {
             "ultGen%": percent(ANA_ULT_COST/OW2_ANA_ULT_COST)
             },
             "ashe": {
+                "ability1EnemyKb%": 0,
+                "ability1SelfKb%": 0,
                 "health%": percent(ASHE_BOB_HEALTH/OW2_ASHE_BOB_HEALTH), # for BOB hp
                 "ultGen%": percent(OW2_ASHE_ULT_COST/ASHE_ULT_COST)
             },
