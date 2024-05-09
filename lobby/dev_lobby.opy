@@ -118,6 +118,7 @@ settings {
                 "primaryFireIgniteDamage": 0,
                 "primaryFireIgniteDuration": 0,
                 "primaryFireIgniteRate": 0,
+                "health%": percent(MAUGA_CAGE_FIGHT_HEALTH/OW2_MAUGA_CAGE_FIGHT_HEALTH), # for cage fight
                 "ultGen%": percent(MAUGA_ULT_COST/OW2_MAUGA_ULT_COST)
             },
             "moira": {
