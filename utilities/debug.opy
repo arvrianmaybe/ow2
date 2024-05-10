@@ -1,5 +1,5 @@
 #!mainFile "../main.opy"
-globalvar DEBUG_MODE = createWorkshopSetting(bool, "Dev Tools", "debug mode", true)
+globalvar DEBUG_MODE = createWorkshopSetting(bool, "Dev Tools", "debug mode", false)
 #!define STAT_KEEP_ALIVE (2)
 #!define STAT_SPACING (0.5)
 
