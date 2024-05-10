@@ -1,6 +1,6 @@
 #!mainFile "../main.opy"
 
-playervar isExoCharged 
+playervar is_exo_charged 
 
 
 rule "[baptiste/exo_boots.opy] start exo boots if bap is standing and crouching and is fully charged":
@@ -9,8 +9,8 @@ rule "[baptiste/exo_boots.opy] start exo boots if bap is standing and crouching 
     @Condition eventPlayer.isOnGround() == true
     @Condition eventPlayer.isCrouching() == true
     
-    wait(0.7, Wait.ABORT_WHEN_FALSE)
-    eventPlayer.isExoCharged = true
+    wait(OW2_BAPTISTE_EXO_BOOST_CHARGED_TIME, Wait.ABORT_WHEN_FALSE)
+    eventPlayer.is_exo_charged = true
 
 
 rule "[baptiste/exo_boots.opy] any direction exo boots cancel if not crouching":
@@ -19,13 +19,13 @@ rule "[baptiste/exo_boots.opy] any direction exo boots cancel if not crouching":
     @Condition eventPlayer.isCrouching() == false
     
     wait(1, Wait.ABORT_WHEN_FALSE)
-    eventPlayer.isExoCharged = false
+    eventPlayer.is_exo_charged = false
 
 
 rule "[baptiste/exo_boots.opy] any direction exo boots inward":
     @Event eachPlayer
     @Condition eventPlayer.isJumping() == true
-    @Condition eventPlayer.isExoCharged == true
+    @Condition eventPlayer.is_exo_charged == true
     
     eventPlayer.applyImpulse(eventPlayer.getFacingDirection(), 20, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION)
 
@@ -35,4 +35,4 @@ rule "[baptiste/exo_boots.opy] any direction exo boots false":
     @Condition eventPlayer.getCurrentHero() == Hero.BAPTISTE
     @Condition eventPlayer.isInAir() == true
     
-    eventPlayer.isExoCharged = false
+    eventPlayer.is_exo_charged = false
