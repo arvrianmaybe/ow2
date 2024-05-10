@@ -1,5 +1,5 @@
 #!mainFile "../main.opy"
-globalvar DEBUG_MODE = createWorkshopSetting(bool, "Dev Tools", "debug mode", false)
+globalvar DEBUG_MODE = createWorkshopSetting(bool, "Dev Tools", "debug mode", true)
 #!define STAT_KEEP_ALIVE (2)
 #!define STAT_SPACING (0.5)
 
@@ -18,8 +18,8 @@ rule "[debug.opy] Disable Inspector for performance":
 rule "[debug.opy] global debug (Top Left)":
     @Event eachPlayer
     @Condition DEBUG_MODE == true
-    @Condition eventPlayer.isHoldingButton(Button.MELEE)
-    @Condition eventPlayer.isHoldingButton(Button.JUMP)
+    #@Condition eventPlayer.isHoldingButton(Button.MELEE)
+    #@Condition eventPlayer.isHoldingButton(Button.JUMP)
 
     hudHeader(getAllPlayers(), "Global", HudPosition.LEFT, 0, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
     hudSubheader(getAllPlayers(), "Server Load: {}%".format(getServerLoad()), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
@@ -31,8 +31,8 @@ rule "[debug.opy] global debug (Top Left)":
 rule "[debug.opy] player debug (Top Right)":
     @Event eachPlayer
     @Condition DEBUG_MODE == true
-    @Condition eventPlayer.isHoldingButton(Button.MELEE)
-    @Condition eventPlayer.isHoldingButton(Button.JUMP)
+    #@Condition eventPlayer.isHoldingButton(Button.MELEE)
+    #@Condition eventPlayer.isHoldingButton(Button.JUMP)
 
     hudHeader(eventPlayer, "Event Player", HudPosition.RIGHT, 0, Color.WHITE, HudReeval.STRING)
     hudSubheader(eventPlayer, "call_init = {}".format(eventPlayer.call_init), HudPosition.RIGHT, 1, Color.WHITE, HudReeval.STRING)
@@ -40,7 +40,7 @@ rule "[debug.opy] player debug (Top Right)":
     hudSubheader(eventPlayer, "isUsingUltimate() = {}".format(eventPlayer.isUsingUltimate()), HudPosition.RIGHT, 1, Color.WHITE, HudReeval.STRING)
     hudSubheader(eventPlayer, "isUsingAbility1() = {}".format(eventPlayer.isUsingAbility1()), HudPosition.RIGHT, 1, Color.WHITE, HudReeval.STRING)
     hudSubheader(eventPlayer, "isUsingAbility2() = {}".format(eventPlayer.isUsingAbility2()), HudPosition.RIGHT, 1, Color.WHITE, HudReeval.STRING)
-    hudHeader(getAllPlayers(), "getSpeed() = {}".format(eventPlayer.getSpeed()), HudPosition.LEFT, 0, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubheader(eventPlayer(), "getSpeed() = {}".format(eventPlayer.getSpeed()), HudPosition.RIGHT, 0, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
 
 rule "[debug.opy] unlimated ult":
     @Event eachPlayer
