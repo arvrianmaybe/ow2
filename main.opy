@@ -27,7 +27,6 @@
 #!include "utilities/role_lock.opy"
 #!include "utilities/watermark.opy"
 #!include "utilities/stat_helper.opy"
-#!include "utilities/debug.opy"
 
 # Heroes
 #!include "heroes/ana/init_ana.opy"
@@ -78,3 +77,6 @@
 # Ultimate
 ##!include "ultimate/ult_charge.opy"
 ##!include "ultimate/ultimate_cost.opy"
+
+# Include debug at the end so any variable can be viewed
+##!include "utilities/debug.opy"
