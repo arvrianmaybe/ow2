@@ -81,3 +81,12 @@ def cancelDuplication():
     @Name "[echo/duplcation.opy]: cancelDuplication()"
     
     kill(eventPlayer, eventPlayer)
+
+rule "[echo/duplicate.opy]: Correct duplicate ultimate charge rate":
+    @Event eachPlayer
+    @Hero echo
+    @Condition eventPlayer.isDuplicatingAHero()
+    @Condition eventPlayer.getUltCharge() == 0
+
+    wait()
+    eventPlayer.setUltCharge((percent(1 - (OW2_ECHO_DUPLICATE_ULT_CHARGE_MULTIPLIER/ECHO_DUPLICATE_ULT_CHARGE_MULTIPLIER)))/OW2_ECHO_DUPLICATE_ULT_CHARGE_MULTIPLIER)
