@@ -1,6 +1,6 @@
 #!mainFile "../main.opy"
 
-#!include "heroes/orisa/ammo.opy"
+#!include "heroes/orisa/fusion_driver.opy"
 #!include "heroes/orisa/fortify.opy"
 #!include "heroes/orisa/exterminate.opy"
 #!include "heroes/orisa/halt.opy"
