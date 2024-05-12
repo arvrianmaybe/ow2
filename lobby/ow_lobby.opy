@@ -175,7 +175,7 @@ settings {
                 "primaryFireMaximumTime%": percent((OW2_MOIRA_HEAL_GRASP_AMMO_USAGE/MOIRA_HEAL_GRASP_AMMO_USAGE)*(MOIRA_HEAL_GRASP_AMMO/OW2_MOIRA_HEAL_GRASP_AMMO)),
             },
             "orisa": {
-                "ability2Cooldown%": percent(ORISA_EXTERMINATE_COOLDOWN/OW2_ORISA_SPINNING_JAV),
+                "ability2Cooldown%": percent(ORISA_EXTERMINATE_COOLDOWN/OW2_ORISA_JAVELIN_SPIN_COOLDOWN),
                 "ultGen%": percent(ORISA_ULT_COST/OW2_ORISA_ULT_COST)
             },
             "pharah": {
