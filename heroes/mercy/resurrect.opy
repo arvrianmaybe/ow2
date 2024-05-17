@@ -1,5 +1,6 @@
 #!mainFile "../main.opy"
 
+/*
 playervar dead_allies 
 playervar self_resurrect_effect 
 playervar count_dead_allies 
@@ -106,3 +107,4 @@ rule "[mercy/resurrect.opy]: Add array to dead allies":
     wait()
     if RULE_CONDITION:
         goto RULE_START
+*/
