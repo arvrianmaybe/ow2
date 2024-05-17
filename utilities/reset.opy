@@ -1,4 +1,7 @@
-#!mainFile "../dev_main.opy"
+#!mainFile "../main.opy"
+#!include "utilities/stat_helper.opy"
+#!include "ultimate/ultimate_cost.opy"
+#!include "utilities/macro.opy"
 
 globalvar reset_gvar
 #!defineMember ready_color reset_gvar[0]
@@ -29,6 +32,13 @@ subroutine resetFrenemies
     resetSelfHealing() \
     setCustomHp(health, armor, shields) \
     enableAllAbilities() \
+
+#!define resetHero()\
+    clearCustomHp()\
+    resetStats()\
+    resetStatuses()\
+    resetFrenemies()\
+    enableAllAbilities()\
 
 
 def enableAllAbilities():
