@@ -5,11 +5,11 @@ globalvar  health_pool
 
 playervar hero_id_duplicated
 
-subroutine cancelDuplication 
+subroutine cancelDuplication
 
 rule "[echo/duplicate.opy]: Table of all heroes with custom hp":
     # tanks
-    health_pool[heroID(Hero.DVA)] = [DVA_HEALTH,DVA_HEALTH_ARMOUR,0]
+    health_pool[heroID(Hero.DVA)] = [DVA_HEALTH,DVA_ARMOR,0]
     health_pool[heroID(Hero.HAMMOND)] = [WRECKING_BALL_HEALTH,WRECKING_BALL_ARMOR,0]
     health_pool[heroID(Hero.JUNKER_QUEEN)] = [JUNKERQUEEN_HEALTH,JUNKERQUEEN_ARMOR,0]
     health_pool[heroID(Hero.MAUGA)] = [MAUGA_HEALTH,0,0]
@@ -23,7 +23,7 @@ rule "[echo/duplicate.opy]: Table of all heroes with custom hp":
 
     # damage
     health_pool[heroID(Hero.ASHE)] = [ASHE_HEALTH,0,0]
-    health_pool[heroID(Hero.BASTION)] = [BASTION_HEALTH,BASTION_HEALTH_ARMOUR,0]
+    health_pool[heroID(Hero.BASTION)] = [BASTION_HEALTH,BASTION_ARMOR,0]
     health_pool[heroID(Hero.MCCREE)] = [MCCREE_HEALTH,0,0]
     health_pool[heroID(Hero.DOOMFIST)] = [DOOMFIST_HEALTH,0,0]
     health_pool[heroID(Hero.GENJI)] = [GENJI_HEALTH,0,0]
@@ -57,30 +57,23 @@ rule "[echo/duplicate.opy]: Set Life for echo when duplicating a tank":
     @Event eachPlayer
     @Hero echo
     @Condition eventPlayer.isDuplicatingAHero()
-        
-    eventPlayer.setStatusEffect(null, Status.UNKILLABLE, 1) #so we dont accidentally kill the player with 1 hp
+    
     clearCustomHp()
     eventPlayer.hero_id_duplicated = heroID(eventPlayer.getHeroOfDuplication())
-    wait(0.1)
+    wait(1)
     setCustomHp(
-    health_pool[eventPlayer.hero_id_duplicated][0],
-    health_pool[eventPlayer.hero_id_duplicated][1],
-    health_pool[eventPlayer.hero_id_duplicated][2],
-    )   
-rule "[echo/duplcation.opy]: Reduce ultimate duration":
+        health_pool[eventPlayer.hero_id_duplicated][0],
+        health_pool[eventPlayer.hero_id_duplicated][1],
+        health_pool[eventPlayer.hero_id_duplicated][2],
+    )
+
+rule "[echo/duplicate.opy]: Reinitialize echo after exiting duplicate":
     @Event eachPlayer
     @Hero echo
-    #@Condition eventPlayer.isUsingUltimate() #useless
-    @Condition eventPlayer.isDuplicatingAHero()
-        
-    wait(ECHO_DUPLICATE_DURATION, Wait.ABORT_WHEN_FALSE)
-    cancelDuplication()
-    
-    
-def cancelDuplication():
-    @Name "[echo/duplcation.opy]: cancelDuplication()"
-    
-    kill(eventPlayer, eventPlayer)
+    @Condition not eventPlayer.isDuplicatingAHero()
+
+    resetHero()
+    eventPlayer.call_init = true
 
 rule "[echo/duplicate.opy]: Correct duplicate ultimate charge rate":
     @Event eachPlayer
@@ -90,3 +83,18 @@ rule "[echo/duplicate.opy]: Correct duplicate ultimate charge rate":
 
     wait()
     eventPlayer.setUltCharge((percent(1 - (OW2_ECHO_DUPLICATE_ULT_CHARGE_MULTIPLIER/ECHO_DUPLICATE_ULT_CHARGE_MULTIPLIER)))/OW2_ECHO_DUPLICATE_ULT_CHARGE_MULTIPLIER)
+
+rule "[echo/duplcation.opy]: Reduce ultimate duration":
+    @Event eachPlayer
+    @Hero echo
+    @Condition eventPlayer.isDuplicatingAHero()
+        
+    wait(ECHO_DUPLICATE_DURATION, Wait.ABORT_WHEN_FALSE)
+    cancelDuplication()
+    
+    
+def cancelDuplication():
+    @Name "[echo/duplcation.opy]: cancelDuplication()"
+
+    kill(eventPlayer,eventPlayer)
+    
