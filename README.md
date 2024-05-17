@@ -21,7 +21,7 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Echo | ✅ | ✅ | ✅ | ✅ | ✔ |  |
 | Genji | ✔ | ✔ | ✔ | ✔ | ✔ |  |
 | Hanzo | ✔ | ✔ | ✔ | ✔ | ✔ |  |
-| Junker Queen |  |  | ✅ |  |  |  |
+| Junker Queen |  |  |  |  |  |  |
 | Junkrat | ✔ | ✔ | ✔ | ✅ | ✅ |  |
 | Kiriko | ✅ | ✅ | ✅ |  |  | ✅ Wall Climb |
 | Lifeweaver |  |  | ✅ |  |  |  |
@@ -44,7 +44,7 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Symmetra | ✔ | ✔ | ✔ | ✔ | ✅ |  |
 | Torbjorn | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | Tracer | ✔ |  |  | ✅ | ✅ |  |
-| Venture |  | ✔ |  |  |  | ✅ Explorer Resolve |
+| Venture |  |  |  |  |  |  |
 | Widowmaker |  |  |  |  |  | ✅ Damage Falloff |
 | Winston | ✔ | ✅ | ✅ | ✅ | ✅ |  |
 | Wrecking Ball | ✅ | ✅ | ✅ | ✔ | ✔ | ✅ Piledriver |
