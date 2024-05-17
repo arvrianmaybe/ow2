@@ -1,8 +1,8 @@
 #!mainFile "../main.opy"
 
-playervar is_exo_charged 
+#playervar is_exo_charged 
 
-
+/*
 rule "[baptiste/exo_boots.opy] start exo boots if bap is standing and crouching and is fully charged":
     @Event eachPlayer
     @Condition eventPlayer.getCurrentHero() == Hero.BAPTISTE
@@ -36,3 +36,4 @@ rule "[baptiste/exo_boots.opy] any direction exo boots false":
     @Condition eventPlayer.isInAir() == true
     
     eventPlayer.is_exo_charged = false
+*/
