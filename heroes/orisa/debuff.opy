@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../dev_main.opy"
 
 playervar is_using_debuff
 playervar is_debuff

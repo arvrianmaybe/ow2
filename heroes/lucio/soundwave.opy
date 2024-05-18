@@ -11,7 +11,6 @@ rule "[lucio/soundwave.opy]: Soundwave damage increase":
 
 rule "[lucio/soundwave.opy] boop knocks you forward base on your speed":
     @Event eachPlayer
-    @Hero lucio
     @Condition eventPlayer.isFiringSecondaryFire() == true
     @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE) == false
     
