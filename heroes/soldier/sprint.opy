@@ -1,5 +1,6 @@
 #!mainFile "../main.opy"
 
+/*
 rule "[sprint.opy] soldier sprint indicaator":
     @Event eachPlayer
     @Hero soldier
@@ -13,3 +14,4 @@ rule "[sprint.opy] soldier sprint indicator false":
     @Condition eventPlayer.isStanding() == false
 
     eventPlayer.setAbility1Enabled(true)
+*/
