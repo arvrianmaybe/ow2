@@ -5,7 +5,6 @@
 #!include "utilities/hero_switched.opy"
 #!include "heroes/mccree/deadeye.opy"
 #!include "heroes/mccree/flashbang.opy"
-#!include "heroes/mccree/peacekeeper.opy"
 
 rule "[mccree/init_mccree.opy] init mccree":
     @Event eachPlayer
