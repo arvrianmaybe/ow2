@@ -29,4 +29,3 @@ rule "[kiriko/init_kiriko.opy]: Initialize Kiriko":
     setBaseDamage(eventPlayer, (KIRIKO_KUNAI_HEADSHOT_DAMAGE/OW2_KIRIKO_KUNAI_HEADSHOT_DAMAGE))
 
     eventPlayer.call_init = false
-
