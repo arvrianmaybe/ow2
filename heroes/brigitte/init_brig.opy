@@ -6,21 +6,22 @@
 #!include "heroes/brigitte/shield_bash.opy"
 #!include "heroes/brigitte/inspire.opy"
 
-rule "[brigitte/init.opy]: Detect switch to Brigitte":
+rule "[brigitte/init_brigitte.opy] init brigitte":
     @Event eachPlayer
     @Hero brigitte
-
-    eventPlayer.call_init = true
-
-
-rule "[brigitte/init.opy]: Initialize Brigitte":
-    @Event eachPlayer
-    @Hero brigitte
-    @Condition eventPlayer.call_init == true
+    #@Condition eventPlayer.call_init == true
     
+    defaultHero()
     newHero(BRIGITTE_HEALTH, BRIGITTE_HEALTH_ARMOR, 0)
     setUltCost(BRIGITTE_ULT_COST)
-
     removePassiveHealing()
-    
-    eventPlayer.call_init = false
+    #eventPlayer.hp_health = 150
+    #eventPlayer.hp_armour = 50
+    #applyCustomHealth()
+
+rule "[hero_switch.opy]: Detect switch to brigitte":
+    @Event eachPlayer
+    @Hero brigitte
+    @Condition eventPlayer._hero_switched
+           
+    eventPlayer.call_init = true    

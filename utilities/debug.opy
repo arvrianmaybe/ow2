@@ -1,4 +1,3 @@
-#!mainFile "../main.opy"
 globalvar DEBUG_MODE = createWorkshopSetting(bool, "Dev Tools", "debug mode", false)
 #!define STAT_KEEP_ALIVE (2)
 #!define STAT_SPACING (0.5)
@@ -9,17 +8,15 @@ playervar debug_pvar
 #!define _total_healing_received debug_pvar[2]
 #!define _last_healing_received debug_pvar[3]
 
-rule "[debug.opy] Disable Inspector for performance":
+rule "[debug.opy] disable inspector":
     @Event global
-    @Condition not DEBUG_MODE
+    @Condition DEBUG_MODE
 
     disableInspector()
 
 rule "[debug.opy] global debug (Top Left)":
-    @Event eachPlayer
+    @Event global
     @Condition DEBUG_MODE == true
-    #@Condition eventPlayer.isHoldingButton(Button.MELEE)
-    #@Condition eventPlayer.isHoldingButton(Button.JUMP)
 
     hudHeader(getAllPlayers(), "Global", HudPosition.LEFT, 0, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
     hudSubheader(getAllPlayers(), "Server Load: {}%".format(getServerLoad()), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
@@ -31,8 +28,6 @@ rule "[debug.opy] global debug (Top Left)":
 rule "[debug.opy] player debug (Top Right)":
     @Event eachPlayer
     @Condition DEBUG_MODE == true
-    #@Condition eventPlayer.isHoldingButton(Button.MELEE)
-    #@Condition eventPlayer.isHoldingButton(Button.JUMP)
 
     hudHeader(eventPlayer, "Event Player", HudPosition.RIGHT, 0, Color.WHITE, HudReeval.STRING)
     hudSubheader(eventPlayer, "call_init = {}".format(eventPlayer.call_init), HudPosition.RIGHT, 1, Color.WHITE, HudReeval.STRING)
@@ -40,15 +35,15 @@ rule "[debug.opy] player debug (Top Right)":
     hudSubheader(eventPlayer, "isUsingUltimate() = {}".format(eventPlayer.isUsingUltimate()), HudPosition.RIGHT, 1, Color.WHITE, HudReeval.STRING)
     hudSubheader(eventPlayer, "isUsingAbility1() = {}".format(eventPlayer.isUsingAbility1()), HudPosition.RIGHT, 1, Color.WHITE, HudReeval.STRING)
     hudSubheader(eventPlayer, "isUsingAbility2() = {}".format(eventPlayer.isUsingAbility2()), HudPosition.RIGHT, 1, Color.WHITE, HudReeval.STRING)
-    hudSubheader(eventPlayer(), "getSpeed() = {}".format(eventPlayer.getSpeed()), HudPosition.RIGHT, 0, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
 
 rule "[debug.opy] unlimated ult":
     @Event eachPlayer
     @Condition DEBUG_MODE == true
-    @Condition eventPlayer.isHoldingButton(Button.ULTIMATE)
 
     eventPlayer.setUltCharge(100)
-    eventPlayer.forceButtonPress(Button.ULTIMATE)
+    wait()
+    if RULE_CONDITION:
+        goto RULE_START
 
 rule "[debug.opy] Show Player Damage/Healing":
     @Event eachPlayer
@@ -123,34 +118,3 @@ rule "[debug.opy] Debug healing instance":
     wait(STAT_KEEP_ALIVE, Wait.RESTART_WHEN_TRUE)
     healee._last_healing_received = 0
     healee._total_healing_received = 0
-
-rule "[debug.opy] dummybot testing":
-    @Event eachPlayer
-    @Condition DEBUG_MODE
-    @Condition eventPlayer.isHoldingButton(Button.INTERACT)
-    @Condition eventPlayer.isHoldingButton(Button.CROUCH)
-
-    destroyAllDummies()
-    createDummy(Hero.ANA, getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer, eventPlayer) # feel free to change it to whatever character your testing. but always and i mean always
-                                                                                                # set it back to the same old ana and opposite team
-rule "[debug.opy] damage player":
-    @Event eachPlayer
-    @Condition DEBUG_MODE
-    @Condition eventPlayer.isHoldingButton(Button.INTERACT)
-    @Condition eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
-
-    damage(eventPlayer, null, 1)
-    wait()
-    if RULE_CONDITION:
-        goto RULE_START
-
-rule "[debug.opy] heal player":
-    @Event eachPlayer
-    @Condition DEBUG_MODE
-    @Condition eventPlayer.isHoldingButton(Button.INTERACT)
-    @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE)
-
-    heal(eventPlayer, null, 1)
-    wait()
-    if RULE_CONDITION:
-        goto RULE_START

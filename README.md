@@ -1,4 +1,4 @@
-# Remastered Overwatch 
+# Remastered Overwatch 2 
 
 This repository contains OverPy source code for building [Remastered Overwatch 2](https://workshop.codes/WS8C5) Workshop gamemode.  
 
@@ -21,7 +21,7 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Echo | ✅ | ✅ | ✅ | ✅ | ✔ |  |
 | Genji | ✔ | ✔ | ✔ | ✔ | ✔ |  |
 | Hanzo | ✔ | ✔ | ✔ | ✔ | ✔ |  |
-| Junker Queen |  |  |  |  |  |  |
+| Junker Queen |  |  | ✅ |  |  |  |
 | Junkrat | ✔ | ✔ | ✔ | ✅ | ✅ |  |
 | Kiriko | ✅ | ✅ | ✅ |  |  | ✅ Wall Climb |
 | Lifeweaver |  |  | ✅ |  |  |  |
@@ -31,9 +31,9 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Mccree | ✅ | ✅ | ✅ | ✅ | ✔ |  |
 | Mercy | ✅ | ✅ | ✅ | ✅ | ✔ |  |
 | Moira | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| Orisa | ✅ | ✅ |  | ✅ | ✔ |  |
+| Orisa | ✅ | ✅ | ✔ | ✔ | ✔ |  |
 | Pharah | ✅ | ✔ | ✔ | ✔ | ✅ |  |
-| Ramattra | ✔ | ✔ | ✔ |  | ✅ |  |
+| Ramattra |  |  |  |  |  |  |
 | Reaper | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | Reinhardt | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | Roadhog | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Ult Charge |
@@ -44,8 +44,8 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Symmetra | ✔ | ✔ | ✔ | ✔ | ✅ |  |
 | Torbjorn | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | Tracer | ✔ |  |  | ✅ | ✅ |  |
-| Venture |  |  |  |  |  |  |
-| Widowmaker |  |  |  |  |  | ✅ Damage Falloff |
+| Venture |  |  |  |  |  | ✔HP |
+| Widowmaker |  |  |  |  |  |  |
 | Winston | ✔ | ✅ | ✅ | ✅ | ✅ |  |
 | Wrecking Ball | ✅ | ✅ | ✅ | ✔ | ✔ | ✅ Piledriver |
 | Zarya | ✅ | ✅ | ✅ | ✅ | ✔ |  |

@@ -1,6 +1,5 @@
 #!mainFile "../main.opy"
 
-/*
 rule "[amp.opy] increased dmg to nearby allies":
     @Event eachPlayer
     @Hero lucio
@@ -14,4 +13,3 @@ rule "[amp.opy] increased dmg to nearby allies":
     getPlayers(eventPlayer.getTeam()).setDamageDealt(100)
     eventPlayer.stopForcingOutlineFor(getAllPlayers())
     getPlayers(eventPlayer.getTeam()).stopScalingSize()
-*/
