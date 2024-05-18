@@ -34,3 +34,4 @@ rule "[bastion/init.opy]: Clean up Bastion":
     
     waitUntil(eventPlayer.getCurrentHero() != Hero.BASTION, Math.INFINITY)
     hideMachineGunAmmo()
+    #hideSelfRepairGui()
