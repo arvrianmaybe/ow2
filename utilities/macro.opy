@@ -4,7 +4,7 @@
 
 #!define isHero(player, hero) ((player.getCurrentHero() == hero) or (player.getHeroOfDuplication() == hero))
 
-#!define percent(p) (100*p)
+#!define percent(p) (100*(p))
 
 #!define roundedPercent(p) (round(percent(p)))
 
