@@ -1,12 +1,13 @@
 #!mainFile "../main.opy"
 #!include "utilities/custom_hp.opy"
 
-globalvar  health_pool
+# globalvar  health_pool
 
-playervar hero_id_duplicated
+# playervar hero_id_duplicated
 
-subroutine cancelDuplication
+# subroutine cancelDuplication
 
+/*
 rule "[echo/duplicate.opy]: Table of all heroes with custom hp":
     # tanks
     health_pool[heroID(Hero.DVA)] = [DVA_HEALTH,DVA_ARMOR,0]
@@ -97,4 +98,19 @@ def cancelDuplication():
     @Name "[echo/duplcation.opy]: cancelDuplication()"
 
     kill(eventPlayer,eventPlayer)
+*/
+
+
+
+rule "[echo/duplicate.opy] turn into the hero you dup":
+    @Event eachPlayer
+    @Condition eventPlayer.isDuplicatingAHero() == true
     
+    kill(eventPlayer, null)
+    eventPlayer.startForcingHero(eventPlayer.getHeroOfDuplication())
+    eventPlayer.preloadHero(eventPlayer.getHeroOfDuplication())
+    wait(ECHO_DUPLICATE_DURATION)
+    eventPlayer.preloadHero(Hero.ECHO)
+    eventPlayer.startForcingHero(Hero.ECHO)
+    wait(1)
+    eventPlayer.stopForcingCurrentHero()

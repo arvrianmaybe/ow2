@@ -6,7 +6,7 @@
 
 settings {
     "main": {
-        "modeName": GAMEMODE_NAME,
+        "modeName": GAMEMODE_NAME + " " + GAMEMODE_VERSION,
         "description": GAMEMODE_DESCRIPTION,
     },
     "lobby": {
@@ -86,8 +86,8 @@ settings {
             "ultGen%": percent(ANA_ULT_COST/OW2_ANA_ULT_COST)
             },
             "ashe": {
-                "ability1EnemyKb%": 0,
-                "ability1SelfKb%": 0,
+                "ability1EnemyKb%": 300,
+                "ability1SelfKb%": 300,
                 "health%": percent(ASHE_BOB_HEALTH/OW2_ASHE_BOB_HEALTH), # for BOB hp
                 "ultGen%": percent(OW2_ASHE_ULT_COST/ASHE_ULT_COST)
             },
@@ -96,14 +96,19 @@ settings {
                 "ability2Cooldown%": percent(BAPTISTE_LAMP_COOLDOWN_TIME/OW2_BAPTISTE_LAMP_COOLDOWN_TIME),
                 "ultGen%": percent(OW2_BAPTISTE_ULT_COST/BAPTISTE_ULT_COST)
             },
+            "brigitte": {
+                "health%": percent(BRIGITTE_BARRIER_HEALTH/OW2_BRIGITTE_BARRIER_HEALTH), # for barrier hp
+                "ability2Cooldown%": percent(BAPTISTE_LAMP_COOLDOWN_TIME/OW2_BAPTISTE_LAMP_COOLDOWN_TIME),
+                "ultGen%": percent(OW2_BAPTISTE_ULT_COST/BAPTISTE_ULT_COST)
+            },
             "bastion": {
-                "ability1Cooldown%": percent(BASTION_SENTRY_COOLDOWN/OW2_BASTION_RECONFIGURE_COOLDOWN),
+                "ability1Cooldown%": percent(BASTION_TANK_CONFIG_COOLDOWN/OW2_BASTION_RECONFIGURE_COOLDOWN),
                 "secondaryFireCooldown%": percent(BASTION_TANK_COOLDOWN/OW2_TACTICAL_GRENADE_COOLDOWN),
                 "ultGen%": percent(OW2_BASTION_ULT_COST/BASTION_ULT_COST)
-                },
-                "mccree": {
-                    "ultGen%": percent(OW2_MCCREE_ULT_COST/MCCREE_ULT_COST)
-                },
+            },
+            "mccree": {
+                "ultGen%": percent(OW2_MCCREE_ULT_COST/MCCREE_ULT_COST)
+            },
             "doomfist": {
                 "ability1ChargeRate%": 10,
                 "ammoRegenerationTime%": 162,
@@ -235,9 +240,8 @@ settings {
                 "health%": percent(TRACER_HEALTH/OW2_TRACER_HEALTH), # for recall hp
                 "ultGen%": percent(OW2_TRACER_ULT_COST/TRACER_ULT_COST)
             },
-            "tracer": {
-                "health%": percent(TRACER_HEALTH/OW2_TRACER_HEALTH), # for recall hp
-                "ultGen%": percent(OW2_TRACER_ULT_COST/TRACER_ULT_COST)
+            "widowmaker": {
+                "ability1Cooldown%": percent(WIDOW_GRAPPLE_COOLDOWN/OW2_WIDOW_GRAPPLE_COOLDOWN)
             },
             "venture": {
                 "ultGen%": percent(OW2_VENTURE_ULT_COST/VENTURE_ULT_COST)
@@ -290,7 +294,7 @@ settings {
                  "sigma",
                  "sojourn",
                  "soldier",
-                 "sombra",
+                 #"sombra",
                  "symmetra",
                  "torbjorn",
                  "tracer",
