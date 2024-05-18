@@ -94,9 +94,6 @@ def disableAllAbilities():
     eventPlayer.setCrouchEnabled(false)
     eventPlayer.setReloadEnabled(false)
 
-    eventPlayer.stopScalingSize()
-    eventPlayer.stopScalingBarriers()
-
 
 def resetStats():
     @Name "[utilities/reset.opy]: resetStats()"
