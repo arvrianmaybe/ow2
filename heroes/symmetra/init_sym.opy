@@ -19,6 +19,8 @@ rule "[symmetra/init_symmetra.opy]: Initialize symmetra":
     newHero(SYMMETRA_HEALTH, 0,SYMMETRA_SHIELDS)
     setUltCost(SYMMETRA_ULT_COST)
 
+    removeTankPassive()
+
     removePassiveHealing()
 
     eventPlayer.disallowButton(Button.SECONDARY_FIRE) # no sniper sym

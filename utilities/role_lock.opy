@@ -88,7 +88,7 @@ rule "[hero_roster.opy]: Initiaize hero roster workshop settings":
     heroes_enabled[heroID(Hero.SYMMETRA)] = createWorkshopSetting(bool, "Hero Roster", "Symmetra", true, 0)
     heroes_enabled[heroID(Hero.TORBJORN)] = createWorkshopSetting(bool, "Hero Roster", "Torbjorn", true, 0)
     heroes_enabled[heroID(Hero.TRACER)] = createWorkshopSetting(bool, "Hero Roster", "Tracer", true, 0)
-    heroes_enabled[heroID(Hero.VENTURE)] = createWorkshopSetting(bool, "Hero Roster", "Venture", true, 0)
+    #heroes_enabled[heroID(Hero.VENTURE)] = createWorkshopSetting(bool, "Hero Roster", "Venture", true, 0) venture not out :(
     heroes_enabled[heroID(Hero.WIDOWMAKER)] = createWorkshopSetting(bool, "Hero Roster", "Widowmaker", true, 0)
     heroes_enabled[heroID(Hero.WINSTON)] = createWorkshopSetting(bool, "Hero Roster", "Winston", true, 0)
     heroes_enabled[heroID(Hero.HAMMOND)] = createWorkshopSetting(bool, "Hero Roster", "Wrecking Ball", true, 0)

@@ -1,5 +1,5 @@
 #!mainFile "../main.opy"
-#!include "heroes/baptiste/regen_burst.opy"
+#!include "heroes/baptiste/reg_boost.opy"
 #!include "heroes/baptiste/exo_boots.opy"
 
 rule "[baptiste/baptiste.opy] init baptiste":

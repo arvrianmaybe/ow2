@@ -5,11 +5,8 @@
 #!include "utilities/hero_switched.opy"
 #!include "heroes/roadhog/breather.opy"
 #!include "heroes/roadhog/wholehog.opy"
-#!include "heroes/roadhog/scrap_gun.opy"
+#!include "heroes/sombra/hack.opy"
 #!include "heroes/roadhog/hook.opy"
-
-
-# Sorry for using ow1 roadhog, is now actually normal pre-rework roadhog with some minor changes, oh and https://web.archive.org/web/20230317080207/https://overwatch.fandom.com/wiki/Roadhog#Overview for the references
 
 rule "[roadhog/init_roadhog.opy] init roadhog":
     @Event eachPlayer

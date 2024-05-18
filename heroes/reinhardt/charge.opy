@@ -1,6 +1,5 @@
 #!mainFile "../main.opy"
 
-/*
 rule "[reinhardt/charge.opy] increased charge speed"
     @Event eachPlayer
     @Hero reinhardt
@@ -12,7 +11,6 @@ rule "[reinhardt/charge.opy] increased charge speed"
     wait(REINHARDT_CHARGE_COOLDOWN_TIME)
     eventPlayer.setMoveSpeed(100)
     eventPlayer.setAbilityCharge(Button.ABILITY_1, 2)
-*/
 
 rule "[reinhardt/charge.opy]: Increase charge damage":
     @Event playerDealtDamage

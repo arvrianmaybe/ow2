@@ -120,15 +120,3 @@ rule "[orisa/ammo.opy]: Slow down Orisa when shooting":
     eventPlayer.setMoveSpeed(100-percent(ORISA_MOVEMENT_PENALTY))
     waitUntil(not eventPlayer.isHoldingButton(Button.PRIMARY_FIRE) or eventPlayer.is_orisa_reloading, Math.INFINITY)
     eventPlayer.setMoveSpeed(100)
-
-rule "[orisa/ammo.opy]: Back to normal when Orisa stop shotting": #i found an issue where if you fire in fortify it cancels back to the nerfs.
-    @Event eachPlayer
-    @Hero orisa
-    @Condition eventPlayer.isUsingAbility1()
-    @Condition eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
-    @Condition not eventPlayer.is_orisa_reloading
-    eventPlayer.setMoveSpeed(100-percent(ORISA_MOVEMENT_PENALTY))
-    waitUntil(not eventPlayer.isHoldingButton(Button.PRIMARY_FIRE) or eventPlayer.is_orisa_reloading, Math.INFINITY)
-    eventPlayer.setMoveSpeed(percent(ORISA_FORITFY_MOVEMENT_BONUS/OW2_ORISA_FORTIFY_MOVEMENT_DECREASE))
-    waitUntil(not eventPlayer.isUsingAbility1(), Math.INFINITY) # Just to be safe when player fires at last second to still gain movement speed
-    eventPlayer.setMoveSpeed(100)

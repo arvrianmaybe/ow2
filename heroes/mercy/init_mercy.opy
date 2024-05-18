@@ -1,7 +1,6 @@
 #!mainFile "../main.opy"
 
 #!include "heroes/mercy/guardian.opy"
-#!include "heroes/mercy/resurrect.opy"
 
 
 rule "[mercy/init_mercy.opy]: Detect switch to Mercy":
@@ -20,8 +19,6 @@ rule "[mercy/init_mercy.opy]: Initialize Mercy":
     setUltCost(MERCY_ULT_COST)
     eventPlayer.setAmmo(0, MERCY_CLIP_SIZE)
     eventPlayer.setMaxAmmo(0, MERCY_CLIP_SIZE)
-    #eventPlayer.disallowButton(Button.ABILITY_2) # No rez
-    #eventPlayer.disallowButton(Button.ULTIMATE) # No Ultimate
 
     eventPlayer.is_using_guardian_angel = false
     eventPlayer.is_slingshotting = false

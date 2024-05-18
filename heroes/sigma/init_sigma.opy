@@ -1,6 +1,8 @@
 #!mainFile "../main.opy"
 
-#!include "heroes/sigma/accretion.opy"
+##!include "heroes/sigma/nemesis.opy"
+##!include "heroes/sigma/vortex.opy"
+##!include "heroes/sigma/annihilation.opy"
 
 rule "[sigma/init_sigma.opy]: Detect switch to sigma":
     @Event eachPlayer

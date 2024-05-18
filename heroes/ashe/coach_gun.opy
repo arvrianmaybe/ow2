@@ -2,7 +2,7 @@
 
 playervar double_abilitys_one 
 
-/*
+
 rule "[ashe/couch_gun.opy] double couch gun":
     @Event eachPlayer
     @Hero ashe
@@ -33,12 +33,3 @@ rule "[ashe/couch_gun.opy] double couch reset cooldown":
     
     wait(0.4)
     eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
-*/
-
-rule "[ashe/coouch_gun.opy]: damage shotgun":
-    @Event playerDealtDamage
-    @Hero ashe
-    #@Condition eventAbility == Button.ABILITY_1
-    @Condition eventPlayer.isUsingAbility1() == true
-
-    damage(victim, attacker, eventDamage*(ASHE_SHOTGUN_DAMAGE/OW2_ASHE_COUCH_GUN_DAMAGE)-eventDamage)

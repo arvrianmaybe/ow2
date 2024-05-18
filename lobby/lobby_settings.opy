@@ -1,5 +1,5 @@
 #!mainFile "main.opy"
-#!include "env/ow_env.opy"
+#!include "lobby/game_mode.opy"
 #!include "constant/reimagined_constant.opy"
 #!include "utilities/macro.opy"
 #!include "constant/normal_constant.opy"
@@ -69,14 +69,7 @@ settings {
             "gamemodeStartTrigger": "allSlotsFilled",
             "tankPassiveHealthBonus": "alwaysEnabled",
             "enableCompetitiveRules": true
-        },
-        #"clash": {
-            #"heroLimit": "1PerTeam",
-            #"roleLimit": "off",
-            #"gamemodeStartTrigger": "allSlotsFilled",
-            #"tankPassiveHealthBonus": "alwaysEnabled",
-            #"enableCompetitiveRules": true
-        #},
+        }
     },
     "heroes": {
         "allTeams": {
@@ -86,8 +79,6 @@ settings {
             "ultGen%": percent(ANA_ULT_COST/OW2_ANA_ULT_COST)
             },
             "ashe": {
-                "ability1EnemyKb%": 0,
-                "ability1SelfKb%": 0,
                 "health%": percent(ASHE_BOB_HEALTH/OW2_ASHE_BOB_HEALTH), # for BOB hp
                 "ultGen%": percent(OW2_ASHE_ULT_COST/ASHE_ULT_COST)
             },
@@ -166,7 +157,6 @@ settings {
                 "primaryFireIgniteDamage": 0,
                 "primaryFireIgniteDuration": 0,
                 "primaryFireIgniteRate": 0,
-                "health%": percent(MAUGA_CAGE_FIGHT_HEALTH/OW2_MAUGA_CAGE_FIGHT_HEALTH), # for cage fight
                 "ultGen%": percent(MAUGA_ULT_COST/OW2_MAUGA_ULT_COST)
             },
             "moira": {
@@ -175,7 +165,7 @@ settings {
                 "primaryFireMaximumTime%": percent((OW2_MOIRA_HEAL_GRASP_AMMO_USAGE/MOIRA_HEAL_GRASP_AMMO_USAGE)*(MOIRA_HEAL_GRASP_AMMO/OW2_MOIRA_HEAL_GRASP_AMMO)),
             },
             "orisa": {
-                "ability2Cooldown%": percent(ORISA_EXTERMINATE_COOLDOWN/OW2_ORISA_JAVELIN_SPIN_COOLDOWN),
+                "ability2Cooldown%": percent(ORISA_EXTERMINATE_COOLDOWN/OW2_ORISA_SPINNING_JAV),
                 "ultGen%": percent(ORISA_ULT_COST/OW2_ORISA_ULT_COST)
             },
             "pharah": {
@@ -235,12 +225,8 @@ settings {
                 "health%": percent(TRACER_HEALTH/OW2_TRACER_HEALTH), # for recall hp
                 "ultGen%": percent(OW2_TRACER_ULT_COST/TRACER_ULT_COST)
             },
-            "tracer": {
-                "health%": percent(TRACER_HEALTH/OW2_TRACER_HEALTH), # for recall hp
-                "ultGen%": percent(OW2_TRACER_ULT_COST/TRACER_ULT_COST)
-            },
-            "venture": {
-                "ultGen%": percent(OW2_VENTURE_ULT_COST/VENTURE_ULT_COST)
+            "widowmaker": {
+                "ultGen%": percent(OW2_WIDOWMAKER_ULT_COST/WIDOWMAKER_ULT_COST)
             },
             "winston": {
                 "health%": percent(WINSTON_BARRIER_HEALTH/OW2_WINSTON_BARRIER_HEALTH), # for barrier hp
@@ -258,49 +244,7 @@ settings {
             },
             "zenyatta": {
              "ultGen%": percent(OW2_ZENYATTA_ULT_COST/ZENYATTA_ULT_COST)
-             },
-             "enabledHeroes": [
-                 "ana",
-                 "ashe",
-                 "baptiste",
-                 "bastion",
-                 "brigitte",
-                 "mccree",
-                 "doomfist",
-                 "dva",
-                 "echo",
-                 "genji",
-                 "hanzo",
-                 "illari",
-                 "junkerQueen",
-                 "junkrat",
-                 "kiriko",
-                 "lifeweaver",
-                 "lucio",
-                 "mauga",
-                 "mei",
-                 "mercy",
-                 "moira",
-                 "orisa",
-                 "pharah",
-                 "ramattra",
-                 "reaper",
-                 "reinhardt",
-                 "roadhog",
-                 "sigma",
-                 "sojourn",
-                 "soldier",
-                 "sombra",
-                 "symmetra",
-                 "torbjorn",
-                 "tracer",
-                 "venture",
-                 "widowmaker",
-                 "winston",
-                 "hammond",
-                 "zarya",
-                 "zenyatta",
-             ]
-         }
-     }
- }
+            }
+        }
+    }
+}

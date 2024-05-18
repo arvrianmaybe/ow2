@@ -15,7 +15,7 @@ rule "[dva/hp.opy]: Correct DVa mech health":
 
     wait(1, Wait.ABORT_WHEN_FALSE)
     eventPlayer.remech_damage_taken = eventPlayer.getMaxHealth() - eventPlayer.getHealth()
-    setCustomHp(DVA_HEALTH, DVA_ARMOR, 0)
+    setCustomHp(DVA_HEALTH, DVA_HEALTH_ARMOUR, 0)
     eventPlayer.setHealth(eventPlayer.getMaxHealth() - eventPlayer.remech_damage_taken)
 
 

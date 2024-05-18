@@ -9,9 +9,8 @@ playervar machine_gun_ammo_id
 
 subroutine startMachineGunReload
 
-#!define hideMachineGunAmmo()\
-    destroyInWorldText(eventPlayer.machine_gun_ammo_id)\
-    eventPlayer.machine_gun_ammo_id = null
+subroutine showMachineGunAmmo
+subroutine hideMachineGunAmmo
 
 
 rule "[bastion/machine_gun.opy]: Activate machine gun in sentry mode":
@@ -22,29 +21,30 @@ rule "[bastion/machine_gun.opy]: Activate machine gun in sentry mode":
     eventPlayer.machine_gun_ready = true
     stopChasingVariable(eventPlayer.machine_gun_reload_timer)
 
-    # show machine gun ammo
+
+def showMachineGunAmmo():
+    @Name "[bastion/machine_gun.opy]: showMachineGunAmmo()"
+
     if eventPlayer.machine_gun_ammo_id == null:
-        createInWorldText(
-            eventPlayer,
-            "{0}|{1}".format(ceil(eventPlayer.machine_gun_ammo), BASTION_SENTRY_AMMO),
-            updateEveryTick(eventPlayer.getEyePosition() + \
-            (100 * (3.3 * worldVector(Vector.RIGHT, eventPlayer, Transform.ROTATION) + \
-            ((-1.3 - 0.2) * (angleToDirection(horizontalAngleOfDirection(eventPlayer.getFacingDirection()), 
-            verticalAngleOfDirection(eventPlayer.getFacingDirection()) - 90))) + 3 * eventPlayer.getFacingDirection()))), 
-            2, 
-            Clip.NONE, 
-            WorldTextReeval.VISIBILITY_POSITION_STRING_AND_COLOR, 
-            Color.WHITE, 
-            SpecVisibility.DEFAULT)
+        createInWorldText(eventPlayer, 
+                        "{0}|{1}".format(ceil(eventPlayer.machine_gun_ammo), BASTION_SENTRY_AMMO),
+                        updateEveryTick(eventPlayer.getEyePosition() + \
+                        (100 * (3.3 * worldVector(Vector.RIGHT, eventPlayer, Transform.ROTATION) + \
+                        ((-1.3 - 0.2) * (angleToDirection(horizontalAngleOfDirection(eventPlayer.getFacingDirection()), 
+                        verticalAngleOfDirection(eventPlayer.getFacingDirection()) - 90))) + 3 * eventPlayer.getFacingDirection()))), 
+                        2, 
+                        Clip.NONE, 
+                        WorldTextReeval.VISIBILITY_POSITION_STRING_AND_COLOR, 
+                        Color.WHITE, 
+                        SpecVisibility.DEFAULT)
         eventPlayer.machine_gun_ammo_id = getLastCreatedText()
 
 
-rule "[bastion/machine_gun.opy]: Hide machine gun ammo when not in sentry mode":
-    @Event eachPlayer
-    @Hero bastion
-    @Condition eventPlayer.current_configuration != Configuration.SENTRY
+def hideMachineGunAmmo():
+    @Name "[bastion/machine_gun.opy]: hideMachineGunAmmo()"
 
-    hideMachineGunAmmo()
+    destroyInWorldText(eventPlayer.machine_gun_ammo_id)
+    eventPlayer.machine_gun_ammo_id = null
 
 
 def startMachineGunReload():
@@ -69,6 +69,22 @@ rule "[bastion/machine_gun.opy]: finish reloading machine gun":
         smallMessage(eventPlayer, "Done")
 
 
+rule "[bastion/machine_gun.opy]: Show machine gun gui when in sentry mode":
+    @Event eachPlayer
+    @Hero bastion
+    @Condition eventPlayer.current_configuration == Configuration.SENTRY
+
+    showMachineGunAmmo()
+
+
+rule "[bastion/machine_gun.opy]: Hide machine gun gui when not in sentry mode":
+    @Event eachPlayer
+    @Hero bastion
+    @Condition eventPlayer.current_configuration != Configuration.SENTRY
+
+    hideMachineGunAmmo()
+
+
 rule "[bastion/machine_gun.opy]: Consume machine gun ammo when shooting":
     @Event eachPlayer
     @Hero bastion
@@ -86,10 +102,19 @@ rule "[bastion/machine_gun.opy]: Stop machine gun ammo consumption when not shoo
     stopChasingVariable(eventPlayer.machine_gun_ammo)
 
 
-rule "[bastion/machine_gun.opy]: Reload machine gun on reload key or when out of ammo":
+rule "[bastion/machine_gun.opy]: Reload machine gun on reload key":
     @Event eachPlayer
     @Hero bastion
-    @Condition eventPlayer.isHoldingButton(Button.RELOAD) or eventPlayer.machine_gun_ammo <= 0
+    @Condition eventPlayer.isHoldingButton(Button.RELOAD)
+    @Condition eventPlayer.current_configuration == Configuration.SENTRY
+
+    startMachineGunReload()
+
+    
+rule "[bastion/machine_gun.opy]: Reload machine gun if out of ammo":
+    @Event eachPlayer
+    @Hero bastion
+    @Condition eventPlayer.machine_gun_ammo <= 0
     @Condition eventPlayer.current_configuration == Configuration.SENTRY
 
     startMachineGunReload()
@@ -106,8 +131,8 @@ rule "[bastion/machine_gun.opy]: Reload machine gun when not in sentry mode":
 rule "[bastion/machine_gun.opy]: Allow machine gun shooting when machine gun ready":
     @Event eachPlayer
     @Hero bastion
-    @Condition eventPlayer.machine_gun_ready # gun ready to shoot
     @Condition eventPlayer.current_configuration == Configuration.SENTRY
+    @Condition eventPlayer.machine_gun_ready == true # gun ready to shoot
 
     eventPlayer.allowButton(Button.PRIMARY_FIRE)
 
@@ -115,8 +140,7 @@ rule "[bastion/machine_gun.opy]: Allow machine gun shooting when machine gun rea
 rule "[bastion/machine_gun.opy]: Disallow machine gun shooting when machine gun not ready":
     @Event eachPlayer
     @Hero bastion
-    @Condition not eventPlayer.machine_gun_ready # gun not ready to shoot
+    @Condition eventPlayer.machine_gun_ready == false # gun not ready to shoot
     @Condition eventPlayer.current_configuration == Configuration.SENTRY
 
     eventPlayer.disallowButton(Button.PRIMARY_FIRE)
-
