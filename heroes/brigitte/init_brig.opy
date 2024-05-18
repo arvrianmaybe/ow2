@@ -11,7 +11,7 @@ rule "[brigitte/init.opy]: Detect switch to Brigitte":
     @Hero brigitte
 
     eventPlayer.call_init = true
-
+  
 
 rule "[brigitte/init.opy]: Initialize Brigitte":
     @Event eachPlayer
