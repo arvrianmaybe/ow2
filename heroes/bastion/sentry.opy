@@ -6,17 +6,14 @@
 rule "[bastion/sentry.opy]: Detect sentry mode":
     @Event eachPlayer
     @Hero bastion
-    @Condition eventPlayer.isUsingUltimate()
-    #@Condition eventPlayer.isInAlternateForm()
-    #@Condition eventPlayer.current_configuration == Configuration.RECON # Sentry mode can only be entered from recon mode
+    @Condition eventPlayer.isInAlternateForm()
+    @Condition eventPlayer.current_configuration == Configuration.RECON # Sentry mode can only be entered from recon mode
     @Condition eventPlayer.current_configuration != Configuration.TANK # prevents incorrectly identifying tank as sentry
-    #@Condition eventPlayer.isUsingAbility1()
+    @Condition eventPlayer.isUsingAbility1()
 
-    eventPlayer.cancelPrimaryAction()
-    wait(BASTION_TANK_CONFIG_TRANSFORM_TIME-OW2_BASTION_ASSAULT_CONFIG_TRANSFORM_TIME)
     eventPlayer.current_configuration = Configuration.SENTRY
 
-/*
+
 rule "[bastion/sentry.opy]: Go back to sentry mode": # thanks for ecks for letting me steal this code rq
     @Event eachPlayer
     @Hero bastion
@@ -32,22 +29,17 @@ rule "[bastion/sentry.opy]: Go back to sentry mode": # thanks for ecks for letti
             eventPlayer.cancelPrimaryAction()
             eventPlayer.forceButtonPress(Button.ABILITY_1)
     while RULE_CONDITION
-*/
 
 
 rule "[bastion/sentry.opy]: Initialize sentry mode":
     @Event eachPlayer
     @Hero bastion
     @Condition eventPlayer.current_configuration == Configuration.SENTRY
-    @Condition eventPlayer.current_configuration != Configuration.TANK
 
     setBaseDamage(eventPlayer, BASTION_SENTRY_DAMAGE/OW2_BASTION_ASSAULT_CONFIG_DAMAGE)
-    #eventPlayer.setStatusEffect(null, Status.ROOTED, 9999)
+    eventPlayer.setStatusEffect(null, Status.ROOTED, 9999)
     eventPlayer.setKnockbackReceived(0)
 
-    eventPlayer.cancelPrimaryAction()
-    eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
     eventPlayer.disallowButton(Button.SECONDARY_FIRE)
     eventPlayer.setSecondaryFireEnabled(true)
-    eventPlayer.forceButtonPress(Button.ABILITY_1)
     eventPlayer.allowButton(Button.PRIMARY_FIRE)
