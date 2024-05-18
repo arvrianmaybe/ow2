@@ -1,6 +1,7 @@
-#!mainFile "../../dev_main.opy"
+#!mainFile "../main.opy"
 
 #!include "heroes/junkrat/bomb.opy"
+#!include "heroes/junkrat/tire.opy"
 
 rule "[junkrat/init.opy]: Detect switch to Junkrat":
     @Event eachPlayer

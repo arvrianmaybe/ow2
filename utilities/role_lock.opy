@@ -4,9 +4,9 @@
 
 globalvar i
 globalvar hero_select_time
-globalvar max_tank_count = createWorkshopSetting(int[0:6], "Role limit", "Tank", 2, 0)
-globalvar max_damage_count = createWorkshopSetting(int[0:6], "Role limit", "Damage", 2, 1)
-globalvar max_support_count = createWorkshopSetting(int[0:6], "Role limit", "Support", 2, 2)
+globalvar max_tank_count = createWorkshopSetting(int[0:6], "Role limit", "Tank", 6, 0)
+globalvar max_damage_count = createWorkshopSetting(int[0:6], "Role limit", "Damage", 6, 1)
+globalvar max_support_count = createWorkshopSetting(int[0:6], "Role limit", "Support", 6, 2)
 globalvar heroes_enabled
 
 # Currently enabled heroes
@@ -84,11 +84,11 @@ rule "[hero_roster.opy]: Initiaize hero roster workshop settings":
     heroes_enabled[heroID(Hero.SIGMA)] = createWorkshopSetting(bool, "Hero Roster", "Sigma", true, 0)
     heroes_enabled[heroID(Hero.SOJOURN)] = createWorkshopSetting(bool, "Hero Roster", "Sojourn", true, 0)
     heroes_enabled[heroID(Hero.SOLDIER)] = createWorkshopSetting(bool, "Hero Roster", "Soldier", true, 0)
-    heroes_enabled[heroID(Hero.SOMBRA)] = createWorkshopSetting(bool, "Hero Roster", "Sombra", true, 0)
+    #heroes_enabled[heroID(Hero.SOMBRA)] = createWorkshopSetting(bool, "Hero Roster", "Sombra", false, 0)
     heroes_enabled[heroID(Hero.SYMMETRA)] = createWorkshopSetting(bool, "Hero Roster", "Symmetra", true, 0)
     heroes_enabled[heroID(Hero.TORBJORN)] = createWorkshopSetting(bool, "Hero Roster", "Torbjorn", true, 0)
     heroes_enabled[heroID(Hero.TRACER)] = createWorkshopSetting(bool, "Hero Roster", "Tracer", true, 0)
-    #heroes_enabled[heroID(Hero.VENTURE)] = createWorkshopSetting(bool, "Hero Roster", "Venture", true, 0) venture not out :(
+    heroes_enabled[heroID(Hero.VENTURE)] = createWorkshopSetting(bool, "Hero Roster", "Venture", true, 0)
     heroes_enabled[heroID(Hero.WIDOWMAKER)] = createWorkshopSetting(bool, "Hero Roster", "Widowmaker", true, 0)
     heroes_enabled[heroID(Hero.WINSTON)] = createWorkshopSetting(bool, "Hero Roster", "Winston", true, 0)
     heroes_enabled[heroID(Hero.HAMMOND)] = createWorkshopSetting(bool, "Hero Roster", "Wrecking Ball", true, 0)
@@ -102,6 +102,8 @@ rule "[hero_roster.opy]: Define tank, damage, support heroes array":
     # Tanks
     tank_heroes = getTankHeroes()
     tank_heroes.remove(Hero.DOOMFIST)
+    tank_heroes.append(Hero.BRIGITTE)
+
 
     # Damage
     damage_heroes = getDamageHeroes()
@@ -109,6 +111,7 @@ rule "[hero_roster.opy]: Define tank, damage, support heroes array":
 
     # Supports
     support_heroes = getSupportHeroes()
+    support_heroes.remove(Hero.BRIGITTE)
 
     # Put enabled heroes into roaster
     tank_roaster = []

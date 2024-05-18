@@ -8,14 +8,10 @@ globalvar reset_gvar
 
 playervar reset_pvar
 #!defineMember call_init reset_pvar[0]
-#!defineMember friendly_doomfist_player reset_pvar[1]
 #!defineMember friendly_orisa_player reset_pvar[2]
 #!defineMember friendly_sombra_player reset_pvar[3]
-#!defineMember enemy_doomfist_player reset_pvar[4]
 #!defineMember enemy_orisa_player reset_pvar[5]
 #!defineMember enemy_sombra_player reset_pvar[6]
-#!defineMember friendly_lifeweaver_player reset_pvar[7]
-#!defineMember enemy_lifeweaver_player reset_pvar[8]
 
 subroutine enableAllAbilities
 subroutine disableAllAbilities
@@ -37,9 +33,16 @@ subroutine resetFrenemies
     setCustomHp(health, armor, shields) \
     enableAllAbilities() \
 
+#!define resetHero()\
+    clearCustomHp()\
+    resetStats()\
+    resetStatuses()\
+    resetFrenemies()\
+    enableAllAbilities()\
+
 
 def enableAllAbilities():
-    @Name "[reset.opy]: enableAllAbilities()"
+    @Name "[utilities/reset.opy]: enableAllAbilities()"
 
     eventPlayer.allowButton(Button.PRIMARY_FIRE)
     eventPlayer.allowButton(Button.SECONDARY_FIRE)
@@ -64,13 +67,9 @@ def enableAllAbilities():
     eventPlayer.setCrouchEnabled(true)
     eventPlayer.setReloadEnabled(true)
 
-    eventPlayer.setKnockbackDealt(100)
-    eventPlayer.setKnockbackReceived(100)
-
-    eventPlayer.setMoveSpeed(100)
 
 def disableAllAbilities():
-    @Name "[reset.opy]: disableAllAbilities()"
+    @Name "[utilities/reset.opy]: disableAllAbilities()"
 
     eventPlayer.disallowButton(Button.PRIMARY_FIRE)
     eventPlayer.disallowButton(Button.SECONDARY_FIRE)
@@ -95,13 +94,12 @@ def disableAllAbilities():
     eventPlayer.setCrouchEnabled(false)
     eventPlayer.setReloadEnabled(false)
 
-    eventPlayer.setKnockbackDealt(0)
-    eventPlayer.setKnockbackReceived(0)
+    eventPlayer.stopScalingSize()
+    eventPlayer.stopScalingBarriers()
 
-    eventPlayer.setMoveSpeed(0)
 
 def resetStats():
-    @Name "[reset.opy]: resetStats()"
+    @Name "[utilities/reset.opy]: resetStats()"
 
     setBaseDamage(eventPlayer, 1)
     eventPlayer.setDamageReceived(100)
@@ -113,13 +111,10 @@ def resetStats():
     eventPlayer.setKnockbackDealt(100)
     eventPlayer.setGravity(100)
     eventPlayer.setMoveSpeed(100)
-    destroyAllHudTexts()
-    destroyAllProgressBarHuds()
-    destroyAllInWorldTexts()
 
 
 def resetStatuses():
-    @Name "[reset.opy]: resetStatuses()"
+    @Name "[utilities/reset.opy]: resetStatuses()"
 
     eventPlayer.clearStatusEffect(Status.ASLEEP)
     eventPlayer.clearStatusEffect(Status.BURNING)
@@ -134,19 +129,15 @@ def resetStatuses():
 
 
 def resetFrenemies():
-    @Name "[reset.opy]: resetFrenemies()"
+    @Name "[utilities/reset.opy]: resetFrenemies()"
 
-    eventPlayer.friendly_doomfist_player = getPlayersOnHero(Hero.DOOMFIST, eventPlayer.getTeam())[0]
-    eventPlayer.enemy_doomfist_player = getPlayersOnHero(Hero.DOOMFIST, getOppositeTeam(eventPlayer.getTeam()))[0]
     eventPlayer.friendly_orisa_player = getPlayersOnHero(Hero.ORISA, eventPlayer.getTeam())[0]
     eventPlayer.enemy_orisa_player = getPlayersOnHero(Hero.ORISA, getOppositeTeam(eventPlayer.getTeam()))[0]
     eventPlayer.friendly_sombra_player = getPlayersOnHero(Hero.SOMBRA, eventPlayer.getTeam())[0]
     eventPlayer.enemy_sombra_player = getPlayersOnHero(Hero.SOMBRA, getOppositeTeam(eventPlayer.getTeam()))[0]
-    eventPlayer.friendly_lifeweaver_player = getPlayersOnHero(Hero.DOOMFIST, eventPlayer.getTeam())[0]
-    eventPlayer.enemy_lifeweaver_player = getPlayersOnHero(Hero.DOOMFIST, getOppositeTeam(eventPlayer.getTeam()))[0]
 
     
-rule "[reset.opy]: Reinitialize hero on new round":
+rule "[utilities/reset.opy]: Reinitialize hero on new round":
     @Event eachPlayer
     @Condition getCurrentGamemode() == Gamemode.CONTROL
     @Condition isMatchBetweenRounds()

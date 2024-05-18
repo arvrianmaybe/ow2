@@ -12,7 +12,7 @@ rule "[dva/init.opy]: Initialize DVa":
     @Hero dva
     @Condition eventPlayer.call_init
     
-    newHero(DVA_HEALTH,DVA_HEALTH_ARMOUR, 0)
+    newHero(DVA_HEALTH,DVA_ARMOR, 0)
     eventPlayer.setDamageDealt(DVA_DAMAGE)
     setUltCost(DVA_ULT_COST)
     removePassiveHealing()

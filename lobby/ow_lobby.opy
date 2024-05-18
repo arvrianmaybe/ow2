@@ -1,12 +1,12 @@
 #!mainFile "main.opy"
-#!include "lobby/game_mode.opy"
+#!include "env/ow_env.opy"
 #!include "constant/reimagined_constant.opy"
 #!include "utilities/macro.opy"
 #!include "constant/normal_constant.opy"
 
 settings {
     "main": {
-        "modeName": GAMEMODE_NAME,
+        "modeName": GAMEMODE_NAME + " " + GAMEMODE_VERSION,
         "description": GAMEMODE_DESCRIPTION,
     },
     "lobby": {
@@ -69,7 +69,14 @@ settings {
             "gamemodeStartTrigger": "allSlotsFilled",
             "tankPassiveHealthBonus": "alwaysEnabled",
             "enableCompetitiveRules": true
-        }
+        },
+        #"clash": {
+            #"heroLimit": "1PerTeam",
+            #"roleLimit": "off",
+            #"gamemodeStartTrigger": "allSlotsFilled",
+            #"tankPassiveHealthBonus": "alwaysEnabled",
+            #"enableCompetitiveRules": true
+        #},
     },
     "heroes": {
         "allTeams": {
@@ -79,6 +86,8 @@ settings {
             "ultGen%": percent(ANA_ULT_COST/OW2_ANA_ULT_COST)
             },
             "ashe": {
+                "ability1EnemyKb%": 300,
+                "ability1SelfKb%": 300,
                 "health%": percent(ASHE_BOB_HEALTH/OW2_ASHE_BOB_HEALTH), # for BOB hp
                 "ultGen%": percent(OW2_ASHE_ULT_COST/ASHE_ULT_COST)
             },
@@ -87,14 +96,19 @@ settings {
                 "ability2Cooldown%": percent(BAPTISTE_LAMP_COOLDOWN_TIME/OW2_BAPTISTE_LAMP_COOLDOWN_TIME),
                 "ultGen%": percent(OW2_BAPTISTE_ULT_COST/BAPTISTE_ULT_COST)
             },
+            "brigitte": {
+                "health%": percent(BRIGITTE_BARRIER_HEALTH/OW2_BRIGITTE_BARRIER_HEALTH), # for barrier hp
+                "ability2Cooldown%": percent(BAPTISTE_LAMP_COOLDOWN_TIME/OW2_BAPTISTE_LAMP_COOLDOWN_TIME),
+                "ultGen%": percent(OW2_BAPTISTE_ULT_COST/BAPTISTE_ULT_COST)
+            },
             "bastion": {
-                "ability1Cooldown%": percent(BASTION_SENTRY_COOLDOWN/OW2_BASTION_RECONFIGURE_COOLDOWN),
+                "ability1Cooldown%": percent(BASTION_TANK_CONFIG_COOLDOWN/OW2_BASTION_RECONFIGURE_COOLDOWN),
                 "secondaryFireCooldown%": percent(BASTION_TANK_COOLDOWN/OW2_TACTICAL_GRENADE_COOLDOWN),
                 "ultGen%": percent(OW2_BASTION_ULT_COST/BASTION_ULT_COST)
-                },
-                "mccree": {
-                    "ultGen%": percent(OW2_MCCREE_ULT_COST/MCCREE_ULT_COST)
-                },
+            },
+            "mccree": {
+                "ultGen%": percent(OW2_MCCREE_ULT_COST/MCCREE_ULT_COST)
+            },
             "doomfist": {
                 "ability1ChargeRate%": 10,
                 "ammoRegenerationTime%": 162,
@@ -157,6 +171,7 @@ settings {
                 "primaryFireIgniteDamage": 0,
                 "primaryFireIgniteDuration": 0,
                 "primaryFireIgniteRate": 0,
+                "health%": percent(MAUGA_CAGE_FIGHT_HEALTH/OW2_MAUGA_CAGE_FIGHT_HEALTH), # for cage fight
                 "ultGen%": percent(MAUGA_ULT_COST/OW2_MAUGA_ULT_COST)
             },
             "moira": {
@@ -165,7 +180,7 @@ settings {
                 "primaryFireMaximumTime%": percent((OW2_MOIRA_HEAL_GRASP_AMMO_USAGE/MOIRA_HEAL_GRASP_AMMO_USAGE)*(MOIRA_HEAL_GRASP_AMMO/OW2_MOIRA_HEAL_GRASP_AMMO)),
             },
             "orisa": {
-                "ability2Cooldown%": percent(ORISA_EXTERMINATE_COOLDOWN/OW2_ORISA_SPINNING_JAV),
+                "ability2Cooldown%": percent(ORISA_EXTERMINATE_COOLDOWN/OW2_ORISA_JAVELIN_SPIN_COOLDOWN),
                 "ultGen%": percent(ORISA_ULT_COST/OW2_ORISA_ULT_COST)
             },
             "pharah": {
@@ -226,7 +241,10 @@ settings {
                 "ultGen%": percent(OW2_TRACER_ULT_COST/TRACER_ULT_COST)
             },
             "widowmaker": {
-                "ultGen%": percent(OW2_WIDOWMAKER_ULT_COST/WIDOWMAKER_ULT_COST)
+                "ability1Cooldown%": percent(WIDOW_GRAPPLE_COOLDOWN/OW2_WIDOW_GRAPPLE_COOLDOWN)
+            },
+            "venture": {
+                "ultGen%": percent(OW2_VENTURE_ULT_COST/VENTURE_ULT_COST)
             },
             "winston": {
                 "health%": percent(WINSTON_BARRIER_HEALTH/OW2_WINSTON_BARRIER_HEALTH), # for barrier hp
@@ -244,7 +262,49 @@ settings {
             },
             "zenyatta": {
              "ultGen%": percent(OW2_ZENYATTA_ULT_COST/ZENYATTA_ULT_COST)
-            }
-        }
-    }
-}
+             },
+             "enabledHeroes": [
+                 "ana",
+                 "ashe",
+                 "baptiste",
+                 "bastion",
+                 "brigitte",
+                 "mccree",
+                 "doomfist",
+                 "dva",
+                 "echo",
+                 "genji",
+                 "hanzo",
+                 "illari",
+                 "junkerQueen",
+                 "junkrat",
+                 "kiriko",
+                 "lifeweaver",
+                 "lucio",
+                 "mauga",
+                 "mei",
+                 "mercy",
+                 "moira",
+                 "orisa",
+                 "pharah",
+                 "ramattra",
+                 "reaper",
+                 "reinhardt",
+                 "roadhog",
+                 "sigma",
+                 "sojourn",
+                 "soldier",
+                 #"sombra",
+                 "symmetra",
+                 "torbjorn",
+                 "tracer",
+                 "venture",
+                 "widowmaker",
+                 "winston",
+                 "hammond",
+                 "zarya",
+                 "zenyatta",
+             ]
+         }
+     }
+ }

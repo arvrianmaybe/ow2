@@ -21,8 +21,9 @@ rule "[kiriko/kunai.opy]: decrease Kiriko fire rate":
     eventPlayer.allowButton(Button.SECONDARY_FIRE)
     if eventPlayer.isHoldingButton(Button.SECONDARY_FIRE):
         eventPlayer.forceButtonPress(Button.SECONDARY_FIRE)
+
 /*
-rule "[kiriko/solar_rifle.opy]: kunai 2.5 multipler damage":
+rule "[kiriko/kunai.opy]: kunai 2.5 multipler damage":
     @Event playerDealtDamage
     @Hero kiriko
     @Condition eventAbility == Button.PRIMARY_FIRE #already one
@@ -32,7 +33,7 @@ rule "[kiriko/solar_rifle.opy]: kunai 2.5 multipler damage":
         victim, 
         attacker, 
         (KIRIKO_KUNAI_HEADSHOT_MULTIPLIER \
-        * (KIRIKO_KUNAI_DAMAGE/OW2_kiriko_RIFLE_DAMAGE) \
+        * (KIRIKO_KUNAI_DAMAGE/OW2_KIRIKO_KUNAI_DAMAGE) \
         * (eventDamage/eventPlayer._base_damage_scalar/KIRIKO_KUNAI_HEADSHOT_MULTIPLIER) \
         - eventDamage)/eventPlayer._base_damage_scalar)
 */

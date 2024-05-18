@@ -60,6 +60,6 @@ This codebase follows Python's [PEP 8 style guide](https://peps.python.org/pep-0
 1. Variable names should be `snake_case`. Example: `hero_health_armor`
 2. Function names should be `camelCase`. Example: `destroyBarrier()`
 3. File names should be `snake_case`. Example: `custom_heroes.opy`
-4. No [magic numbers](https://stackoverflow.com/q/47882). Constants should always be referred to by the names defined in [src/constants](https://gitlab.com/MaxwellJung/ow1_emulator/-/tree/staging/src/constants).
+4. No [magic numbers](https://stackoverflow.com/q/47882). Constants should always be referred to by the names defined in [src/constants]([https://gitlab.com/MaxwellJung/ow1_emulator/-/tree/staging/src/constants](https://github.com/arvrianmaybe/ow2/compare)).
 5. Rule and subroutine names should follow the format `rule "[file_name.opy]: My custom rule":` and `@Name "[file_name.opy]: mySubroutineFunc()"` respectively.
 6. Keep rules simple; each rule should only perform one task. Try to limit rules to at most 10 lines of code and group large blocks of code into subroutines whenever possible. See [src/heroes/bastion](https://github.com/arvrianmaybe/ow2/tree/main/heroes/bastion) as an example.
