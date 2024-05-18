@@ -20,6 +20,8 @@ rule "[brigitte/init.opy]: Initialize Brigitte":
     
     newHero(BRIGITTE_HEALTH, BRIGITTE_HEALTH_ARMOR, 0)
     setUltCost(BRIGITTE_ULT_COST)
+    eventPlayer.setAbility2Enabled(false)
+    eventPlayer.startScalingSize(1.2, true)
 
     removePassiveHealing()
     
