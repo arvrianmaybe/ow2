@@ -11,10 +11,15 @@
                                "Main build: " + GAMEMODE_CODE + "\n" + \
                                "Staging build: " + STAGING_CODE + "\n" + \
                                "\n" + \
+                               "Gamemode forked from" + "\n" + \
+                               "Overwatch 1 Emulator v1.12.2 (KHTG0)" + "\n" + \
+                               "by ecksdee#11729" + "\n" + \
+                               "\n" + \
                                "Codebase Contributors:" + "\n" + \
                                "viper" + "\n" + \
                                "pepperminthe_" + "\n" + \
                                "highrezolution42#0927" + "\n" + \
+                               "ecksdee#4643" + "\n" + \
                                "\n" + \
                                "workshop.codes/remastered" + "\n" + \
                                "\n" + \
