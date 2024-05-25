@@ -1,5 +1,5 @@
 #!mainFile "../main.opy"
-
+ 
 # Universal
 #!define OW2_ARMOR_DAMAGE_REDUCTION 0.3
 #!define OW2_DAMAGE_PASSIVE_DURATION 2
