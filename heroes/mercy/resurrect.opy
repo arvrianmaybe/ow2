@@ -80,7 +80,7 @@ def stopMassRes():
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, Color.YELLOW, eventPlayer, 15)
     playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.YELLOW, eventPlayer, Math.INFINITY)
 
-    # Clear exterminate effects
+    # Clear res effects
     destroyEffect(eventPlayer.mercy_res_id)
     eventPlayer.mercy_res_id = null
 
