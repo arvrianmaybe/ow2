@@ -1,12 +1,17 @@
 #!mainFile "../main.opy"
 #!include "utilities/custom_hp.opy"
 
-globalvar  health_pool
+#globalvar  health_pool
 
-playervar hero_id_duplicated
+#playervar hero_id_duplicated
 
 subroutine cancelDuplication
 
+playervar remember_echo_pvar
+
+#!define ECHO_DUP_VOICELINE_DRUATION 1.2
+
+/*
 rule "[echo/duplicate.opy]: Table of all heroes with custom hp":
     # tanks
     health_pool[heroID(Hero.DVA)] = [DVA_HEALTH,DVA_ARMOR,0]
@@ -74,11 +79,24 @@ rule "[echo/duplicate.opy]: Reinitialize echo after exiting duplicate":
 
     resetHero()
     eventPlayer.call_init = true
+*/
+
+rule "[echo/duplicate.opy]: accurate dup":
+    @Event eachPlayer
+    #@Hero echo
+    @Condition eventPlayer.isDuplicatingAHero()
+
+    eventPlayer.remember_echo_pvar = true # Remember Echo Dup
+    wait(ECHO_DUP_VOICELINE_DRUATION)
+    eventPlayer.startForcingHero(eventPlayer.getHeroOfDuplication())
+    eventPlayer.preloadHero(eventPlayer.getHeroOfDuplication())
+
 
 rule "[echo/duplicate.opy]: Correct duplicate ultimate charge rate":
     @Event eachPlayer
-    @Hero echo
-    @Condition eventPlayer.isDuplicatingAHero()
+    #@Hero echo
+    #@Condition eventPlayer.isDuplicatingAHero()
+    @Condition eventPlayer.remember_echo_pvar
     @Condition eventPlayer.getUltCharge() == 0
 
     wait()
@@ -86,15 +104,28 @@ rule "[echo/duplicate.opy]: Correct duplicate ultimate charge rate":
 
 rule "[echo/duplcation.opy]: Reduce ultimate duration":
     @Event eachPlayer
-    @Hero echo
-    @Condition eventPlayer.isDuplicatingAHero()
-        
+    #@Hero echo
+    @Condition eventPlayer.remember_echo_pvar
+    #@Condition eventPlayer.isDuplicatingAHero()
+     
     wait(ECHO_DUPLICATE_DURATION, Wait.ABORT_WHEN_FALSE)
     cancelDuplication()
     
-    
+rule "[echo/duplcation.opy]: death on dup":
+    #@Event playerDied
+    @Event eachPlayer
+    @Condition eventPlayer.getHealth() <= 1
+    @Condition not eventPlayer.call_init
+    @Condition eventPlayer.remember_echo_pvar
+ 
+    eventPlayer.resurrect()
+    cancelDuplication()
+
 def cancelDuplication():
     @Name "[echo/duplcation.opy]: cancelDuplication()"
 
-    kill(eventPlayer,eventPlayer)
-    
+    #kill(eventPlayer,eventPlayer)
+    eventPlayer.startForcingHero(Hero.ECHO)
+    eventPlayer.preloadHero(Hero.ECHO)
+    eventPlayer.stopForcingCurrentHero()
+    eventPlayer.remember_echo_pvar = false # Stop echo dup
