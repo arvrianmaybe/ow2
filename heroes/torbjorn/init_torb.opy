@@ -1,6 +1,7 @@
 #!mainFile "../main.opy"
 
 #!include "heroes/torbjorn/overload.opy"
+#!include "heroes/torbjorn/hammer.opy"
 
 
 rule "[torbjorn/init.opy]: Detect switch to Torbjorn":
