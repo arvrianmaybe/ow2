@@ -1,6 +1,7 @@
 #!mainFile "../main.opy"
 
 #!include "heroes/torbjorn/overload.opy"
+#!include "heroes/torbjorn/hammer.opy"
 
 
 rule "[torbjorn/init.opy]: Detect switch to Torbjorn":
@@ -30,14 +31,3 @@ rule "[torbjorn/init.opy]: Correct Rivet Gun and ultimate damage":
     @Condition eventAbility in [Button.PRIMARY_FIRE, Button.SECONDARY_FIRE, Button.ULTIMATE]
 
     damage(victim, attacker, (eventDamage/eventPlayer._base_damage_scalar - eventDamage)/eventPlayer._base_damage_scalar)
-
-rule "[torbjorn/init.opy]: Increase Forge Hammer damage during overload":
-    @Event playerDealtDamage
-    @Hero torbjorn
-    @Condition eventAbility == Button.PRIMARY_FIRE
-    @Condition eventPlayer.isInAlternateForm()
-
-    damage(
-        victim, 
-        attacker, 
-        (((110/55) if eventPlayer.isUsingAbility2() else 1) * eventDamage/eventPlayer._base_damage_scalar - eventDamage)/eventPlayer._base_damage_scalar)

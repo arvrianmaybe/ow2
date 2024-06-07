@@ -11,7 +11,7 @@ rule "[brigitte/init.opy]: Detect switch to Brigitte":
     @Hero brigitte
 
     eventPlayer.call_init = true
-
+  
 
 rule "[brigitte/init.opy]: Initialize Brigitte":
     @Event eachPlayer
@@ -20,8 +20,6 @@ rule "[brigitte/init.opy]: Initialize Brigitte":
     
     newHero(BRIGITTE_HEALTH, BRIGITTE_HEALTH_ARMOR, 0)
     setUltCost(BRIGITTE_ULT_COST)
-    eventPlayer.setAbility2Enabled(false)
-    eventPlayer.startScalingSize(1.2, true)
 
     removePassiveHealing()
     

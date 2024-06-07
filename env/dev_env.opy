@@ -11,10 +11,15 @@
                                "Main build: " + GAMEMODE_CODE + "\n" + \
                                "Staging build: " + STAGING_CODE + "\n" + \
                                "\n" + \
+                               "Gamemode forked from" + "\n" + \
+                               "Overwatch 1 Emulator v1.12.2 (KHTG0)" + "\n" + \
+                               "by ecksdee#11729" + "\n" + \
+                               "\n" + \
                                "Codebase Contributors:" + "\n" + \
                                "viper" + "\n" + \
                                "pepperminthe_" + "\n" + \
                                "highrezolution42#0927" + "\n" + \
+                               "ecksdee#4643" + "\n" + \
                                "\n" + \
                                "workshop.codes/remastered" + "\n" + \
                                "\n" + \
@@ -30,6 +35,6 @@
 #!define DISCORD_LONG_LINK "discord.gg/vb5r2gfNTQ"
 
 rule "Copyright (c) 2024 Remastered Overwatch. See https://github.com/arvrianmaybe/ow2 for license to use this code.":
-    @Disabled
+    #@Disabled
     # this code has been forked by overwatch 1 emulator, please also check theres https://gitlab.com/MaxwellJung/ow1_emulator/-/tree/staging?ref_type=heads
     disableInspector()

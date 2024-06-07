@@ -1,8 +1,8 @@
 #!mainFile "../main.opy"
 
-playervar inspire 
+#playervar inspire 
 
-
+/*
 rule "[brigitte/inspire.opy] inspire detection":
     @Event playerDealtDamage
     @Hero brigitte
@@ -21,4 +21,5 @@ rule "[brigitte/inspire.opy] inspire start":
     
     eventPlayer.setDamageDealt(BRIGITTE_INSPIRE_DAMAGE)
     waitUntil(not eventPlayer in getPlayersOnHero(Hero.BRIGITTE, eventPlayer.getTeam()).inspire, 99999)
-    eventPlayer.setDamageDealt(BASE_DAMAGE)
+    eventPlayer.setDamageDealt(BASE_DAMAGE)\
+*/

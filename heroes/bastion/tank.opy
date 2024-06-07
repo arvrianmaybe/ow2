@@ -5,8 +5,7 @@
 rule "[bastion/tank.opy]: Detect tank mode":
     @Event eachPlayer
     @Hero bastion
-    @Condition eventPlayer.current_configuration != Configuration.SENTRY
-    @Condition eventPlayer.isUsingAbility1()
+    @Condition eventPlayer.isUsingUltimate()
 
     eventPlayer.current_configuration = Configuration.TANK
 
@@ -15,7 +14,6 @@ rule "[bastion/tank.opy]: Initialize tank mode":
     @Event eachPlayer
     @Hero bastion
     @Condition eventPlayer.current_configuration == Configuration.TANK
-    @Condition eventPlayer.current_configuration != Configuration.SENTRY
 
     eventPlayer.setMoveSpeed(percent(BASTION_TANK_CONFIG_MOVE_SPEED)) # move faster in tank mode
     setBaseDamage(eventPlayer, BASTION_TANK_CONFIG_DAMAGE/OW2_BASTION_TACTICAL_GRENADE_DAMAGE) # deal more damage in tank mode
@@ -35,13 +33,13 @@ rule "[bastion/tank.opy]: Initialize tank mode":
 def startTank():
     @Name "[bastion/tank.opy]: startTank()"
 
-    #eventPlayer.setUltEnabled(false) # Prevent Bastion from getting ult charge during ultimate
+    eventPlayer.setUltEnabled(false) # Prevent Bastion from getting ult charge during ultimate
     wait(BASTION_TANK_CONFIG_TRANSFORM_TIME-OW2_BASTION_ASSAULT_CONFIG_TRANSFORM_TIME)
     eventPlayer.cancelPrimaryAction() # interrupt ultimate animation right before it completes
     eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
     eventPlayer.forceButtonPress(Button.ABILITY_1) # Go to turret mode
     eventPlayer.allowButton(Button.SECONDARY_FIRE) # fix a bug where they cant fire it.
-    #eventPlayer.disallowButton(Button.ABILITY_1) # Disable reconfiguring out of turret mode
+    eventPlayer.disallowButton(Button.ABILITY_1) # Disable reconfiguring out of turret mode
 
 
 def endTank():
@@ -58,7 +56,6 @@ rule "[bastion/tank.opy]: Activate tank mode":
     @Event eachPlayer
     @Hero bastion
     @Condition eventPlayer.current_configuration == Configuration.TANK
-    @Condition eventPlayer.current_configuration != Configuration.SENTRY
     
     startTank()
     waitUntil(not eventPlayer.isUsingAbility1(), BASTION_TANK_CONFIG_DURATION)
@@ -69,7 +66,6 @@ rule "[bastion/tank.opy]: Fire tank shells":
     @Event eachPlayer
     @Hero bastion
     @Condition eventPlayer.current_configuration == Configuration.TANK
-    @Condition eventPlayer.current_configuration != Configuration.SENTRY
     @Condition eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
     
     do: 
@@ -85,7 +81,6 @@ rule "[bastion/tank.opy]: Reload tank shells":
     @Event eachPlayer
     @Hero bastion
     @Condition eventPlayer.current_configuration == Configuration.TANK
-    @Condition eventPlayer.current_configuration != Configuration.SENTRY
     @Condition eventPlayer.isFiringSecondaryFire()
 
     eventPlayer.setAbilityCooldown(Button.SECONDARY_FIRE, BASTION_TANK_CONFIG_SHELL_RELOAD_TIME) # modify cooldown for tank shell
