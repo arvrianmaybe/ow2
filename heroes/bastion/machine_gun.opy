@@ -7,7 +7,7 @@ playervar machine_gun_reload_timer
 
 playervar machine_gun_ammo_id
 
-subroutine startMachineGunReload
+subroutine reloadMachineGun
 
 #!define hideMachineGunAmmo()\
     destroyInWorldText(eventPlayer.machine_gun_ammo_id)\
@@ -47,12 +47,11 @@ rule "[bastion/machine_gun.opy]: Hide machine gun ammo when not in sentry mode":
     hideMachineGunAmmo()
 
 
-def startMachineGunReload():
+
+def reloadMachineGun():
     @Name "[bastion/machine_gun.opy]: start machine gun reload timer"
-    if eventPlayer.machine_gun_ammo >= BASTION_SENTRY_AMMO:
-        return # do nothing if ammo already full
+ 
     eventPlayer.machine_gun_reload_timer = BASTION_SENTRY_RELOAD_TIME
-    eventPlayer.setAmmo(1, 0)
     chase(eventPlayer.machine_gun_reload_timer, 0, rate=1, ChaseReeval.DESTINATION_AND_RATE)
 
 
@@ -87,8 +86,11 @@ rule "[bastion/machine_gun.opy]: Reload machine gun on reload key or when out of
     @Hero bastion
     @Condition eventPlayer.isHoldingButton(Button.RELOAD) or eventPlayer.machine_gun_ammo <= 0
     @Condition eventPlayer.current_configuration == Configuration.SENTRY
+    @Condition not eventPlayer.isReloading()
+    @Condition eventPlayer.machine_gun_ammo < BASTION_SENTRY_AMMO # don't reload if ammo already full
 
-    startMachineGunReload()
+    eventPlayer.setAmmo(1, 0) # play turret reload animation
+    reloadMachineGun()
 
 
 rule "[bastion/machine_gun.opy]: Reload machine gun when not in sentry mode":
@@ -96,9 +98,7 @@ rule "[bastion/machine_gun.opy]: Reload machine gun when not in sentry mode":
     @Hero bastion
     @Condition eventPlayer.current_configuration != Configuration.SENTRY
 
-    if eventPlayer.isUsingAbility1() and eventPlayer.isHoldingButton(Button.ABILITY_1):
-        eventPlayer.setAmmo(1, BASTION_SENTRY_AMMO)
-        eventPlayer.machine_gun_ammo = BASTION_SENTRY_AMMO
+    reloadMachineGun()
 
 
 rule "[bastion/machine_gun.opy]: Allow machine gun shooting when machine gun ready":
