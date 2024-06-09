@@ -1,5 +1,7 @@
 #!mainFile "../main.opy"
 
+#!include "utilities/stat_helper.opy"
+
 playervar is_using_exterminate
 playervar exterminate_player
 playervar exterminate_player_effect
@@ -38,7 +40,7 @@ def startExterminate():
 
     # Exterminate Buffs
     eventPlayer.setDamageDealt(ORISA_EXTERMINATE_DAMAGE)
-    eventPlayer.setMoveSpeed(percent(ORISA_EXTERMINATE_SPEED/ORISA_FORITFY_MOVEMENT_BONUS))
+    eventPlayer.setMoveSpeed(percent(ORISA_EXTERMINATE_SPEED/OW2_ORISA_FORTIFY_MOVEMENT_DECREASE))
 
 
 def hideExterminate():
