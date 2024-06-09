@@ -1,4 +1,6 @@
-#!mainFile "../main.opy"
+#!mainFile "../dev_main.opy"
+
+
 globalvar DEBUG_MODE = createWorkshopSetting(bool, "Dev Tools", "debug mode", false)
 #!define STAT_KEEP_ALIVE (2)
 #!define STAT_SPACING (0.5)
@@ -18,8 +20,6 @@ rule "[debug.opy] Disable Inspector for performance":
 rule "[debug.opy] global debug (Top Left)":
     @Event eachPlayer
     @Condition DEBUG_MODE == true
-    #@Condition eventPlayer.isHoldingButton(Button.MELEE)
-    #@Condition eventPlayer.isHoldingButton(Button.JUMP)
 
     hudHeader(getAllPlayers(), "Global", HudPosition.LEFT, 0, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
     hudSubheader(getAllPlayers(), "Server Load: {}%".format(getServerLoad()), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
@@ -31,8 +31,6 @@ rule "[debug.opy] global debug (Top Left)":
 rule "[debug.opy] player debug (Top Right)":
     @Event eachPlayer
     @Condition DEBUG_MODE == true
-    #@Condition eventPlayer.isHoldingButton(Button.MELEE)
-    #@Condition eventPlayer.isHoldingButton(Button.JUMP)
 
     hudHeader(eventPlayer, "Event Player", HudPosition.RIGHT, 0, Color.WHITE, HudReeval.STRING)
     hudSubheader(eventPlayer, "call_init = {}".format(eventPlayer.call_init), HudPosition.RIGHT, 1, Color.WHITE, HudReeval.STRING)
@@ -139,10 +137,11 @@ rule "[debug.opy] damage player":
     @Condition eventPlayer.isHoldingButton(Button.INTERACT)
     @Condition eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
 
-    damage(eventPlayer, null, 1)
-    wait()
-    if RULE_CONDITION:
-        goto RULE_START
+    eventPlayer.setStatusEffect(null, Status.UNKILLABLE, 2)
+    damage(eventPlayer, null, Math.INFINITY)
+    #wait()
+    #if RULE_CONDITION:
+        #goto RULE_START
 
 rule "[debug.opy] heal player":
     @Event eachPlayer
