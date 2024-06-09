@@ -21,7 +21,7 @@ rule "[orisa/debuff.opy]: play Terra Surge voiceline":
     getPlayersInRadius(eventPlayer, 
                        OW2_ORISA_TERRA_SURGE_RADIUS, 
                        getOppositeTeam(eventPlayer.getTeam()), 
-                       LosCheck.SURFACES).setStatusEffect(null, Status.PHASED_OUT, 0.016)
+                       LosCheck.SURFACES).setStatusEffect(null, Status.PHASED_OUT, 3)
     eventPlayer.forceButtonPress(Button.ULTIMATE)
     eventPlayer.disallowButton(Button.ULTIMATE)
 
@@ -137,8 +137,8 @@ rule "[orisa/debuff.opy]: nerf player when they have debuff":
     @Event eachPlayer
     @Condition eventPlayer.is_debuff
 
-    eventPlayer.setDamageDealt(percent(ORISA_DEBUFF_DAMAGE_NERF - eventPlayer._base_damage_scalar))
-    eventPlayer.setDamageReceived(percent(ORISA_DEBUFF_DAMAGE_RECIVED_NERF - eventPlayer._base_damage_scalar))
+    setBaseDamage(eventPlayer, ORISA_DEBUFF_DAMAGE_NERF/ORISA_SUPERCHARGER_DAMAGE_MULTIPLIER)
+    setBaseDefense(eventPlayer, ORISA_DEBUFF_DAMAGE_RECIVED_NERF/ORISA_CUSTOM_SUPERCHARGE_DEFENSE_MULTIPLIER)
 
     # Beam and sound effects
     if (eventPlayer.orisa_debuff_beam_id == null): # beam
