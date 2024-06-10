@@ -30,10 +30,10 @@ rule "[ramattra/init_ramattra.opy]: Initialize ramattra":
 
 rule "[ramattra/init_ramattra.opy] clean up ramattra":
     @Event eachPlayer
-    @Condition eventPlayer.Ult_Duration != ULT_DURATION_WORKSHOP_SETTINGS
+    @Condition eventPlayer.ult_duration != ULT_DURATION_WORKSHOP_SETTINGS
     @Condition eventPlayer.isUsingUltimate() != true
     @Condition eventPlayer.getCurrentHero() == Hero.RAMATTRA
     
     waitUntil(eventPlayer.getCurrentHero() != Hero.RAMATTRA, Math.INFINITY)
-    destroyProgressBarHud(eventPlayer.Progress_Bar)
-    stopChasingVariable(eventPlayer.Ult_Duration)
+    destroyProgressBarHud(eventPlayer.progress_bar)
+    stopChasingVariable(eventPlayer.ult_duration)
