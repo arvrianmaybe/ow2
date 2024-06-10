@@ -3,8 +3,9 @@
 globalvar ULT_DURATION_WORKSHOP_SETTINGS = createWorkshopSetting(int[1:20], "Ramattra ult", "Annihilation duration", 4, 0)
 globalvar ULT_DURATION_MAX = ULT_DURATION_WORKSHOP_SETTINGS 
 
-playervar Ult_Duration 
-playervar Progress_Bar 
+playervar ult_duration 
+playervar current_hero 
+playervar progress_bar 
 
 rule "[ramattra/annihilation.opy]: increase annahilation damaage":
     @Event playerDealtDamage
@@ -16,16 +17,18 @@ rule "[ramattra/annihilation.opy]: increase annahilation damaage":
 
 # thanks for Mathemann69 for letting me use this code (workshop.codes/PK7BH)
 
-rule "[ramattra/annihilation.opy]: has spawned":
+rule "[ramattra/annihilation.opy]: spawn":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned() == true
     
-    destroyProgressBarHud(eventPlayer.Progress_Bar)
-    stopChasingVariable(eventPlayer.Ult_Duration)
-    eventPlayer.Ult_Duration = ULT_DURATION_WORKSHOP_SETTINGS
+    eventPlayer.current_hero = eventPlayer.getCurrentHero()
+    destroyProgressBarHud(eventPlayer.progress_bar)
+    stopChasingVariable(eventPlayer.ult_duration)
+    eventPlayer.ult_duration = ULT_DURATION_WORKSHOP_SETTINGS
 
 
-rule "[ramattra/init_ramattra.opy] Invisible HUDs, to push down the progress bar":
+rule "[ramattra/annihilation.opy]: invis hud":
+    #That pushes the main hud down
     hudText(getAllPlayers(), null, " ", " ", HudPosition.TOP, 1, Color.WHITE, Color.WHITE, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.NEVER)
     hudText(getAllPlayers(), null, " ", " ", HudPosition.TOP, 2, Color.WHITE, Color.WHITE, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.NEVER)
     hudText(getAllPlayers(), null, " ", " ", HudPosition.TOP, 3, Color.WHITE, Color.WHITE, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.NEVER)
@@ -38,24 +41,26 @@ rule "[ramattra/init_ramattra.opy] Invisible HUDs, to push down the progress bar
     hudText(getAllPlayers(), null, " ", " ", HudPosition.TOP, 10, Color.WHITE, Color.WHITE, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.NEVER)
 
 
-rule "[ramattra/annihilation.opy]: init ultimate and chase variables":
+rule "[ramattra/annihilation.opy]: start ult and chase variables":
     @Event eachPlayer
     @Hero ramattra
     @Condition eventPlayer.isUsingUltimate() == true
     
-    eventPlayer.Ult_Duration = ULT_DURATION_WORKSHOP_SETTINGS
-    progressBarHud(eventPlayer, eventPlayer.Ult_Duration * (100 / ULT_DURATION_MAX), "{0}s".format(round(eventPlayer.Ult_Duration)), HudPosition.TOP, 1000, Color.WHITE, Color.WHITE, ProgressHudReeval.VISIBILITY_VALUES_AND_COLOR, SpecVisibility.NEVER)
-    eventPlayer.Progress_Bar = getLastCreatedText()
+    #eventPlayer.setAllowedHeroes(eventPlayer.getCurrentHero())
+    eventPlayer.ult_duration = ULT_DURATION_WORKSHOP_SETTINGS
+    progressBarHud(eventPlayer, eventPlayer.ult_duration * (100 / ULT_DURATION_MAX), "{0}s".format(round(eventPlayer.ult_duration)), HudPosition.TOP, 1000, Color.WHITE, Color.WHITE, ProgressHudReeval.VISIBILITY_VALUES_AND_COLOR, SpecVisibility.NEVER)
+    eventPlayer.progress_bar = getLastCreatedText()
     wait()
-    chase(eventPlayer.Ult_Duration, 0, rate=1, ChaseReeval.DESTINATION_AND_RATE)
+    chase(eventPlayer.ult_duration, 0, rate=1, ChaseReeval.DESTINATION_AND_RATE)
     waitUntil(not eventPlayer.isUsingUltimate(), 99999)
-    stopChasingVariable(eventPlayer.Ult_Duration)
-    destroyProgressBarHud(eventPlayer.Progress_Bar)
+    stopChasingVariable(eventPlayer.ult_duration)
+    destroyProgressBarHud(eventPlayer.progress_bar)
     wait()
-    eventPlayer.Ult_Duration = ULT_DURATION_WORKSHOP_SETTINGS
+    eventPlayer.ult_duration = ULT_DURATION_WORKSHOP_SETTINGS
+    #eventPlayer.setAllowedHeroes(getAllHeroes())
 
 
-rule "[ramattra/annihilation.opy]: stop chasing if dealing damage":
+rule "[ramattra/annihilation.opy]: dealt dmg stop chase variables":
     @Event playerDealtDamage
     @Hero ramattra
     @Condition eventAbility == Button.ULTIMATE
@@ -64,15 +69,15 @@ rule "[ramattra/annihilation.opy]: stop chasing if dealing damage":
     @Condition eventAbility != Button.MELEE
     @Condition eventAbility != null
     
-    stopChasingVariable(eventPlayer.Ult_Duration)
+    stopChasingVariable(eventPlayer.ult_duration)
     wait(0.25, Wait.RESTART_WHEN_TRUE)
-    chase(eventPlayer.Ult_Duration, 0, rate=1, ChaseReeval.DESTINATION_AND_RATE)
+    chase(eventPlayer.ult_duration, 0, rate=1, ChaseReeval.DESTINATION_AND_RATE)
 
 
-rule "[ramattra/annihilation.opy]: camcel ult if hit 0":
+rule "[ramattra/annihilation.opy]: stop ult if varb hits 0":
     @Event eachPlayer
     @Hero ramattra
-    @Condition eventPlayer.Ult_Duration <= 0
+    @Condition eventPlayer.ult_duration <= 0
     @Condition eventPlayer.isUsingUltimate() == true
     
     eventPlayer.forceButtonPress(Button.ABILITY_1)
