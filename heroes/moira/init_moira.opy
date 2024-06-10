@@ -15,6 +15,7 @@ rule "[moira/init_moira.opy]: Initialize moira":
     @Event eachPlayer
     @Hero moira
     @Condition eventPlayer.call_init
-    
+
+    removePassiveHealing()
     newHero(MOIRA_HEALTH, 0, 0)
     setUltCost(MOIRA_ULT_COST)
