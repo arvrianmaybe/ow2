@@ -19,6 +19,16 @@ playervar self_repair_time_left
  and (player.isAlive()) \
  and (player.self_repair_time_left > 0))
 
+#!define hideSelfRepairRing()\
+ destroyEffect(eventPlayer.self_repair_hud_id[0])\
+ eventPlayer.self_repair_hud_id[0] = null\
+ destroyEffect(eventPlayer.self_repair_hud_id[1])\
+ eventPlayer.self_repair_hud_id[1] = null
+ 
+#!define hideSelfRepairResource()\
+    destroyProgressBarHud(eventPlayer.self_repair_gui)\
+    eventPlayer.self_repair_gui = null
+
  #!defineMember self_repair_instance repair_pvar[3]
 
 rule "[bastion/self_repair.opy]: self repair start":
@@ -95,8 +105,7 @@ rule "[bastion/repair.opy]: Deactivate self-repair":
 
     # Disable Player Effects
 
-    destroyEffect(eventPlayer.self_repair_hud_id)
-    eventPlayer.self_repair_hud_id = null
+    hideSelfRepairRing()
 
     # Allow Buttons
 
@@ -128,6 +137,12 @@ rule "[bastion/self_repair.opy] stop self repair if full heal":
     eventPlayer.setReloadEnabled(true)
     eventPlayer.setPrimaryFireEnabled(true)
 
+rule "[bastion/repair.opy]: Hide self repair resource GUI":
+    @Event eachPlayer
+    @Hero bastion
+    @Condition eventPlayer.self_repair_time_left >= BASTION_MAX_SELF_REPAIR_DURATION
+
+    hideSelfRepairResource()
 
 rule "[bastion/repair.opy]: Give ult charge for self repair":
     @Event playerDealtHealing
