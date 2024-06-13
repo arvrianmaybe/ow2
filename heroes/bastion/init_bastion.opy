@@ -7,15 +7,10 @@
 rule "[bastion/init_bastion.opy] init bastion":
     @Event eachPlayer
     @Hero bastion
-    #@Condition eventPlayer.call_init == true
     
     defaultHero()
     newHero(BASTION_HEALTH,BASTION_ARMOR, 0)
     setUltCost(BASTION_ULT_COST)
-    #eventPlayer.hp_health = 225
-    #eventPlayer.hp_armour = 75
-    #applyCustomHealth()
-    #eventPlayer.setSecondaryFireEnabled(false)
      
     eventPlayer.disallowButton(Button.SECONDARY_FIRE)
     applyCustomHp()
@@ -34,4 +29,5 @@ rule "[bastion/init.opy]: Clean up Bastion":
     
     waitUntil(eventPlayer.getCurrentHero() != Hero.BASTION, Math.INFINITY)
     hideMachineGunAmmo()
-    #hideSelfRepairGui()
+    hideSelfRepairResource()
+    hideSelfRepairRing()
