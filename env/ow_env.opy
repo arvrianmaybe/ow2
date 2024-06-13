@@ -1,7 +1,7 @@
 #!mainFile "../main.opy"
 
 # Environment Variables
-#!define GAMEMODE_VERSION "0.26"
+#!define GAMEMODE_VERSION "v1.00"
 #!define GAMEMODE_NAME "Remastered Overwatch"
 #!define GAMEMODE_DESCRIPTION (GAMEMODE_NAME + " " + GAMEMODE_VERSION + "\n" + \
                                "\n" + \
