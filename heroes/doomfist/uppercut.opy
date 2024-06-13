@@ -13,16 +13,15 @@ playervar uppercut_shields
 #!defineMember _last_uppercut_attacker uppercut_pvar[5]
 
 #!define uppercutDamageExtension()\
- wait(DOOMFIST_UPPERCUT_STUN_EXTENSION_RENEW)\
  damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
  eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)\
- wait(DOOMFIST_UPPERCUT_STUN_EXTENSION_RENEW)\
+ wait()\
  damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
  eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)\
- wait(DOOMFIST_UPPERCUT_STUN_EXTENSION_RENEW)\
+ wait()\
  damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
  eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)\
- wait(DOOMFIST_UPPERCUT_STUN_EXTENSION_RENEW)\
+ wait()\
  damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
  eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)
 
