@@ -91,11 +91,6 @@ rule "[doomfist/uppercut.opy]: Uppercut vfx + movement physics":
     eventPlayer.setAbility2Enabled(true)
 
     eventPlayer.stopForcingThrottle()
-    wait(0.15)
-    if (eventPlayer.isUsingAbility1()): return
-    eventPlayer.setGravity(50)
-    wait(0.25)
-    if (eventPlayer.isUsingAbility1()): return
     eventPlayer.setGravity(100)
 
 rule "[doomfist/uppercut.opy]: Detect uppercut victims":
