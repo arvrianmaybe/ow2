@@ -2,7 +2,7 @@
 
 #!include "heroes/doomfist/punch.opy"
 #!include "heroes/doomfist/meteor.opy"
-#!include "heroes/doomfist/powered_block.opy"
+#!include "heroes/doomfist/uppercut.opy"
 #!include "heroes/doomfist/slam.opy"
 #!include "heroes/doomfist/cannon.opy"
 
