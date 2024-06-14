@@ -11,19 +11,39 @@ playervar uppercut_shields
 #!defineMember _uppercut_victims uppercut_pvar[3]
 #!defineMember _uppercut_attacker uppercut_pvar[4]
 #!defineMember _last_uppercut_attacker uppercut_pvar[5]
+playervar uppercut_dmg_effects
 
 #!define uppercutDamageExtension()\
- damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
- eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)\
- wait()\
- damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
- eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)\
- wait()\
- damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
- eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)\
- wait()\
- damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
- eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)
+ if (eventPlayer.uppercut_dmg_effects[0] == null):\
+    damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
+    eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)\
+    playEffect(getAllPlayers(), DynamicEffect.EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer, 100)\
+    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, rgb(201, 195, 196), eventPlayer, 1)\
+ eventPlayer.uppercut_dmg_effects[0] = getLastCreatedEntity()\
+ wait(DOOMFIST_UPPERCUT_STUN_EXTENSION_RENEW)\
+ if (eventPlayer.uppercut_dmg_effects[1] == null):\
+    damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
+    eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)\
+    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.YELLOW, eventPlayer, 1)\
+ eventPlayer.uppercut_dmg_effects[1] = getLastCreatedEntity()\
+ wait(DOOMFIST_UPPERCUT_STUN_EXTENSION_RENEW)\
+ if (eventPlayer.uppercut_dmg_effects[2] == null):\
+    damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
+    eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)\
+    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, rgb(217, 144, 54), eventPlayer, 1)\
+ eventPlayer.uppercut_dmg_effects[2] = getLastCreatedEntity()\
+ wait(DOOMFIST_UPPERCUT_STUN_EXTENSION_RENEW)\
+ if (eventPlayer.uppercut_dmg_effects[3] == null):\
+    damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE_EXTENSION)\
+    eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)\
+    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, rgb(163, 44, 62), eventPlayer, 1)\
+ eventPlayer.uppercut_dmg_effects[3] = getLastCreatedEntity()
+ 
+ # Hex Code i use:
+ # Red : #a32c3e
+ # White/Grey : #c9c3c4
+ # Yellow (unused) : #cee657
+ # Orange : #d99036
 
 rule "[doomfist/uppercut.opy]: Control flow for uppercut":
     @Event eachPlayer
@@ -91,6 +111,10 @@ rule "[doomfist/uppercut.opy]: Uppercut vfx + movement physics":
     eventPlayer.setAbility2Enabled(true)
 
     eventPlayer.stopForcingThrottle()
+    if (eventPlayer.isUsingAbility1()): return
+    eventPlayer.setGravity(50)
+    wait(0.25)
+    if (eventPlayer.isUsingAbility1()): return
     eventPlayer.setGravity(100)
 
 rule "[doomfist/uppercut.opy]: Detect uppercut victims":
@@ -127,8 +151,16 @@ rule "[doomfist/uppercut.opy]: Damage uppercut victims + vfx + uppercut knockbac
     @Condition eventPlayer.is_hit_by_uppercut
     @Condition eventPlayer._last_uppercut_attacker != eventPlayer._uppercut_attacker
 
-    # stun
-    eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_STUN_PER_HIT)
+     # knockback
+    eventPlayer.startForcingThrottle(0, 0, 0, 0, 0, 0) # Lose movement control
+    eventPlayer.applyImpulse(Vector.UP, 13.5, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION_XYZ)
+    eventPlayer.applyImpulse(getForwardDirection(eventPlayer._uppercut_attacker), 8.5, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION_XYZ)
+
+    # upercut hit vfx
+    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.WHITE, eventPlayer, 1)
+
+    # initial stun
+    eventPlayer.setStatusEffect(eventPlayer._uppercut_attacker, Status.STUNNED, DOOMFIST_UPPERCUT_INITIAL_STUN)
 
     # damage
     damage(eventPlayer, eventPlayer._uppercut_attacker, DOOMFIST_UPPERCUT_DAMAGE)
@@ -137,13 +169,7 @@ rule "[doomfist/uppercut.opy]: Damage uppercut victims + vfx + uppercut knockbac
     # damage extension
     uppercutDamageExtension()
 
-    # upercut hit vfx
-    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.WHITE, eventPlayer, 1)
-
-    # knockback
-    eventPlayer.startForcingThrottle(0, 0, 0, 0, 0, 0) # Lose movement control
-    eventPlayer.applyImpulse(Vector.UP, 13.5, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION_XYZ)
-    eventPlayer.applyImpulse(getForwardDirection(eventPlayer._uppercut_attacker), 8.5, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION_XYZ)
+    # lock out
     wait(DOOMFIST_UPPERCUT_AIR_LOCK_TIME)
     eventPlayer.stopForcingThrottle() # Regain movement control
 
