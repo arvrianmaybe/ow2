@@ -1,7 +1,6 @@
 #!mainFile "../main.opy"
 
-##!include "heroes/symmetra/nemesis.opy"
-#!include "heroes/symmetra/orb.opy"
+##!include "heroes/symmetra/orb.opy"
 #!include "heroes/symmetra/teleporter.opy"
 
 rule "[symmetra/init_symmetra.opy]: Detect switch to symmetra":
