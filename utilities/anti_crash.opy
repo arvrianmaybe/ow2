@@ -1,13 +1,19 @@
 #!mainFile "../main.opy"
 
-rule "[utilities/anticrash.opy] anti-crash":
-    @Condition getServerLoad() > 230
+# Following code is based on 
+# https://workshop.codes/wiki/articles/help-my-server-is-crashing-a-guide-on-how-to-improve-server-stability-for-your-codes#anti-crash-rules
+
+globalvar ANTI_CRASH_ACTIVATE_PERCENT = createWorkshopSetting(int[0:250], "Anti Crash", "Activation Percent", 200)
+globalvar ANTI_CRASH_HOLD_TIME = createWorkshopSetting(float[0:20], "Anti Crash", "Activation Hold Time", 8)
+globalvar ANTI_CRASH_DEACTIVATE_PERCENT = createWorkshopSetting(int[0:250], "Anti Crash", "Deactivation Percent", 150)
+
+rule "[utilities/anti_crash.opy]: Activate anti crash":
+    @Condition getServerLoad() > ANTI_CRASH_ACTIVATE_PERCENT
     
-    #thanks for rooky for the code, workshop.codes/KHYA7
-
-
-    smallMessage(getAllPlayers(), "Anti-Crash Enabled.")
-    setSlowMotion(10)
-    waitUntil(getServerLoad() < 175, 99999)
-    smallMessage(getAllPlayers(), "Anti-Crash Disabled.")
+    wait(ANTI_CRASH_HOLD_TIME, Wait.ABORT_WHEN_FALSE)
+    smallMessage(getAllPlayers(), "Anti crash system activated")
+    setSlowMotion(1)
+    wait(0.5)
+    waitUntil(getServerLoad() < ANTI_CRASH_DEACTIVATE_PERCENT, Math.INFINITY)
     setSlowMotion(100)
+
