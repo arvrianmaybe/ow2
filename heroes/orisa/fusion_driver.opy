@@ -18,8 +18,7 @@ rule "[orisa/fusion_driver.opy]: Decrease ammo when shooting gun":
     @Hero orisa
     @Condition eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
     @Condition not eventPlayer.is_orisa_reloading
-    @Condition not eventPlayer.isMeleeing()
-    @Condition not eventPlayer.isFiringSecondaryFire()
+    @Condition not eventPlayer.isMeleeing() or eventPlayer.isHoldingButton(Button.SECONDARY_FIRE)
     @Condition eventPlayer.orisa_ammo > 0
     
     eventPlayer.orisa_ammo -= 1
@@ -70,8 +69,8 @@ def reloadFusionDriver():
 
     eventPlayer.setAmmo(0, 0) # Play reload animation
     eventPlayer.is_orisa_reloading = true
-    waitUntil(eventPlayer.isHoldingButton(Button.MELEE), ORISA_RELOAD_TIME)
-    if eventPlayer.isHoldingButton(Button.MELEE):
+    waitUntil(eventPlayer.isHoldingButton(Button.MELEE) or eventPlayer.isFiringSecondaryFire(), ORISA_RELOAD_TIME)
+    if eventPlayer.isHoldingButton(Button.MELEE) or eventPlayer.isFiringSecondaryFire():
         eventPlayer.setAmmo(0, ORISA_CLIP_SIZE + 1) # Exit reload animation
         eventPlayer.forceButtonPress(Button.MELEE)
     else:
@@ -117,19 +116,6 @@ rule "[orisa/ammo.opy]: Slow down Orisa when shooting":
     @Condition eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
     @Condition not eventPlayer.is_orisa_reloading
 
-    eventPlayer.setMoveSpeed(100-percent(ORISA_MOVEMENT_PENALTY))
-    waitUntil(not eventPlayer.isHoldingButton(Button.PRIMARY_FIRE) or eventPlayer.is_orisa_reloading, Math.INFINITY)
-    eventPlayer.setMoveSpeed(100)
-
-rule "[orisa/fusion_driver.opy]: Slow down Orisa when shooting":
-    @Event eachPlayer
-    @Hero orisa
-    @Condition eventPlayer.isUsingAbility1()
-    @Condition eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
-    @Condition not eventPlayer.is_orisa_reloading
-
-    eventPlayer.setMoveSpeed(100-percent(ORISA_MOVEMENT_PENALTY))
-    waitUntil(not eventPlayer.isHoldingButton(Button.PRIMARY_FIRE) or eventPlayer.is_orisa_reloading, Math.INFINITY)
-    eventPlayer.setMoveSpeed(percent(ORISA_FORITFY_MOVEMENT_BONUS/OW2_ORISA_FORTIFY_MOVEMENT_DECREASE))
-    waitUntil(not eventPlayer.isUsingAbility1(), Math.INFINITY) # Just to be safe when player fires at last second to still gain movement speed
-    eventPlayer.setMoveSpeed(100)
+    setBaseMovement(eventPlayer, eventPlayer._base_movement_scalar*(1-ORISA_MOVEMENT_PENALTY))
+    waitUntil((not eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)) or (eventPlayer.is_orisa_reloading), Math.INFINITY)
+    setBaseMovement(eventPlayer, eventPlayer._base_movement_scalar/(1-ORISA_MOVEMENT_PENALTY))
