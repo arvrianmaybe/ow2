@@ -39,8 +39,7 @@ def startExterminate():
     playEffect(getAllPlayers(), DynamicEffect.GOOD_PICKUP_EFFECT, Color.LIME_GREEN, eventPlayer, 100)
 
     # Exterminate Buffs
-    eventPlayer.setDamageDealt(ORISA_EXTERMINATE_DAMAGE)
-    eventPlayer.setMoveSpeed(percent(ORISA_EXTERMINATE_SPEED/OW2_ORISA_FORTIFY_MOVEMENT_DECREASE))
+    setBaseDamage(eventPlayer, ORISA_EXTERMINATE_GUN_DAMAGE/ORISA_GUN_DAMAGE)
 
 
 def hideExterminate():
@@ -59,8 +58,7 @@ def hideExterminate():
     eventPlayer.setAbilityCooldown(Button.ABILITY_2, ORISA_EXTERMINATE_COOLDOWN)
 
     # Clean Up Player Buffs
-    eventPlayer.setDamageDealt(100)
-    eventPlayer.setMoveSpeed(100)
+    setBaseDamage(eventPlayer, ORISA_GUN_DAMAGE/OW2_ORISA_FUSION_DRIVER_DAMAGE)
 
     eventPlayer.is_using_exterminate = false # Stop Exterminate
 
@@ -69,5 +67,13 @@ rule "[orisa/exterminate.opy]: abort exterminate if player uses fortify":
     @Hero orisa
     @Condition eventPlayer.is_using_exterminate
     @Condition eventPlayer.isUsingAbility1()
+
+    hideExterminate()
+
+rule"[orisa/exterminate.opy]: abort exterminate if player got dealt with cc":
+    @Event eachPlayer
+    @Hero orisa
+    @Condition eventPlayer.is_using_exterminate
+    @Condition isCCd(eventPlayer)
 
     hideExterminate()
