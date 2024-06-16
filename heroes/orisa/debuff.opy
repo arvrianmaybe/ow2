@@ -21,7 +21,7 @@ rule "[orisa/debuff.opy]: play Terra Surge voiceline":
     getPlayersInRadius(eventPlayer, 
                        OW2_ORISA_TERRA_SURGE_RADIUS, 
                        getOppositeTeam(eventPlayer.getTeam()), 
-                       LosCheck.SURFACES).setStatusEffect(null, Status.PHASED_OUT, 3)
+                       LosCheck.SURFACES).setStatusEffect(null, Status.PHASED_OUT, 1)
     eventPlayer.forceButtonPress(Button.ULTIMATE)
     eventPlayer.disallowButton(Button.ULTIMATE)
 
@@ -137,8 +137,8 @@ rule "[orisa/debuff.opy]: nerf player when they have debuff":
     @Event eachPlayer
     @Condition eventPlayer.is_debuff
 
-    setBaseDamage(eventPlayer, ORISA_DEBUFF_DAMAGE_NERF/ORISA_SUPERCHARGER_DAMAGE_MULTIPLIER)
-    setBaseDefense(eventPlayer, ORISA_DEBUFF_DAMAGE_RECIVED_NERF/ORISA_CUSTOM_SUPERCHARGE_DEFENSE_MULTIPLIER)
+    setBaseDamage(eventPlayer, ORISA_DEBUFF_DAMAGE_PENALTY/ORISA_SUPERCHARGER_DAMAGE_MULTIPLIER)
+    setBaseDefense(eventPlayer, ORISA_DEBUFF_DMG_RECEIVED_PENALTY/ORISA_CUSTOM_SUPERCHARGE_DEFENSE_MULTIPLIER)
 
     # Beam and sound effects
     if (eventPlayer.orisa_debuff_beam_id == null): # beam
@@ -163,10 +163,25 @@ rule "[orisa/debuff.opy]: revert nerfs if not debuff":
     @Event eachPlayer
     @Condition not eventPlayer.is_debuff
     
-    eventPlayer.setDamageDealt(percent(eventPlayer._base_damage_scalar))
-
+    eventPlayer.setDamageDealt(100)
+    eventPlayer.setDamageReceived(100)
+    
     # Beam and sound effects
     destroyEffect(eventPlayer.orisa_debuff_beam_id)
     eventPlayer.orisa_debuff_beam_id = null
     destroyEffect(eventPlayer.orisa_debuff_sound_id)
     eventPlayer.orisa_debuff_sound_id = null
+
+rule "[orisa/debuff.opy]: destroy effects if still there":
+    @Event eachPlayer
+    @Condition not eventPlayer.is_using_debuff
+
+    destroyEffect(eventPlayer.orisa_debuff_beam_id)
+    eventPlayer.orisa_debuff_beam_id = null
+    destroyEffect(eventPlayer.orisa_debuff_sound_id)
+    eventPlayer.orisa_debuff_sound_id = null
+
+    destroyEffect(eventPlayer.orisa_debuff_id[0])
+    eventPlayer.orisa_debuff_id[0] = null
+    destroyEffect(eventPlayer.orisa_debuff_id[1])
+    eventPlayer.orisa_debuff_id[1] = null
