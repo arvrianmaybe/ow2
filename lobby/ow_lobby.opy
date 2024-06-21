@@ -31,9 +31,9 @@ settings {
         "escort": {
             "enableCompetitiveRules": true
         },
-        "flashpoint": {
-            "controlPointA": false
-        },
+        #"flashpoint": {
+            #"controlPointA": false
+        #},
         "hybrid": {
             "disabledMaps": [
                 "blizzWorldWinter",
@@ -102,10 +102,11 @@ settings {
                 "ultGen%": percent(OW2_BASTION_ULT_COST/BASTION_ULT_COST)
                 },
                 "mccree": {
+                    "ability2Cooldown%": percent(MCCREE_FLASHBANG_COOLDOWN/OW2_MCCREE_FLASHBANG_COOLDOWN),
                     "ultGen%": percent(OW2_MCCREE_ULT_COST/MCCREE_ULT_COST)
                 },
             "doomfist": {
-                "ability1ChargeRate%": 10,
+                #"ability1ChargeRate%": 10,
                 "ammoRegenerationTime%": 162,
                 "secondaryFireKb%": 0,
                 "ultGen%": percent(OW2_DOOMFIST_ULT_COST/DOOMFIST_ULT_COST)
