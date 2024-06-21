@@ -19,8 +19,9 @@ rule "[bastion/sentry.opy]: Initialize sentry mode":
 
     eventPlayer.disallowButton(Button.SECONDARY_FIRE)
 
-    #waitUntil(eventPlayer.isOnGround(), Math.INFINITY)
-    #eventPlayer.setMoveSpeed(0)
+    waitUntil(eventPlayer.isOnGround(), Math.INFINITY)
+    if eventPlayer.current_configuration == Configuration.SENTRY:
+        eventPlayer.setMoveSpeed(0)
 
 rule "[bastion/sentry.opy]: Extend sentry mode": # thanks for ecks for letting me steal this code rq
     @Event eachPlayer
