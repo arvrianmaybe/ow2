@@ -50,11 +50,11 @@ settings {
             },
             "bastion": {
                 "ability1Cooldown%": percent(BASTION_SENTRY_COOLDOWN/OW2_BASTION_RECONFIGURE_COOLDOWN),
-                "secondaryFireCooldown%": percent(BASTION_TANK_COOLDOWN/OW2_TACTICAL_GRENADE_COOLDOWN),
+                #"secondaryFireCooldown%": percent(BASTION_TANK_COOLDOWN/OW2_TACTICAL_GRENADE_COOLDOWN),
                 "ultGen%": percent(OW2_BASTION_ULT_COST/BASTION_ULT_COST)
                 },
                 "mccree": {
-                    "ability2Cooldown%": percent(MCCREE_FLASHBANG_COOLDOWN/OW2_MCCREE_FLASHBANG_COOLDOWN),
+                    #"ability2Cooldown%": percent(MCCREE_FLASHBANG_COOLDOWN/OW2_MCCREE_FLASHBANG_COOLDOWN),
                     "ultGen%": percent(OW2_MCCREE_ULT_COST/MCCREE_ULT_COST)
                 },
             "doomfist": {
