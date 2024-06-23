@@ -12,9 +12,11 @@ playervar transloc_p0
 playervar transloc_v0
 playervar transloc_time
 
+playervar _seed_hit_surface_normal
+
 playervar translocator_id
 
-playervar call_throwTranslocator                     
+playervar call_throwTranslocator
 
 subroutine throwTranslocator
 subroutine destroyTranslocator
@@ -29,7 +31,7 @@ subroutine hideTranslocator
                                      SOMBRA_TRANSLOCATOR_GRAVITY/2 * (t ** 2) + eventPlayer.transloc_v0.y * t + eventPlayer.transloc_p0.y, \
                                      eventPlayer.transloc_v0.z * t + eventPlayer.transloc_p0.z)
 
-/*
+
 rule "[sombra/translocator.opy]: Bind Ability 2 to translocator":
     @Event eachPlayer
     @Hero sombra
@@ -123,7 +125,7 @@ def throwTranslocator():
                                   null, \
                                   null, \
                                   false).getNormal())
-    eventPlayer.transloc_v0 = 0.03 * reflection(eventPlayer.trasnloc_velocity, eventPlayer._seed_hit_surface_normal)
+    eventPlayer.transloc_v0 = 0.03 * (eventPlayer.trasnloc_velocity - 2 * dotProduct(eventPlayer.trasnloc_velocity, eventPlayer._seed_hit_surface_normal) * eventPlayer._seed_hit_surface_normal)
     eventPlayer.transloc_p0 = eventPlayer.transloc_position
     eventPlayer.transloc_time = 0
     chase(eventPlayer.transloc_time, SOMBRA_TRANSLOCATOR_COOLDOWN_TIME, rate=1, ChaseReeval.DESTINATION_AND_RATE)
@@ -174,4 +176,3 @@ rule "[sombra/translocator.opy]: Show using translocator GUI":
     @Condition eventPlayer._is_using_translocator
 
     eventPlayer.setAbilityCooldown(Button.ABILITY_2, 0.4)
-*/
