@@ -19,7 +19,9 @@ rule "[sombra/stealth.opy]: Remove Stealth passive":
 
     do:
         damage(eventPlayer, null, MIN_DAMAGE)
-        wait(cosDeg(1), Wait.ABORT_WHEN_FALSE)
+        wait(cosDeg(1), Wait.ABORT_WHEN_FALSE) # some irrational value
+        # explanation: since stealth passive activates every 3.5 seconds
+        # damage must be applied in a way that never synchronizes with passive stealth activation
     while RULE_CONDITION:
 
 
@@ -37,7 +39,7 @@ def enterStealth():
     @Name "[sombra/stealth.opy]: enterStealth()"
 
     eventPlayer.setAbility1Enabled(false)
-    eventPlayer.setSecondaryFireEnabled(false)
+    eventPlayer.setSecondaryFireEnabled(false) # Disable hacking during invis
     showStealthHud()
     wait(SOMBRA_STEALTH_CAST_TIME)
     eventPlayer.setInvisibility(Invis.ENEMIES)
@@ -46,12 +48,11 @@ def enterStealth():
     damage(eventPlayer, null, 0.01)
     heal(eventPlayer, null, 0.01)
     wait(OW2_SOMBRA_STEALTH_COOLDOWN)
-    #wait(Math.INFINITY, Wait.ABORT_WHEN_FALSE)
     wait(OW2_SOMBRA_STEALTH_CAST_TIME)
     hideStealthHud()
     exitStealth()
     eventPlayer.setInvisibility(Invis.NONE)
-    eventPlayer.setMoveSpeed(percent(SOMBRA_STEALTH_MOVEMENT_BONUS/OW2_SOMBRA_STEALTH_MOVEMENT_BONUS))
+
 
 rule "[sombra/stealth.opy]: Exit Stealth when shooting":
     @Event eachPlayer
@@ -67,15 +68,23 @@ rule "[sombra/stealth.opy]: Exit Stealth when shooting":
     eventPlayer.setAbilityCooldown(Button.ABILITY_1, SOMBRA_STEALTH_COOLDOWN)
 
 
+rule "[sombra/stealth.opy]: Exit Stealth when taking damage":
+    @Event playerTookDamage
+    @Hero sombra
+    @Condition eventPlayer.is_using_stealth
+
+    exitStealth()
+    eventPlayer.setAbilityCooldown(Button.ABILITY_1, SOMBRA_STEALTH_COOLDOWN)
+
+
 def exitStealth():
     @Name "[sombra/stealth.opy]: exitStealth()"
 
     damage(eventPlayer, null, 0.01)
     heal(eventPlayer, null, 0.01)
-    eventPlayer.setSecondaryFireEnabled(true)
+    eventPlayer.setSecondaryFireEnabled(true) # Enable hacking after exiting invis
     eventPlayer.setInvisibility(Invis.NONE)
     eventPlayer.setMoveSpeed(100)
-    hideStealthHud()
     wait(SOMBRA_STEALTH_RECOVERY_TIME)
     eventPlayer.setAbility1Enabled(true)
     eventPlayer.is_using_stealth = false
