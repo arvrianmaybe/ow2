@@ -46,11 +46,12 @@ def enterStealth():
     damage(eventPlayer, null, 0.01)
     heal(eventPlayer, null, 0.01)
     wait(OW2_SOMBRA_STEALTH_COOLDOWN)
+    #wait(Math.INFINITY, Wait.ABORT_WHEN_FALSE)
     wait(OW2_SOMBRA_STEALTH_CAST_TIME)
     hideStealthHud()
+    exitStealth()
     eventPlayer.setInvisibility(Invis.NONE)
     eventPlayer.setMoveSpeed(percent(SOMBRA_STEALTH_MOVEMENT_BONUS/OW2_SOMBRA_STEALTH_MOVEMENT_BONUS))
-
 
 rule "[sombra/stealth.opy]: Exit Stealth when shooting":
     @Event eachPlayer
@@ -61,15 +62,6 @@ rule "[sombra/stealth.opy]: Exit Stealth when shooting":
             or eventPlayer.isHoldingButton(Button.MELEE) \
             or eventPlayer.isHoldingButton(Button.ABILITY_1) \
             or eventPlayer.isHoldingButton(Button.ULTIMATE)
-
-    exitStealth()
-    eventPlayer.setAbilityCooldown(Button.ABILITY_1, SOMBRA_STEALTH_COOLDOWN)
-
-
-rule "[sombra/stealth.opy]: Exit Stealth when taking damage":
-    @Event playerTookDamage
-    @Hero sombra
-    @Condition eventPlayer.is_using_stealth
 
     exitStealth()
     eventPlayer.setAbilityCooldown(Button.ABILITY_1, SOMBRA_STEALTH_COOLDOWN)
