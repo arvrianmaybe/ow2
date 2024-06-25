@@ -7,6 +7,15 @@ playervar freeze_move_penalty
 subroutine clearFreezeEffect
 
 
+rule "[mei/blaster.opy]: 20 icicle ammo consumption.":
+    @Event eachPlayer
+    @Hero mei
+    @Condition eventPlayer.isFiringSecondaryFire() == true
+    
+    waitUntil(not eventPlayer.isFiringSecondaryFire(), Math.INFINITY)
+    eventPlayer.setAmmo(0, max(0, eventPlayer.getAmmo(0) + OW2_MEI_ICICLE_AMMO_CONSUMPTION))
+    eventPlayer.setAmmo(0, max(0, eventPlayer.getAmmo(0) - MEI_ICICLE_AMMO_CONSUMPTION))
+
 rule "[mei/blaster.opy]: Track freezing on enemy":
     @Event playerDealtDamage
     @Hero mei
