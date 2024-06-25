@@ -17,9 +17,8 @@ rule "[lifeweaver/init.opy]: Initialize lifeweaver":
     @Hero lifeweaver
     @Condition eventPlayer.call_init
     
-    newHero(LIFEWEAVER_HEALTH, 0, 0)
+    newHero(LIFEWEAVER_HEALTH, 0, LIFEWEAVER_SHIELD_HP)
     setUltCost(LIFEWEAVER_ULT_COST)
-    eventPlayer.disallowButton(Button.ABILITY_2)
 
     removePassiveHealing()
 
