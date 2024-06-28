@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 playervar is_using_stealth
 playervar stealth_hud_id
@@ -49,9 +49,9 @@ def enterStealth():
     heal(eventPlayer, null, 0.01)
     wait(OW2_SOMBRA_STEALTH_COOLDOWN)
     wait(OW2_SOMBRA_STEALTH_CAST_TIME)
-    hideStealthHud()
-    exitStealth()
     eventPlayer.setInvisibility(Invis.NONE)
+    eventPlayer.setMoveSpeed(percent(SOMBRA_STEALTH_MOVEMENT_BONUS/OW2_SOMBRA_STEALTH_MOVEMENT_BONUS))
+    exitStealth()
 
 
 rule "[sombra/stealth.opy]: Exit Stealth when shooting":
@@ -64,7 +64,6 @@ rule "[sombra/stealth.opy]: Exit Stealth when shooting":
             or eventPlayer.isHoldingButton(Button.ABILITY_1) \
             or eventPlayer.isHoldingButton(Button.ULTIMATE)
 
-    hideStealthHud()
     exitStealth()
     eventPlayer.setAbilityCooldown(Button.ABILITY_1, SOMBRA_STEALTH_COOLDOWN)
 
@@ -75,12 +74,14 @@ rule "[sombra/stealth.opy]: Exit Stealth when taking damage":
     @Condition eventPlayer.is_using_stealth
 
     exitStealth()
-    hideStealthHud()
     eventPlayer.setAbilityCooldown(Button.ABILITY_1, SOMBRA_STEALTH_COOLDOWN)
 
 
 def exitStealth():
     @Name "[sombra/stealth.opy]: exitStealth()"
+
+    destroyEffect(eventPlayer.stealth_hud_id)
+    eventPlayer.stealth_hud_id = null
 
     damage(eventPlayer, null, 0.01)
     heal(eventPlayer, null, 0.01)
@@ -89,6 +90,7 @@ def exitStealth():
     eventPlayer.setMoveSpeed(100)
     wait(SOMBRA_STEALTH_RECOVERY_TIME)
     eventPlayer.setAbility1Enabled(true)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_1, SOMBRA_STEALTH_COOLDOWN)
     eventPlayer.is_using_stealth = false
 
 
@@ -98,10 +100,3 @@ def showStealthHud():
     if eventPlayer.stealth_hud_id == null:
         createEffect(eventPlayer, Effect.SPHERE, rgb(100, 68, 179), eventPlayer, 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.stealth_hud_id = getLastCreatedEntity()
-
-
-def hideStealthHud():
-    @Name "[sombra/stealth.opy]: hideStealthHud()"
-
-    destroyEffect(eventPlayer.stealth_hud_id)
-    eventPlayer.stealth_hud_id = null
