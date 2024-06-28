@@ -1,6 +1,5 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 #!include "utilities/stat_helper.opy"
-#!include "ultimate/ultimate_cost.opy"
 #!include "utilities/macro.opy"
 
 globalvar reset_gvar
