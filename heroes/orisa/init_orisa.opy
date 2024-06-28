@@ -1,14 +1,9 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 #!include "heroes/orisa/fusion_driver.opy"
 #!include "heroes/orisa/fortify.opy"
 #!include "heroes/orisa/exterminate.opy"
-##!include "heroes/orisa/halt.opy"
 #!include "heroes/orisa/debuff.opy"
-
-#!define initOrisaSpeed()\
-    eventPlayer.forceButtonPress(Button.ABILITY_1)\
-    eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
 
 rule "[orisa/init.opy]: Detect switch to Orisa":
     @Event eachPlayer
@@ -30,7 +25,6 @@ rule "[orisa/init.opy]: Initialize Orisa":
 
     resetFusionDriver()
     showOrisaAmmoHud()
-    initOrisaSpeed()
     eventPlayer.is_orisa_reloading = false
     setBaseDamage(eventPlayer, ORISA_GUN_DAMAGE/OW2_ORISA_FUSION_DRIVER_DAMAGE)
 
