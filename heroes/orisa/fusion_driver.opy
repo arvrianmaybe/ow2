@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 playervar orisa_ammo
 playervar orisa_ammo_hud
@@ -110,12 +110,12 @@ def hideOrisaAmmoHud():
     destroyInWorldText(eventPlayer.orisa_ammo_hud)
     eventPlayer.orisa_ammo_hud = null
 
-rule "[orisa/ammo.opy]: Slow down Orisa when shooting":
+rule "[orisa/fusion_driver.opy]: Slow down Orisa when shooting":
     @Event eachPlayer
     @Hero orisa
     @Condition eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
     @Condition not eventPlayer.is_orisa_reloading
 
-    setBaseMovement(eventPlayer, eventPlayer._base_movement_scalar*(1-ORISA_MOVEMENT_PENALTY))
+    eventPlayer.setMoveSpeed(percent(ORISA_MOVEMENT_PENALTY/1))
     waitUntil((not eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)) or (eventPlayer.is_orisa_reloading), Math.INFINITY)
-    setBaseMovement(eventPlayer, eventPlayer._base_movement_scalar/(1-ORISA_MOVEMENT_PENALTY))
+    eventPlayer.setMoveSpeed(100)
