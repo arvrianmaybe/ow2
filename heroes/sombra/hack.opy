@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 playervar hack_timer
 
@@ -22,5 +22,7 @@ rule "[sombra/hack.opy]: Reset hack if has stealth passive":
     wait(OW2_SOMBRA_HACK_CAST_TIME, Wait.ABORT_WHEN_FALSE)
     eventPlayer.disallowButton(Button.SECONDARY_FIRE)
     eventPlayer.allowButton(Button.SECONDARY_FIRE)
+    damage(eventPlayer, null, MIN_DAMAGE)
+    heal(eventPlayer, null, MIN_DAMAGE)
     if RULE_CONDITION:
         goto RULE_START
