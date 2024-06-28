@@ -1,6 +1,5 @@
 #!mainFile "../main.opy"
 
-#!include "env/ow_env.opy"
 #!include "utilities/debug.opy"
 
 globalvar rgb_list = [vect(255, 0, 0), vect(255, 255, 0), vect(0, 255, 0), vect(0, 255, 255), vect(0, 0, 255), vect(255, 0, 255)]
