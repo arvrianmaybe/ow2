@@ -1,6 +1,4 @@
 #!mainFile "../main.opy"
-#!include "utilities/reset.opy"
-#!include "utilities/custom_hp.opy"
 
 playervar hero_switch_pvar
 #!defineMember _last_hero_played hero_switch_pvar[0]
