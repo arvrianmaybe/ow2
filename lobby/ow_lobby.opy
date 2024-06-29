@@ -1,4 +1,4 @@
-#!mainFile "main.opy"
+#!mainFile "../main.opy"
 #!include "constant/reimagined_constant.opy"
 #!include "utilities/macro.opy"
 #!include "constant/normal_constant.opy"
