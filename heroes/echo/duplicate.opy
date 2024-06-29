@@ -1,4 +1,4 @@
-#!mainFile ".,./../main.opy"
+#!mainFile "../../main.opy"
 
 globalvar  health_pool
 
