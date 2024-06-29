@@ -1,8 +1,4 @@
-#!mainFile "../main.opy"
-
-#!include "heroes/torbjorn/overload.opy"
-#!include "heroes/torbjorn/hammer.opy"
-
+#!mainFile "../../main.opy"
 
 rule "[torbjorn/init.opy]: Detect switch to Torbjorn":
     @Event eachPlayer
