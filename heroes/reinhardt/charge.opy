@@ -1,18 +1,4 @@
-#!mainFile "../main.opy"
-
-/*
-rule "[reinhardt/charge.opy] increased charge speed"
-    @Event eachPlayer
-    @Hero reinhardt
-    @Condition eventPlayer.isUsingAbility1()
-
-    eventPlayer.setMoveSpeed(REINHARDE_CHARGE_SPEED)
-    waitUntil(not eventPlayer.isUsingAbility1(), 1)
-    eventPlayer.setAbilityCharge(Button.ABILITY_1, 0) 
-    wait(REINHARDT_CHARGE_COOLDOWN_TIME)
-    eventPlayer.setMoveSpeed(100)
-    eventPlayer.setAbilityCharge(Button.ABILITY_1, 2)
-*/
+#!mainFile "../../main.opy"
 
 rule "[reinhardt/charge.opy]: Increase charge damage":
     @Event playerDealtDamage
