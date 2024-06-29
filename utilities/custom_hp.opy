@@ -1,6 +1,4 @@
 #!mainFile "../main.opy"
-#!include "utilities/reset.opy"
-#!include "utilities/hero_switched.opy"
 
 playervar custom_hp_pvar
 #!defineMember _hp_health custom_hp_pvar[0]
