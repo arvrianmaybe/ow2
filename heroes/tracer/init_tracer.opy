@@ -1,6 +1,4 @@
-#!mainFile "../main.opy"
-
-#!include "heroes/tracer/pulse_pistol.opy"
+#!mainFile "../../main.opy"
 
 rule "[tracer/init.opy]: Detect switch to Tracer":
     @Event eachPlayer
@@ -12,7 +10,6 @@ rule "[tracer/init.opy]: Detect switch to Tracer":
 rule "[tracer/init.opy]: Initialize Tracer":
     @Event eachPlayer
     @Hero tracer
-    #@Condition eventPlayer.call_init
 
     defaultHero()
     newHero(TRACER_HEALTH, 0, 0)
