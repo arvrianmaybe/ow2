@@ -1,6 +1,7 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 #!include "heroes/hammond/shields.opy"
+#!include "heroes/hammond/grapple.opy"
 
 rule "[hammond/init.opy]: Detect switch to Wrecking Ball":
     @Event eachPlayer
@@ -14,7 +15,7 @@ rule "[hammond/init.opy]: Initialize Wrecking Ball":
     @Hero hammond
     @Condition eventPlayer.call_init
 
-    newHero(WRECKING_BALL_HEALTH, WRECKING_BALL_ARMOR, 0)
+    newHero(WRECKING_BALL_HEALTH, WRECKING_BALL_ARMOR, WRECKING_BALL_SHIELDS)
     setUltCost(WRECKING_BALL_ULT_COST)
     removeTankPassive()
     removePassiveHealing()
