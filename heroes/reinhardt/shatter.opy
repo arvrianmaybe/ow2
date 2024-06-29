@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[reinhardt/shatter.opy]: one shot earthshatter":
     @Event playerDealtDamage
