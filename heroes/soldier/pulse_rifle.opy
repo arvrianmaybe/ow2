@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[soldier/pulse_rifle.opy]: Deal more soldier primary fire damage":
     @Event playerDealtDamage
