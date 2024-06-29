@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 #!include "heroes/zarya/self_bubble.opy"
 #!include "heroes/zarya/ally_bubble.opy"
