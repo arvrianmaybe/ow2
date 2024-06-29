@@ -26,4 +26,5 @@ rule "[junkrat/bomb.opy]: Throw projectile when pressing e":
                      0, 
                      0, 
                      1)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_2, JUNKRAT_BOMB_COOLDOWN)
     playEffect(getAllPlayers(), DynamicEffect.EXPLOSION_SOUND, Color.YELLOW, eventPlayer, 100)
