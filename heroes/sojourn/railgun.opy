@@ -1,11 +1,9 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 #!define getRailgunAltDamage(d) \
 ((SOJOURN_RAILGUN_ALT_DAMAGE_MAX-SOJOURN_RAILGUN_ALT_DAMAGE_MIN) \
  / (OW2_SOJOURN_RAILGUN_ALT_DAMAGE_MAX-OW2_SOJOURN_RAILGUN_ALT_DAMAGE_MIN) \
  * (d-OW2_SOJOURN_RAILGUN_ALT_DAMAGE_MIN) + SOJOURN_RAILGUN_ALT_DAMAGE_MIN)
-
-
  
 rule "[sojourn/railgun.opy]: Railgun alt fire bodyshot damage":
     @Event playerDealtDamage
