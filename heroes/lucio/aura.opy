@@ -1,3 +1,5 @@
+#!mainFile "..././main.opy"
+
 rule "[lucio/aura.opy]: Allow self healing during heal aura":
     @Event eachPlayer
     @Hero lucio
