@@ -1,6 +1,4 @@
-#!mainFile "../main.opy"
-
-##!include "heroes/sigma/accretion.opy"
+#!mainFile "../../main.opy"
 
 rule "[sigma/init_sigma.opy]: Detect switch to sigma":
     @Event eachPlayer
