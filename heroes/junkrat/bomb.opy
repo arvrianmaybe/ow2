@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[junkrat/bomb.opy]: Throw projectile when pressing e":
     @Event eachPlayer
@@ -26,18 +26,4 @@ rule "[junkrat/bomb.opy]: Throw projectile when pressing e":
                      0, 
                      0, 
                      1)
-    eventPlayer.setAbilityCooldown(Button.ABILITY_2, JUNKRAT_BOMB_COOLDOWN)
     playEffect(getAllPlayers(), DynamicEffect.EXPLOSION_SOUND, Color.YELLOW, eventPlayer, 100)
-
-
-#rule "[junkrat/bomb.opy]: burn victim":
-    #@Event playerDealtDamage
-    #@Hero junkrat
-    #@Condition eventAbility == 0
-
-    #victim.setStatusEffect(eventPlayer, Status.BURNING, JUNKRAT_BOMB_BURNING_DURATION)
-    #victim.startDoT(eventPlayer, JUNKRAT_BOMB_BURNING_DURATION, JUNKRAT_BOMB_DAMAGE_OVERTIME)
-    #wait(3)
-    #victim.stopAllDoT()
-
-# was buggy wouldnt stop burn no matter what
