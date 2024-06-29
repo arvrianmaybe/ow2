@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 
 rule "[zenyatta/init_zenyatta.opy]: Detect switch to zenyatta":
