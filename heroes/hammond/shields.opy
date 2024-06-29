@@ -1,7 +1,9 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
-playervar ow2_adaptive_shield_n
-playervar ow1_adaptive_shield_n
+playervar hammond_shield_pvar
+
+#!defineMember ow2_adaptive_shield_n hammond_shield_pvar [0]
+#!defineMember ow1_adaptive_shield_n hammond_shield_pvar [1]
 
 #!define getOW1AdaptiveShields(n) (WRECKING_BALL_SHIELD_PER_TARGET*n + WRECKING_BALL_ADAPTIVE_SHIELD_BASE)
 #!define getOW2AdaptiveShields(n) (OW2_WRECKING_BALL_SHIELD_PER_TARGET*n + OW2_WRECKING_BALL_ADAPTIVE_SHIELD_BASE)
