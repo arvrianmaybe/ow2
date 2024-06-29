@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[mauga/init.opy]: Detect switch to Mauga":
     @Event eachPlayer
