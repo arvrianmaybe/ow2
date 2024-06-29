@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[illari/solar_rifle.opy]:  Solar Rifle body damage":
     @Event playerDealtDamage
