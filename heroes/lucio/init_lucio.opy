@@ -1,5 +1,6 @@
 #!mainFile "../../main.opy"
 
+#!include "heroes/lucio/aura.opy"
 #!include "heroes/lucio/sound_barrier.opy"
 
 rule "[lucio/init_lucio.opy]: Detect switch to Lucio":
