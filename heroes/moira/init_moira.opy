@@ -1,7 +1,6 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 #!include "heroes/moira/coalescence.opy"
-#!include "heroes/moira/biotic_grasp.opy"
 
 
 rule "[moira/init_moira.opy]: Detect switch to moira":
