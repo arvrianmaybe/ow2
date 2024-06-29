@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 #!define MIN_SLEEP_DURATION 0.5
 
