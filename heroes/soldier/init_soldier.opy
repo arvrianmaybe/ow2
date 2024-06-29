@@ -1,9 +1,6 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
-#!include "heroes/soldier/sprint.opy"
 #!include "heroes/soldier/pulse_rifle.opy"
-##!include "heroes/soldier/concussive.opy"
-##!include "heroes/soldier/barrage.opy"
 
 rule "[soldier/init.opy]: Detect switch to soldier":
     @Event eachPlayer
