@@ -1,11 +1,6 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
-#!include "utilities/reset.opy"
-#!include "utilities/custom_hp.opy"
-#!include "utilities/hero_switched.opy"
-#!include "heroes/lucio/soundwave.opy"
 #!include "heroes/lucio/sound_barrier.opy"
-#!include "heroes/lucio/amp.opy"
 
 rule "[lucio/init_lucio.opy]: Detect switch to Lucio":
     @Event eachPlayer
