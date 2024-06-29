@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 #!include "heroes/mccree/roll.opy"
 #!include "heroes/mccree/deadeye.opy"
