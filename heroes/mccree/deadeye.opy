@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[mccree/deadeye.opy]: remove dmg reduction and dmg":
     @Event eachPlayer
