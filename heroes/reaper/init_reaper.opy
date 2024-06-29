@@ -1,6 +1,5 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
-##!include "heroes/reaper/shotgun.opy"
 #!include "heroes/reaper/blossom.opy"
 
 rule "[reaper/init.opy]: Detect switch to reaper":
