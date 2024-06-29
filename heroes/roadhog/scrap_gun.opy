@@ -1,3 +1,4 @@
+#!mainFile "../../main.opy"
 
 #!define ROADHOG_SCRAP_SECONDARY_SPEED 80
 #!define ROADHOG_SCRAP_SECONDARY_RANGE 8
@@ -19,7 +20,7 @@ playervar scrap_gun_pvar
 playervar scrap_i
 
 
-rule "[roadhog/scrap_gun.opy]: OW1 Scrap Gun secondary fire":
+rule "[roadhog/scrap_gun.opy]: OW2 Scrap Gun secondary fire":
     @Event eachPlayer
     @Hero roadhog
     @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE)
@@ -38,6 +39,7 @@ rule "[roadhog/scrap_gun.opy]: OW1 Scrap Gun secondary fire":
     eventPlayer._scrap_last_fire_time = getTotalTimeElapsed()
     eventPlayer._scrap_start_pos = eventPlayer.getEyePosition()
 
+    eventPlayer.allowButton(Button.PRIMARY_FIRE)
     eventPlayer.setAmmo(0, eventPlayer.getAmmo(0) - 1)
     eventPlayer._scrap_orientation = eventPlayer.getFacingDirection()
     createProjectile(
