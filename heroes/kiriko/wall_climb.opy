@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[kiriko/wall_climb.opy] remove wall climnb passive":
     @Event eachPlayer
