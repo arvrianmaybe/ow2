@@ -1,6 +1,4 @@
-#!mainFile "main.opy"
-#!include "utilities/hero_switched.opy"
-
+#!mainFile "../main.opy"
 
 globalvar i
 globalvar hero_select_time
