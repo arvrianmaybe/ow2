@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[pharah/concussive.opy]: no Concussive Blast damage":
     @Event playerDealtDamage
