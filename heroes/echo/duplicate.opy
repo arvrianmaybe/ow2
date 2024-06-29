@@ -1,11 +1,11 @@
-#!mainFile "../main.opy"
-#!include "utilities/custom_hp.opy"
+#!mainFile ".,./../main.opy"
 
 globalvar  health_pool
 
 playervar hero_id_duplicated
 
-subroutine cancelDuplication
+#!define cancelDuplication()\
+ kill(eventPlayer,eventPlayer)
 
 rule "[echo/duplicate.opy]: Table of all heroes with custom hp":
     # tanks
@@ -91,10 +91,3 @@ rule "[echo/duplcation.opy]: Reduce ultimate duration":
         
     wait(ECHO_DUPLICATE_DURATION, Wait.ABORT_WHEN_FALSE)
     cancelDuplication()
-    
-    
-def cancelDuplication():
-    @Name "[echo/duplcation.opy]: cancelDuplication()"
-
-    kill(eventPlayer,eventPlayer)
-    
