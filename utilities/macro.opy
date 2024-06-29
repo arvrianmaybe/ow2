@@ -1,4 +1,4 @@
-#!mainFile "main.opy"
+#!mainFile "../main.opy"
 
 #!define heroID(h) (getAllHeroes().index(h))
 
