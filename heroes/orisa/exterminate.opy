@@ -1,6 +1,4 @@
-#!mainFile "../main.opy"
-
-#!include "utilities/stat_helper.opy"
+#!mainFile "../../main.opy"
 
 playervar is_using_exterminate
 playervar exterminate_player
