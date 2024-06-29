@@ -1,6 +1,4 @@
-#!mainFile "../main.opy"
-
-#!include "heroes/sombra/emp.opy"
+#!mainFile "../../main.opy"
 
 playervar translocator_pvar
 
@@ -8,6 +6,7 @@ playervar translocator_pvar
 #!defineMember _translocator_id translocator_pvar[1]
 #!defineMember _translocator_icon_id1 translocator_pvar[2]
 #!defineMember _translocator_icon_id2 translocator_pvar[3]
+#!defineMember _seed_hit_surface_normal translocator_pvar[4]
 
 playervar transloc_position
 playervar trasnloc_velocity
@@ -16,8 +15,6 @@ playervar transloc_v0
 playervar transloc_time
 
 playervar call_throwTranslocator
-
-playervar _seed_hit_surface_normal
 
 subroutine throwTranslocator
 subroutine destroyTranslocator
