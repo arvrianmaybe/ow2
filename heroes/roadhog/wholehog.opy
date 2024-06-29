@@ -1,4 +1,5 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
+
 #!include "heroes/sombra/hack.opy"
 
 playervar wholehog_pvar
@@ -31,13 +32,13 @@ rule "[roadhog/wholehog.opy]: enable abilities when not in wholehog":
     eventPlayer.stopForcingButton(Button.PRIMARY_FIRE)
 
 
-# rule "[roadhog/wholehog.opy]: Wholehog force autofire":
-    # @Event eachPlayer
-    # @Hero roadhog
-    # @Condition eventPlayer.isUsingUltimate()
-    # @Condition not eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
+rule "[roadhog/wholehog.opy]: Wholehog force autofire":
+    @Event eachPlayer
+    @Hero roadhog
+    @Condition eventPlayer.isUsingUltimate()
+    @Condition not eventPlayer.isHoldingButton(Button.PRIMARY_FIRE)
     
-    # eventPlayer.startForcingButton(Button.PRIMARY_FIRE)
+    eventPlayer.startForcingButton(Button.PRIMARY_FIRE)
 
 
 
@@ -70,7 +71,7 @@ rule "[roadhog/wholehog.opy]: Reduce ultimate duration":
     @Condition eventPlayer.isUsingUltimate()
     
     wait(ROADHOG_ULTIMATE_DURATION, Wait.ABORT_WHEN_FALSE)
-    #eventPlayer._scrap_ammo = ROADHOG_CLIP_SIZE
+    eventPlayer._scrap_ammo = ROADHOG_CLIP_SIZE
     cancelWholehog()
 
 
@@ -94,6 +95,7 @@ rule "[roadhog/wholehog.opy]: Go back to roadhog":
     eventPlayer.startForcingHero(Hero.ROADHOG)
     eventPlayer.stopForcingCurrentHero()
 
+    eventPlayer.setStatusEffect(null, Status.UNKILLABLE, 1)
     setCustomHp(eventPlayer._hp_health, eventPlayer._hp_armor, eventPlayer._hp_shields)
     eventPlayer.setHealth(eventPlayer._hog_hp)
     eventPlayer.setAbilityCooldown(Button.ABILITY_1, eventPlayer._hook_cooldown)
