@@ -1,11 +1,4 @@
-#!mainFile "../main.opy"
-
-#!include "utilities/reset.opy"
-#!include "utilities/custom_hp.opy"
-#!include "utilities/hero_switched.opy"
-#!include "heroes/junkerqueen/shout.opy"
-#!include "heroes/junkerqueen/carnage.opy"
-#!include "heroes/junkerqueen/rampage.opy"
+#!mainFile "../../main.opy"
 
 playervar jq_self_heal_id 
 
@@ -23,13 +16,13 @@ rule "[junkerqueen/init.opy]: Initialize Junkerqueen":
     
     defaultHero()
     newHero(JUNKERQUEEN_HEALTH, JUNKERQUEEN_ARMOR, 0)
-    setBaseDamage(eventPlayer, JUNKERQUEEN_RAMPAGE_WOUND_DAMAGE/OW2_JUNKERQUEEN_RAMPAGE_WOUND_DAMAGE)
-    removePassiveHealing()
     setUltCost(JUNKERQUEEN_ULT_COST)
+    setBaseDamage(eventPlayer, JUNKERQUEEN_RAMPAGE_WOUND_DAMAGE/OW2_JUNKERQUEEN_RAMPAGE_WOUND_DAMAGE)
+    removeTankPassive()
+    removePassiveHealing()
 
     startHealingModification(eventPlayer, eventPlayer, percent(JUNKERQUEEN_ADRENALINE/OW2_JUNKERQUEEN_ADRENALINE), HealingReeval.NONE)
     eventPlayer.jq_self_heal_id = getLastHealingModification()
-    removeTankPassive()
     
     eventPlayer.call_init = false
 
