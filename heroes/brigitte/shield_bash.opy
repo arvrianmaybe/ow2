@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[brigitte/shield_bash.opy] bring back stun":
     @Event playerDealtDamage
