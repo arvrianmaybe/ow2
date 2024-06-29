@@ -1,9 +1,4 @@
 #!mainFile "../main.opy"
-#!include "utilities/reset.opy"
-#!include "utilities/custom_hp.opy"
-#!include "utilities/hero_switched.opy"
-#!include "constant/reimagined_constant.opy"
-#!include "constant/normal_constant.opy"
 
 playervar remech_damage_taken
 
