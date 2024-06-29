@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[lifeweaver/parting_gift.opy] parting gift passive":
     @Event playerDied
