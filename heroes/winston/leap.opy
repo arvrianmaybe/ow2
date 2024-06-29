@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[winston/leap.opy]: Override leap cooldown during primal":
     @Event eachPlayer
