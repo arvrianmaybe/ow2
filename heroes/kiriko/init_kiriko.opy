@@ -1,10 +1,9 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
-#!include "utilities/reset.opy"
-#!include "utilities/custom_hp.opy"
-#!include "utilities/hero_switched.opy"
+#!include "heroes/kiriko/swift_step.opy"
 #!include "heroes/kiriko/kunai.opy"
 #!include "heroes/kiriko/wall_climb.opy"
+
 rule "[kiriko/init_kiriko.opy]: Detect switch to Kiriko":
     @Event eachPlayer
     @Hero kiriko
@@ -26,6 +25,5 @@ rule "[kiriko/init_kiriko.opy]: Initialize Kiriko":
 
     eventPlayer.setMaxAmmo(0, 6)
     eventPlayer.setAmmo(0, 12)
-    setBaseDamage(eventPlayer, (KIRIKO_KUNAI_HEADSHOT_DAMAGE/OW2_KIRIKO_KUNAI_HEADSHOT_DAMAGE))
 
     eventPlayer.call_init = false
