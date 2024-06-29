@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 playervar ult_charge_pvar
 #!defineMember _missing_ult_points ult_charge_pvar[0]
