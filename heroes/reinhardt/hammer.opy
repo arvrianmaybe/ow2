@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[reinhardt/hammer.opy]: Correct Hammer damage":
     @Event playerDealtDamage
