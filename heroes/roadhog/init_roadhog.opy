@@ -1,28 +1,19 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
-#!include "utilities/reset.opy"
-#!include "utilities/custom_hp.opy"
-#!include "utilities/hero_switched.opy"
 #!include "heroes/roadhog/breather.opy"
 #!include "heroes/roadhog/wholehog.opy"
 #!include "heroes/roadhog/scrap_gun.opy"
 #!include "heroes/roadhog/hook.opy"
 
-
-# Sorry for using ow1 roadhog, is now actually normal pre-rework roadhog with some minor changes, oh and https://web.archive.org/web/20230317080207/https://overwatch.fandom.com/wiki/Roadhog#Overview for the references
-
 rule "[roadhog/init_roadhog.opy] init roadhog":
     @Event eachPlayer
     @Hero roadhog
-    #@Condition eventPlayer.call_init == true
     
-    removeTankPassive()
     defaultHero()
     newHero(ROADHOG_HEALTH, 0, 0)
     removePassiveHealing()
+    removeTankPassive()
     setUltCost(ROADHOG_ULT_COST)
-    #eventPlayer.hp_health = 200
-    #applyCustomHealth()
     eventPlayer.disallowButton(Button.ABILITY_2)
     eventPlayer.disallowButton(Button.SECONDARY_FIRE)
     eventPlayer.setHealingDealt(percent(ROADHOG_BREATHER_HEAL_TOTAL/OW2_ROADHOG_BREATHER_HEAL_TOTAL))
