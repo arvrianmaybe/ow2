@@ -1,10 +1,4 @@
-#!mainFile "../main.opy"
-
-#!include "heroes/venture/dash.opy"
-
-#!include "utilities/reset.opy"
-#!include "utilities/custom_hp.opy"
-#!include "utilities/hero_switched.opy"
+#!mainFile "../../main.opy"
 
 rule "[venture/init_venture.opy]: Detect switch to venture":
     @Event eachPlayer
