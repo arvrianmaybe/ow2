@@ -1,17 +1,7 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 playervar breather_pvar
 #!defineMember _is_using_breather breather_pvar[0]
-
-# rule "[roadhog/breather.opy]: Remove healing buff after breather":
-#     @Event eachPlayer
-#     @Hero roadhog
-#     @Condition eventPlayer.isUsingAbility2()
-
-#     wait(OW2_ROADHOG_BREATHER_DURATION, Wait.ABORT_WHEN_FALSE)
-#     eventPlayer.setHealingReceived(percent(1/(1+OW2_ROADHOG_BREATHER_HEAL_BUFF)))
-#     wait(OW2_ROADHOG_BREATHER_HEAL_BUFF_DURATION)
-#     eventPlayer.setHealingReceived(100)
 
 rule "[roadhog/breather.opy]: Take a Breather":
     @Event eachPlayer
@@ -42,13 +32,3 @@ rule "[roadhog/breather.opy]: Take a Breather":
     eventPlayer.setAbility2Enabled(true)
     eventPlayer.setAbilityCooldown(Button.ABILITY_2,ROADHOG_BREATHER_COOLDOWN)
     eventPlayer.setAbilityCooldown(Button.SECONDARY_FIRE,ROADHOG_BREATHER_COOLDOWN)
-
-
-# rule "[roadhog/breather.opy]: Allow self healing during Breather":
-#     @Event eachPlayer
-#     @Hero roadhog
-#     @Condition eventPlayer._is_using_breather
-
-#     pushSelfHealing(Button.ABILITY_2)
-#     waitUntil(not eventPlayer._is_using_breather, Math.INFINITY)
-#     popSelfHealing(Button.ABILITY_2)
