@@ -1,8 +1,5 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
-#!include "utilities/reset.opy"
-#!include "utilities/custom_hp.opy"
-#!include "utilities/hero_switched.opy"
 #!include "heroes/lifeweaver/parting_gift.opy"
 
 rule "[lifeweaver/init_lifeweaver.opy]: Detect switch to lifeweaver":
