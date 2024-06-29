@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[pharah/rocket_launcher.opy]: Pharah fire rate change":
     @Event eachPlayer
