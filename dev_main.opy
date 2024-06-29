@@ -1,18 +1,17 @@
-#!include "env/dev_env.opy"
+# Constants
+#!include "constant/reimagined_constant.opy"
+#!include "constant/normal_constant.opy"
+
+# Game Lobby
+#!include "lobby/dev_lobby.opy"
 
 ##!obfuscate noRuleFilling noConstantObfuscation
 
 #!suppressWarnings w_type_check w_unsuitable_event
 
-# Game Lobby
-#!include "lobby/dev_lobby.opy"
-
-# Constants
-#!include "constant/reimagined_constant.opy"
-#!include "constant/normal_constant.opy"
-
 # Passives
 
+#!include "passives/tank/headshot.opy"
 #!include "passives/tank/knockback.opy"
 #!include "passives/tank/ult_charge.opy"
 #!include "passives/damage/damage_passive.opy"
@@ -27,6 +26,7 @@
 #!include "utilities/role_lock.opy"
 #!include "utilities/watermark.opy"
 #!include "utilities/stat_helper.opy"
+#!include "utilities/ready.opy"
 
 # Heroes
 #!include "heroes/ana/init_ana.opy"
@@ -69,14 +69,6 @@
 #!include "heroes/hammond/init_hammond.opy"
 #!include "heroes/zarya/init_zarya.opy"
 #!include "heroes/zenyatta/init_zenyatta.opy"
-
-# Damage
-##!include "damage/melee.opy"
-##!include "damage/headshot.opy"
-
-# Ultimate
-##!include "ultimate/ult_charge.opy"
-##!include "ultimate/ultimate_cost.opy"
 
 # Include debug at the end so any variable can be viewed
 #!include "utilities/debug.opy"
