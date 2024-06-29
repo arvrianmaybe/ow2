@@ -38,8 +38,7 @@
 #!define DISCORD_LONG_LINK "discord.gg/vb5r2gfNTQ"
 
 rule "Copyright (c) 2024 Remastered Overwatch. See https://github.com/arvrianmaybe/ow2 for license to use this code.":
-    #@Disabled
-    # this code has been forked by overwatch 1 emulator, please also check theres https://gitlab.com/MaxwellJung/ow1_emulator/-/tree/staging?ref_type=heads
+    # this code has been forked by overwatch 1 emulator, please also check theres https://github.com/Overwatch-1-Emulator/ow1-emulator
     disableInspector()
 
 settings {
@@ -199,7 +198,7 @@ settings {
             "ramattra": {
                 "health%": percent(RAMATTRA_BARRIER_HEALTH/OW2_RAMATTRA_BARRIER_HEALTH), # for barrier
                 "ability1Cooldown%": percent(RAMATTRA_NEMESIS_COOLDOWN/OW2_RAMATTRA_NEMESIS_COOLDOWN),
-                "enableInfiniteUlt": true, # for old ult
+                # "enableInfiniteUlt": true, # for old ult
                 "ultGen%": percent(RAMATTRA_ULT_COST/OW2_RAMATTRA_ULT_COST),
             },
             "soldier": {
