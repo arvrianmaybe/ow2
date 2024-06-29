@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 rule "[reaper/blossom.opy]:  deal less Death Blossom damage":
     @Event playerDealtDamage
