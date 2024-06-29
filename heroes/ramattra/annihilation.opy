@@ -1,4 +1,4 @@
-#!mainFile "../main.opy"
+#!mainFile "../../main.opy"
 
 globalvar ULT_DURATION_WORKSHOP_SETTINGS = createWorkshopSetting(int[1:20], "Ramattra ult", "Annihilation duration", 4, 0)
 globalvar ULT_DURATION_MAX = ULT_DURATION_WORKSHOP_SETTINGS 
