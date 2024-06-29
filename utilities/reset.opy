@@ -1,6 +1,4 @@
-#!mainFile "../../main.opy"
-#!include "utilities/stat_helper.opy"
-#!include "utilities/macro.opy"
+#!mainFile "../main.opy"
 
 globalvar reset_gvar
 #!defineMember ready_color reset_gvar[0]
