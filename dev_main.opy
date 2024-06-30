@@ -23,6 +23,7 @@
 #!include "utilities/custom_hp.opy"
 #!include "utilities/hero_switched.opy"
 #!include "utilities/macro.opy"
+#!include "utilities/hero_roster.opy"
 #!include "utilities/role_lock.opy"
 #!include "utilities/watermark.opy"
 #!include "utilities/stat_helper.opy"
