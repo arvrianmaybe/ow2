@@ -1,8 +1,9 @@
 #!mainFile "../../main.opy"
 
-playervar is_using_exterminate
-playervar exterminate_player
-playervar exterminate_player_effect
+playervar exterminate_pvar
+#!defineMember _is_using_exterminate exterminate_pvar[0]
+#!defineMember _exterminate_effect_id exterminate_pvar[1]
+#!defineMember _exterminate_effect_id1 exterminate_pvar[2]
 
 subroutine startExterminate
 subroutine hideExterminate
@@ -23,15 +24,15 @@ rule "[orisa/exterminate.opy]: Trigger exterminate ability":
 def startExterminate():
     @Name "[orisa/exterminate.opy]: startExterminate()"
 
-    eventPlayer.is_using_exterminate = true # Starts Exterminate
+    eventPlayer._is_using_exterminate = true # Starts Exterminate
 
     # Exterminate Player Effects
-    if (eventPlayer.exterminate_player_effect[0] == null):
+    if (eventPlayer._exterminate_effect_id == null):
         createEffect(getAllPlayers(), Effect.LIGHT_SHAFT, rgb(129, 214, 90), updateEveryTick(eventPlayer.getPosition()), 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS) # hex is #81d65a
-        eventPlayer.exterminate_player_effect[0] = getLastCreatedEntity()
-    if (eventPlayer.exterminate_player_effect[1] == null):
+        eventPlayer._exterminate_effect_id = getLastCreatedEntity()
+    if (eventPlayer._exterminate_effect_id1 == null):
         createEffect(getAllPlayers(), Effect.SPARKLES, Color.LIME_GREEN, eventPlayer, 1.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-        eventPlayer.exterminate_player_effect[1] = getLastCreatedEntity()
+        eventPlayer._exterminate_effect_id1 = getLastCreatedEntity()
     
     # Exterminate Sound
     playEffect(getAllPlayers(), DynamicEffect.GOOD_PICKUP_EFFECT, Color.LIME_GREEN, eventPlayer, 100)
@@ -47,10 +48,10 @@ def hideExterminate():
     playEffect(getAllPlayers(), DynamicEffect.EXPLOSION_SOUND, Color.LIME_GREEN, eventPlayer, 100)
 
     # Clear exterminate effects
-    destroyEffect(eventPlayer.exterminate_player_effect[0])
-    eventPlayer.exterminate_player_effect[0] = null
-    destroyEffect(eventPlayer.exterminate_player_effect[1])
-    eventPlayer.exterminate_player_effect[1] = null
+    destroyEffect(eventPlayer._exterminate_effect_id)
+    eventPlayer._exterminate_effect_id = null
+    destroyEffect(eventPlayer._exterminate_effect_id1)
+    eventPlayer._exterminate_effect_id1 = null
 
     # Cooldown
     eventPlayer.setAbilityCooldown(Button.ABILITY_2, ORISA_EXTERMINATE_COOLDOWN)
@@ -58,12 +59,12 @@ def hideExterminate():
     # Clean Up Player Buffs
     setBaseDamage(eventPlayer, ORISA_GUN_DAMAGE/OW2_ORISA_FUSION_DRIVER_DAMAGE)
 
-    eventPlayer.is_using_exterminate = false # Stop Exterminate
+    eventPlayer._is_using_exterminate = false # Stop Exterminate
 
 rule "[orisa/exterminate.opy]: abort exterminate if player uses fortify":
     @Event eachPlayer
     @Hero orisa
-    @Condition eventPlayer.is_using_exterminate
+    @Condition eventPlayer._is_using_exterminate
     @Condition eventPlayer.isUsingAbility1()
 
     hideExterminate()
@@ -71,7 +72,7 @@ rule "[orisa/exterminate.opy]: abort exterminate if player uses fortify":
 rule"[orisa/exterminate.opy]: abort exterminate if player got dealt with cc":
     @Event eachPlayer
     @Hero orisa
-    @Condition eventPlayer.is_using_exterminate
+    @Condition eventPlayer._is_using_exterminate
     @Condition isCCd(eventPlayer)
 
     hideExterminate()
