@@ -9,6 +9,7 @@ playervar reset_pvar
 #!defineMember friendly_sombra_player reset_pvar[3]
 #!defineMember enemy_orisa_player reset_pvar[5]
 #!defineMember enemy_sombra_player reset_pvar[6]
+#!defineMember _hero_setup reset_pvar[7]
 
 subroutine enableAllAbilities
 subroutine disableAllAbilities
