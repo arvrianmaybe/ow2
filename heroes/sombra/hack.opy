@@ -20,9 +20,8 @@ rule "[sombra/hack.opy]: Reset hack if has stealth passive":
     @Condition eventPlayer.isFiringSecondaryFire()
 
     wait(OW2_SOMBRA_HACK_CAST_TIME, Wait.ABORT_WHEN_FALSE)
-    eventPlayer.disallowButton(Button.SECONDARY_FIRE)
-    eventPlayer.allowButton(Button.SECONDARY_FIRE)
     damage(eventPlayer, null, MIN_DAMAGE)
     heal(eventPlayer, null, MIN_DAMAGE)
+    eventPlayer.setAbilityCooldown(Button.SECONDARY_FIRE, 0)
     if RULE_CONDITION:
         goto RULE_START
