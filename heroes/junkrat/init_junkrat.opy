@@ -25,3 +25,10 @@ rule "[junkrat/init.opy]: Initialize Junkrat":
     eventPlayer.disallowButton(Button.ABILITY_2)
 
     eventPlayer.call_init = false
+
+rule "[junkrat.opy]: Deal less primary fire damage":
+    @Event playerDealtDamage
+    @Hero junkrat
+    @Condition eventAbility in Button.PRIMARY_FIRE
+    
+    heal(victim, null, OW2_JUNKRAT_FRAG_LAUNCHER_DAMAGE - JUNKRAT_FRAG_LAUNCHER_DAMAGE)
