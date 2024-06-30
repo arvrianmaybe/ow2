@@ -1,11 +1,13 @@
 #!mainFile "../../main.opy"
 
-playervar is_using_debuff
-playervar is_debuff
-playervar orisa_debuff_id
-playervar orisa_debuff_origin
-playervar orisa_debuff_beam_id
-playervar orisa_debuff_sound_id
+playervar debuff_pvar
+#!defineMember orisa_debuff_id debuff_pvar [0]
+#!defineMember orisa_debuff_id1 debuff_pvar [1]
+#!defineMember orisa_debuff_origin debuff_pvar [2]
+#!defineMember orisa_debuff_beam_id debuff_pvar [3]
+#!defineMember orisa_debuff_sound_id debuff_pvar [4]
+#!defineMember is_using_debuff debuff_pvar [5]
+#!defineMember is_debuff debuff_pvar [6]
 
 subroutine startDebuff
 subroutine endDebuff
@@ -52,22 +54,22 @@ def startDebuff():
     eventPlayer.communicate(Comms.VOICE_LINE_UP) # Play ultimate voice line
 
     # Supercharge GUI
-    if eventPlayer.orisa_debuff_id[0] == null:
+    if eventPlayer.orisa_debuff_id == null:
         createEffect(getAllPlayers(), 
                      Effect.SPHERE, 
                      Color.LIME_GREEN, 
                      eventPlayer.orisa_debuff_origin + ORISA_DEBUFF_HEIGHT/4*Vector.UP, 
                      ORISA_DEBUFF_HEIGHT/3, 
                      EffectReeval.NONE)
-        eventPlayer.orisa_debuff_id[0] = getLastCreatedEntity()
-    if eventPlayer.orisa_debuff_id[1] == null:
+        eventPlayer.orisa_debuff_id = getLastCreatedEntity()
+    if eventPlayer.orisa_debuff_id1 == null:
         createEffect(getAllPlayers(), 
                      Effect.SPHERE, 
                      Color.LIME_GREEN, 
                      eventPlayer.orisa_debuff_origin + ORISA_DEBUFF_HEIGHT/4*Vector.DOWN, 
                      ORISA_DEBUFF_HEIGHT/3, 
                      EffectReeval.NONE)
-        eventPlayer.orisa_debuff_id[1] = getLastCreatedEntity()
+        eventPlayer.orisa_debuff_id1 = getLastCreatedEntity()
     
     # debuff deploy effect
     playEffect(getAllPlayers(), DynamicEffect.GOOD_EXPLOSION, Color.GREEN, eventPlayer.orisa_debuff_origin, 3)
@@ -81,16 +83,16 @@ def endDebuff():
     @Name "[orisa/debuff.opy]: endDebuff()"
 
     eventPlayer.setUltEnabled(true)
-    destroyEffect(eventPlayer.orisa_debuff_id[0])
-    eventPlayer.orisa_debuff_id[0] = null
-    destroyEffect(eventPlayer.orisa_debuff_id[1])
-    eventPlayer.orisa_debuff_id[1] = null
+    destroyEffect(eventPlayer.orisa_debuff_id)
+    eventPlayer.orisa_debuff_id = null
+    destroyEffect(eventPlayer.orisa_debuff_id1)
+    eventPlayer.orisa_debuff_id1 = null
     eventPlayer.is_using_debuff = false
     getPlayers(eventPlayer.getTeam()).is_debuff = false
 
     # Clear debuff beam effects
-    #destroyEffect(eventPlayer.orisa_debuff_beam_id)
-    #eventPlayer.orisa_debuff_beam_id= null
+    destroyEffect(eventPlayer.orisa_debuff_beam_id)
+    eventPlayer.orisa_debuff_beam_id= null
 
 
 rule "[orisa/debuff.opy]: nerf players in range":
@@ -171,17 +173,3 @@ rule "[orisa/debuff.opy]: revert nerfs if not debuff":
     eventPlayer.orisa_debuff_beam_id = null
     destroyEffect(eventPlayer.orisa_debuff_sound_id)
     eventPlayer.orisa_debuff_sound_id = null
-
-rule "[orisa/debuff.opy]: destroy effects if still there":
-    @Event eachPlayer
-    @Condition not eventPlayer.is_using_debuff
-
-    destroyEffect(eventPlayer.orisa_debuff_beam_id)
-    eventPlayer.orisa_debuff_beam_id = null
-    destroyEffect(eventPlayer.orisa_debuff_sound_id)
-    eventPlayer.orisa_debuff_sound_id = null
-
-    destroyEffect(eventPlayer.orisa_debuff_id[0])
-    eventPlayer.orisa_debuff_id[0] = null
-    destroyEffect(eventPlayer.orisa_debuff_id[1])
-    eventPlayer.orisa_debuff_id[1] = null
