@@ -1,7 +1,5 @@
 #!mainFile "../../main.opy"
 
-#!include "heroes/lifeweaver/parting_gift.opy"
-
 rule "[lifeweaver/init_lifeweaver.opy]: Detect switch to lifeweaver":
     @Event eachPlayer
     @Hero lifeweaver
