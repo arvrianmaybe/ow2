@@ -4,7 +4,7 @@ This repository contains OverPy source code for building [Remastered Overwatch 2
 
 Overwatch 1 stats are referenced using the [Wayback Machine](https://web.archive.org/web/20220929084035/https://overwatch.fandom.com/wiki/Overwatch_Wiki) and [Overwatch 1 Emulator](https://workshop.codes/KHTG0). 
 Overwatch 2 heroes are balanced in-house with the help of our [Discord](https://discord.gg/vb5r2gfNTQ) community.
-Misc stats have been made by myself which i think its fair.
+Misc stats have been made by myself which i thought its fair.
 
 Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouched):
 <!--- https://docs.google.com/spreadsheets/d/1MdZIFEBehciwviUKqBGfStEGfqiRPaCtIdXxLSDwUMM/edit?usp=sharing -->
@@ -15,19 +15,19 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Ashe | ✔ | ✔ | ✅ | ✔ |   |  |
 | Baptiste | ✅ | ✅ | ✅ | ✔ | ✅ |  |
 | Bastion | ✔ | ✅ | ✅ | ✅ | ✅ |  |
-| Brigitte | ✅ | ✅ | ✅ | ✔ | ✔ | ✅ Inspire |
-| D.Va | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Damage|
-| Doomfist | ✅ | ✅ | ✅ | ✅ | ✔ |  |
+| Brigitte | ✅ | ✅ | ✅ | ✔ | ✔ |  |
+| D.Va | ✅ | ✅ | ✅ | ✅ | ✅ | |
+| Doomfist | ✔ | ✅ | ✅ | ✅ | ✔ |  |
 | Echo | ✅ | ✅ | ✅ | ✅ | ✔ |  |
-| Genji | ✔ | ✔ | ✔ | ✔ | ✔ |  |
-| Hanzo | ✔ | ✔ | ✔ | ✔ | ✔ |  |
+| Genji | ✔ |  |  |  |  |  |
+| Hanzo | ✔ |  |  |  |  |  |
 | Junker Queen |  |  |  |  |  |  |
 | Junkrat | ✔ | ✔ | ✔ | ✅ | ✅ |  |
-| Kiriko | ✅ | ✅ | ✅ |  |  | ✅ Wall Climb |
-| Lifeweaver |  |  | ✅ |  |  |  |
+| Kiriko | ✅ | ✅ | ✅ |  |  | ✅ Remove Passive |
+| Lifeweaver |  |  | |  |  |  |
 | Lucio | ✅ | ✅ | ✅ | ✅ | ✔ |  |
 | Mei | ✔ | ✔ | ✅ | ✔ | ✅ |  |
-| Mei |  |  | ✔ |  |  |  |
+| Mei |  |  | ✔ |  |  | ✅ Freeze Logic |
 | Mccree | ✅ | ✅ | ✅ | ✅ | ✔ |  |
 | Mercy | ✅ | ✅ | ✅ | ✅ | ✔ |  |
 | Moira | ✅ | ✅ | ✅ | ✅ | ✅ |  |
@@ -43,7 +43,7 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Sombra |  | ✔ | ✔ | ✔ | ✔ |  |
 | Symmetra | ✔ | ✔ | ✔ | ✔ | ✅ |  |
 | Torbjorn | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| Tracer | ✔ |  |  | ✅ | ✅ |  |
+| Tracer |  |  |  | ✅ | ✅ |  |
 | Venture |  |  |  |  |  |  |
 | Widowmaker |  |  |  |  |  | ✅ Damage Falloff |
 | Winston | ✔ | ✅ | ✅ | ✅ | ✅ |  |
@@ -52,7 +52,7 @@ Progress (✅ = Have Been Changed, ✔ = Has Been Buffed/Nerfed, Blank = Untouch
 | Zenyatta | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Melee |
 ## Changelog
 
-See [releases](https://github.com/Astridisweird/remastered-overwatch-2/releases)
+See [releases](https://github.com/arvrianmaybe/ow2/releases)
 
 ## Contributing Code
 
