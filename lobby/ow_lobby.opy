@@ -4,7 +4,7 @@
 #!include "constant/normal_constant.opy"
 
 # Environment Variables
-#!define GAMEMODE_VERSION "Internal Build"
+#!define GAMEMODE_VERSION "v1.50"
 #!define GAMEMODE_NAME "Remastered Overwatch"
 #!define GAMEMODE_DESCRIPTION (GAMEMODE_NAME + " " + GAMEMODE_VERSION + "\n" + \
                                "\n" + \
@@ -200,6 +200,7 @@ settings {
                 "ultGen%": percent(ORISA_ULT_COST/OW2_ORISA_ULT_COST)
             },
             "pharah": {
+                "passiveExtraFuel%": 0,
                 "ability1RefuelScalar": 0,
                 "ability1Cooldown%": percent(PHARAH_JUMP_JET_COOLDOWN/OW2_PHARAH_JUMP_JET_COOLDOWN),
                 "ability2Cooldown%": percent(PHARAH_CONCUSSIVE_BLAST_COOLDOWN/OW2_PHARAH_CONCUSSIVE_BLAST_COOLDOWN),
